@@ -682,7 +682,11 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
       <h2 class="page-title">Tournois <span>Officiels</span></h2>
       <p class="page-sub">Inscris-toi et bats-toi pour la gloire et les XP</p>
     </div>
-    <div class="tourney-grid" id="tourneyGrid"></div>
+    <div class="empty-state">
+      <div class="empty-icon">🏆</div>
+      <div class="empty-title">Tournois en attente</div>
+      <div class="empty-sub">Les tournois officiels XENOVRA arrivent bientôt. Reste connecté pour ne pas rater le lancement !</div>
+    </div>
   </div>
 
   <!-- PROFILE -->
@@ -988,18 +992,18 @@ function switchLb(p, btn) {
 
 // ─── SHOP ───
 var shopItems = [
-  {cat:'avatar',icon:'🦊',name:'Fox Elite Avatar',desc:'Avatar renard futuriste exclusif',price:800,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
-  {cat:'titre',icon:'⚡',name:'Thunder God',desc:'Affiche ton titre légendaire en jeu',price:1200,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
-  {cat:'badge',icon:'🏅',name:'Badge Fortnite Pro',desc:'Badge exclusif joueurs Fortnite vétérans',price:600,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {cat:'effet',icon:'✨',name:'Particules Neon',desc:'Aura de particules violettes sur ton profil',price:1500,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
-  {cat:'cadre',icon:'🖼',name:'Cadre Cyber Blue',desc:'Cadre de profil holographique bleu',price:400,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {cat:'avatar',icon:'🐺',name:'Wolf Alpha Avatar',desc:'Avatar loup alpha dominateur',price:500,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {cat:'titre',icon:'👑',name:'Clash King',desc:'Titre prestige pour les maîtres CR',price:1000,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
-  {cat:'badge',icon:'🛡️',name:'Badge Fair Play',desc:'Récompense les joueurs respectueux',price:200,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
-  {cat:'effet',icon:'🌊',name:'Vague Cyan',desc:'Ondulation cyan autour de ton avatar',price:900,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
-  {cat:'cadre',icon:'🔥',name:'Cadre Inferno',desc:'Cadre enflammé pour les warriors',price:700,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
-  {cat:'avatar',icon:'🤖',name:'Xeno Bot Avatar',desc:'Avatar robot exclusif XENOVRA',price:300,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
-  {cat:'badge',icon:'⭐',name:'Badge Top 100',desc:'Pour les joueurs classés Top 100',price:1800,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
+  {cat:'avatar',icon:'🦊',name:'Fox Elite Avatar',desc:'Avatar renard futuriste exclusif',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {cat:'titre',icon:'⚡',name:'Thunder God',desc:'Affiche ton titre légendaire en jeu',price:8,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
+  {cat:'badge',icon:'🏅',name:'Badge Fortnite Pro',desc:'Badge exclusif joueurs Fortnite vétérans',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
+  {cat:'effet',icon:'✨',name:'Particules Neon',desc:'Aura de particules violettes sur ton profil',price:8,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
+  {cat:'cadre',icon:'🖼',name:'Cadre Cyber Blue',desc:'Cadre de profil holographique bleu',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
+  {cat:'avatar',icon:'🐺',name:'Wolf Alpha Avatar',desc:'Avatar loup alpha dominateur',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
+  {cat:'titre',icon:'👑',name:'Clash King',desc:'Titre prestige pour les maîtres CR',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {cat:'badge',icon:'🛡️',name:'Badge Fair Play',desc:'Récompense les joueurs respectueux',price:1,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
+  {cat:'effet',icon:'🌊',name:'Vague Cyan',desc:'Ondulation cyan autour de ton avatar',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {cat:'cadre',icon:'🔥',name:'Cadre Inferno',desc:'Cadre enflammé pour les warriors',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {cat:'avatar',icon:'🤖',name:'Xeno Bot Avatar',desc:'Avatar robot exclusif XENOVRA',price:1,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
+  {cat:'badge',icon:'⭐',name:'Badge Top 100',desc:'Pour les joueurs classés Top 100',price:8,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
 ];
 
 function filterShop(f, btn) {
