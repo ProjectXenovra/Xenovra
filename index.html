@@ -138,13 +138,17 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .fdd-dot.pc{background:#10b981}
 .fdd-arrow{font-size:.6rem;margin-left:2px;opacity:.5;transition:transform .2s}
 .fdd.open .fdd-arrow{transform:rotate(180deg)}
-.dropdown-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:160px;background:var(--card2);border:1px solid rgba(59,130,246,.2);border-radius:8px;z-index:500;box-shadow:0 8px 24px rgba(0,0,0,.6);overflow:hidden;display:none}
+.dropdown-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:180px;background:var(--card2);border:1px solid rgba(59,130,246,.2);border-radius:8px;z-index:500;box-shadow:0 8px 24px rgba(0,0,0,.6);overflow:hidden;display:none}
 .dropdown-menu.right{left:auto;right:0}
 .dropdown-menu.open{display:block}
 .dropdown-opt{padding:8px 14px;font-size:.78rem;font-weight:600;color:var(--muted2);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:7px;font-family:'Exo 2',sans-serif}
 .dropdown-opt:hover{color:#fff;background:rgba(59,130,246,.1)}
 .dropdown-opt.selected{color:var(--blue2);background:rgba(59,130,246,.08)}
 .dropdown-opt .opt-dot{width:7px;height:7px;border-radius:50%}
+
+/* Dropdown category header */
+.dropdown-cat-header{padding:6px 14px 4px;font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-family:'Share Tech Mono',monospace;border-top:1px solid rgba(255,255,255,.06);margin-top:2px}
+.dropdown-cat-header:first-child{border-top:none;margin-top:0}
 
 /* Empty state */
 .empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;text-align:center;gap:16px}
@@ -561,54 +565,73 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
         </button>
       </div>
       <div class="filter-dropdowns" id="filterDropdowns">
+
         <!-- Region -->
         <div class="fdd" id="fdd-region" onclick="toggleDrop(event,'region')">
           <span class="fdd-dot eu"></span>
           <span id="fdd-region-label">Toutes régions</span>
           <span class="fdd-arrow">▼</span>
           <div class="dropdown-menu" id="drop-region">
-            <div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'region','all','Toutes régions')">🌍 Toutes régions</div>
+            <div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'region','all','Toutes régions')">Toutes régions</div>
             <div class="dropdown-opt" data-val="EU" onclick="selectFilter(event,'region','EU','EU')"><span class="opt-dot" style="background:#3b82f6"></span> EU</div>
             <div class="dropdown-opt" data-val="NA" onclick="selectFilter(event,'region','NA','NA')"><span class="opt-dot" style="background:#10b981"></span> NA</div>
-            <div class="dropdown-opt" data-val="AS" onclick="selectFilter(event,'region','AS','AS')"><span class="opt-dot" style="background:#f59e0b"></span> AS</div>
           </div>
         </div>
-        <!-- Platform -->
+
+        <!-- Platform — UPDATED -->
         <div class="fdd" id="fdd-platform" onclick="toggleDrop(event,'platform')">
           <span class="fdd-dot pc"></span>
           <span id="fdd-platform-label">Toutes plateformes</span>
           <span class="fdd-arrow">▼</span>
           <div class="dropdown-menu" id="drop-platform">
-            <div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'platform','all','Toutes plateformes')">🖥️ Toutes plateformes</div>
+            <div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'platform','all','Toutes plateformes')">Toutes plateformes</div>
             <div class="dropdown-opt" data-val="PC" onclick="selectFilter(event,'platform','PC','PC')"><span class="opt-dot" style="background:#10b981"></span> PC</div>
             <div class="dropdown-opt" data-val="Console" onclick="selectFilter(event,'platform','Console','Console')"><span class="opt-dot" style="background:#8b5cf6"></span> Console</div>
-            <div class="dropdown-opt" data-val="Mobile" onclick="selectFilter(event,'platform','Mobile','Mobile')"><span class="opt-dot" style="background:#f59e0b"></span> Mobile</div>
+            <div class="dropdown-opt" data-val="ALL" onclick="selectFilter(event,'platform','ALL','ALL')"><span class="opt-dot" style="background:#22d3ee"></span> ALL</div>
           </div>
         </div>
-        <!-- Gamemode -->
+
+        <!-- Gamemode — UPDATED with categories -->
         <div class="fdd" id="fdd-gamemode" onclick="toggleDrop(event,'gamemode')">
-          <span>🎮</span>
           <span id="fdd-gamemode-label">Tous les modes</span>
           <span class="fdd-arrow">▼</span>
           <div class="dropdown-menu" id="drop-gamemode">
-            <div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'gamemode','all','Tous les modes')">🎮 Tous les modes</div>
-            <div class="dropdown-opt" data-val="1V1 BOXFIGHT" onclick="selectFilter(event,'gamemode','1V1 BOXFIGHT','1V1 Boxfight')">⚔️ 1V1 Boxfight</div>
-            <div class="dropdown-opt" data-val="1V1 REALISTIC" onclick="selectFilter(event,'gamemode','1V1 REALISTIC','1V1 Realistic')">🎯 1V1 Realistic</div>
-            <div class="dropdown-opt" data-val="1V1 PIECE CONTROL" onclick="selectFilter(event,'gamemode','1V1 PIECE CONTROL','Piece Control')">🧱 Piece Control</div>
-            <div class="dropdown-opt" data-val="1V1 BUILD FIGHT" onclick="selectFilter(event,'gamemode','1V1 BUILD FIGHT','Build Fight')">🏗️ Build Fight</div>
-            <div class="dropdown-opt" data-val="2V2" onclick="selectFilter(event,'gamemode','2V2','2V2')">👥 2V2</div>
+            <div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'gamemode','all','Tous les modes')">Tous les modes</div>
+
+            <div class="dropdown-cat-header">CLASSIC</div>
+            <div class="dropdown-opt" data-val="CLASSIC - Realistic" onclick="selectFilter(event,'gamemode','CLASSIC - Realistic','Realistic')">Realistic</div>
+            <div class="dropdown-opt" data-val="CLASSIC - Boxfight" onclick="selectFilter(event,'gamemode','CLASSIC - Boxfight','Boxfight')">Boxfight</div>
+            <div class="dropdown-opt" data-val="CLASSIC - Zone Wars" onclick="selectFilter(event,'gamemode','CLASSIC - Zone Wars','Zone Wars')">Zone Wars</div>
+            <div class="dropdown-opt" data-val="CLASSIC - Build Fight" onclick="selectFilter(event,'gamemode','CLASSIC - Build Fight','Build Fight')">Build Fight</div>
+            <div class="dropdown-opt" data-val="CLASSIC - Speed Realistic" onclick="selectFilter(event,'gamemode','CLASSIC - Speed Realistic','Speed Realistic')">Speed Realistic</div>
+            <div class="dropdown-opt" data-val="CLASSIC - Piece Control" onclick="selectFilter(event,'gamemode','CLASSIC - Piece Control','Piece Control')">Piece Control</div>
+
+            <div class="dropdown-cat-header">ESL</div>
+            <div class="dropdown-opt" data-val="ESL - Hardpoint" onclick="selectFilter(event,'gamemode','ESL - Hardpoint','Hardpoint')">Hardpoint</div>
+            <div class="dropdown-opt" data-val="ESL - CTF" onclick="selectFilter(event,'gamemode','ESL - CTF','CTF')">CTF</div>
+
+            <div class="dropdown-cat-header">ZERO BUILD</div>
+            <div class="dropdown-opt" data-val="ZB - Realistic" onclick="selectFilter(event,'gamemode','ZB - Realistic','ZB Realistic')">Realistic</div>
+            <div class="dropdown-opt" data-val="ZB - Boxfight" onclick="selectFilter(event,'gamemode','ZB - Boxfight','ZB Boxfight')">Boxfight</div>
+
+            <div class="dropdown-cat-header">KILL RACE</div>
+            <div class="dropdown-opt" data-val="KILL RACE - Standard" onclick="selectFilter(event,'gamemode','KILL RACE - Standard','KR Standard')">Standard</div>
+            <div class="dropdown-opt" data-val="KILL RACE - Reload" onclick="selectFilter(event,'gamemode','KILL RACE - Reload','KR Reload')">Reload</div>
+            <div class="dropdown-opt" data-val="KILL RACE - Zero Build" onclick="selectFilter(event,'gamemode','KILL RACE - Zero Build','KR Zero Build')">Zero Build</div>
           </div>
         </div>
+
         <!-- Entry fee sort -->
         <div class="fdd active-filter" id="fdd-fee" onclick="toggleDrop(event,'fee')">
-          <span id="fdd-fee-label">↓ Entry Fee</span>
+          <span id="fdd-fee-label">Entry Fee</span>
           <span class="fdd-arrow">▼</span>
           <div class="dropdown-menu right" id="drop-fee">
-            <div class="dropdown-opt selected" data-val="asc" onclick="selectFilter(event,'fee','asc','↓ Entry Fee')">↓ Entry Fee (croissant)</div>
-            <div class="dropdown-opt" data-val="desc" onclick="selectFilter(event,'fee','desc','↑ Entry Fee')">↑ Entry Fee (décroissant)</div>
-            <div class="dropdown-opt" data-val="prize" onclick="selectFilter(event,'fee','prize','↓ Prize')">🏆 Plus gros prize</div>
+            <div class="dropdown-opt selected" data-val="asc" onclick="selectFilter(event,'fee','asc','Entry Fee')">Entry Fee (croissant)</div>
+            <div class="dropdown-opt" data-val="desc" onclick="selectFilter(event,'fee','desc','Entry Fee')">Entry Fee (décroissant)</div>
+            <div class="dropdown-opt" data-val="prize" onclick="selectFilter(event,'fee','prize','Prize')">Plus gros prize</div>
           </div>
         </div>
+
       </div>
     </div>
     <div class="matches-grid" id="matchesGrid"></div>
@@ -643,11 +666,11 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
     </div>
     <div class="shop-cats">
       <button class="shop-cat active" onclick="filterShop('all',this)">Tout</button>
-      <button class="shop-cat" onclick="filterShop('avatar',this)">🖼️ Avatars</button>
-      <button class="shop-cat" onclick="filterShop('titre',this)">🏷️ Titres</button>
-      <button class="shop-cat" onclick="filterShop('badge',this)">🏅 Badges</button>
-      <button class="shop-cat" onclick="filterShop('effet',this)">✨ Effets</button>
-      <button class="shop-cat" onclick="filterShop('cadre',this)">🖼 Cadres</button>
+      <button class="shop-cat" onclick="filterShop('avatar',this)">Avatars</button>
+      <button class="shop-cat" onclick="filterShop('titre',this)">Titres</button>
+      <button class="shop-cat" onclick="filterShop('badge',this)">Badges</button>
+      <button class="shop-cat" onclick="filterShop('effet',this)">Effets</button>
+      <button class="shop-cat" onclick="filterShop('cadre',this)">Cadres</button>
     </div>
     <div class="shop-grid" id="shopGrid"></div>
   </div>
@@ -680,7 +703,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
           <div>
             <div class="profile-name">XenoPlayer_01</div>
             <div class="profile-tag">@xenoplayer · Membre depuis Jan 2025</div>
-            <div class="profile-bio">Nouveau joueur XENOVRA. Prêt à tout donner 🔥</div>
+            <div class="profile-bio">Nouveau joueur XENOVRA. Prêt à tout donner</div>
           </div>
           <div>
             <div class="xp-big">⚡ 0 <span style="font-size:.85rem;color:var(--muted2)">XP</span></div>
@@ -694,7 +717,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
           <div class="pstat"><div class="pstat-val" style="color:var(--violet3)">0</div><div class="pstat-key">XP gagnés</div></div>
         </div>
         <div class="profile-badges">
-          <span class="badge-item badge-fn">⚡ Nouveau joueur</span>
+          <span class="badge-item badge-fn">Nouveau joueur</span>
         </div>
       </div>
     </div>
@@ -703,12 +726,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 </main>
 
 <script>
-// ════════════════════════════════════════
-// TOUTES LES FONCTIONS DANS LE SCOPE GLOBAL
-// (Fix: elles étaient enfermées dans DOMContentLoaded + try/catch
-//  ce qui les rendait inaccessibles depuis les onclick="" du HTML)
-// ════════════════════════════════════════
-
 // ─── STATE ───
 var currentGame = 'fn';
 var gameDropOpen = false;
@@ -765,7 +782,7 @@ function handleEmailAuth() {
   var pass = document.getElementById('passInput').value.trim();
   if (!email || !pass) { notify('Remplis tous les champs !','⚠️'); return; }
   closeModal();
-  notify(currentAuthTab==='register' ? 'Compte créé ! Bienvenue 🎮' : 'Connexion réussie ! Bienvenue 🎮');
+  notify(currentAuthTab==='register' ? 'Compte créé ! Bienvenue' : 'Connexion réussie ! Bienvenue');
 }
 
 // ─── GAME SELECTOR ───
@@ -796,25 +813,44 @@ function selectGame(g) {
   if (document.getElementById('page-matches').classList.contains('active')) renderMatches();
 }
 
+// ─── GAMEMODE OPTIONS (updated per game) ───
 function updateGamemodeOptions() {
   var menu = document.getElementById('drop-gamemode');
-  var fnModes = ['1V1 BOXFIGHT','1V1 REALISTIC','1V1 PIECE CONTROL','1V1 BUILD FIGHT','2V2 ZONE WARS','1V1 ZERO BUILD'];
-  var crModes = ['1V1 DRAFT','1V1 MEGA DRAFT','1V1 MIRROR','1V1 TOUCHDOWN','2V2 TOUCHDOWN','1V1 BATTLE'];
-  var modes = currentGame==='fn' ? fnModes : crModes;
-  var labels = {
-    '1V1 BOXFIGHT':'⚔️ 1V1 Boxfight','1V1 REALISTIC':'🎯 1V1 Realistic',
-    '1V1 PIECE CONTROL':'🧱 Piece Control','1V1 BUILD FIGHT':'🏗️ Build Fight',
-    '2V2 ZONE WARS':'👥 2V2 Zone Wars','1V1 ZERO BUILD':'🌀 Zero Build',
-    '1V1 DRAFT':'🃏 Draft','1V1 MEGA DRAFT':'👑 Mega Draft',
-    '1V1 MIRROR':'🪞 Mirror','1V1 TOUCHDOWN':'🏈 Touchdown',
-    '2V2 TOUCHDOWN':'👥 2V2 Touchdown','1V1 BATTLE':'⚔️ Battle'
-  };
   activeFilters.gamemode = 'all';
   document.getElementById('fdd-gamemode-label').textContent = 'Tous les modes';
-  menu.innerHTML = '<div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,\'gamemode\',\'all\',\'Tous les modes\')">🎮 Tous les modes</div>';
-  modes.forEach(function(m){
-    menu.innerHTML += '<div class="dropdown-opt" data-val="'+m+'" onclick="selectFilter(event,\'gamemode\',\''+m+'\',\''+( labels[m]||m )+'\')">'+( labels[m]||m )+'</div>';
-  });
+
+  if (currentGame === 'fn') {
+    // FN: Classic / ESL / Zero Build / Kill Race
+    menu.innerHTML =
+      '<div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,\'gamemode\',\'all\',\'Tous les modes\')">Tous les modes</div>' +
+      '<div class="dropdown-cat-header">CLASSIC</div>' +
+      '<div class="dropdown-opt" data-val="CLASSIC - Realistic" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Realistic\',\'Realistic\')">Realistic</div>' +
+      '<div class="dropdown-opt" data-val="CLASSIC - Boxfight" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Boxfight\',\'Boxfight\')">Boxfight</div>' +
+      '<div class="dropdown-opt" data-val="CLASSIC - Zone Wars" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Zone Wars\',\'Zone Wars\')">Zone Wars</div>' +
+      '<div class="dropdown-opt" data-val="CLASSIC - Build Fight" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Build Fight\',\'Build Fight\')">Build Fight</div>' +
+      '<div class="dropdown-opt" data-val="CLASSIC - Speed Realistic" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Speed Realistic\',\'Speed Realistic\')">Speed Realistic</div>' +
+      '<div class="dropdown-opt" data-val="CLASSIC - Piece Control" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Piece Control\',\'Piece Control\')">Piece Control</div>' +
+      '<div class="dropdown-cat-header">ESL</div>' +
+      '<div class="dropdown-opt" data-val="ESL - Hardpoint" onclick="selectFilter(event,\'gamemode\',\'ESL - Hardpoint\',\'Hardpoint\')">Hardpoint</div>' +
+      '<div class="dropdown-opt" data-val="ESL - CTF" onclick="selectFilter(event,\'gamemode\',\'ESL - CTF\',\'CTF\')">CTF</div>' +
+      '<div class="dropdown-cat-header">ZERO BUILD</div>' +
+      '<div class="dropdown-opt" data-val="ZB - Realistic" onclick="selectFilter(event,\'gamemode\',\'ZB - Realistic\',\'ZB Realistic\')">Realistic</div>' +
+      '<div class="dropdown-opt" data-val="ZB - Boxfight" onclick="selectFilter(event,\'gamemode\',\'ZB - Boxfight\',\'ZB Boxfight\')">Boxfight</div>' +
+      '<div class="dropdown-cat-header">KILL RACE</div>' +
+      '<div class="dropdown-opt" data-val="KILL RACE - Standard" onclick="selectFilter(event,\'gamemode\',\'KILL RACE - Standard\',\'KR Standard\')">Standard</div>' +
+      '<div class="dropdown-opt" data-val="KILL RACE - Reload" onclick="selectFilter(event,\'gamemode\',\'KILL RACE - Reload\',\'KR Reload\')">Reload</div>' +
+      '<div class="dropdown-opt" data-val="KILL RACE - Zero Build" onclick="selectFilter(event,\'gamemode\',\'KILL RACE - Zero Build\',\'KR Zero Build\')">Zero Build</div>';
+  } else {
+    // CR modes
+    menu.innerHTML =
+      '<div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,\'gamemode\',\'all\',\'Tous les modes\')">Tous les modes</div>' +
+      '<div class="dropdown-opt" data-val="1V1 DRAFT" onclick="selectFilter(event,\'gamemode\',\'1V1 DRAFT\',\'Draft\')">Draft</div>' +
+      '<div class="dropdown-opt" data-val="1V1 MEGA DRAFT" onclick="selectFilter(event,\'gamemode\',\'1V1 MEGA DRAFT\',\'Mega Draft\')">Mega Draft</div>' +
+      '<div class="dropdown-opt" data-val="1V1 MIRROR" onclick="selectFilter(event,\'gamemode\',\'1V1 MIRROR\',\'Mirror\')">Mirror</div>' +
+      '<div class="dropdown-opt" data-val="1V1 TOUCHDOWN" onclick="selectFilter(event,\'gamemode\',\'1V1 TOUCHDOWN\',\'Touchdown\')">Touchdown</div>' +
+      '<div class="dropdown-opt" data-val="2V2 TOUCHDOWN" onclick="selectFilter(event,\'gamemode\',\'2V2 TOUCHDOWN\',\'2V2 Touchdown\')">2V2 Touchdown</div>' +
+      '<div class="dropdown-opt" data-val="1V1 BATTLE" onclick="selectFilter(event,\'gamemode\',\'1V1 BATTLE\',\'Battle\')">Battle</div>';
+  }
 }
 
 // ─── DROPDOWN FILTERS ───
@@ -850,7 +886,6 @@ function selectFilter(e, key, val, label) {
   renderMatches();
 }
 
-// Close dropdowns on outside click
 document.addEventListener('click', function(e){
   if (!e.target.closest('.fdd')) {
     ['region','platform','gamemode','fee'].forEach(function(k){
@@ -907,9 +942,9 @@ function renderMatches() {
       '<div class="mc-timer-bar"><div class="mc-timer-fill" id="tbar-'+m.id+'" style="width:'+Math.min(100,(m.expiresIn/3600)*100)+'%"></div></div></div></div>' +
       '<div class="mc-fee-row"><div class="mc-fee-item"><div class="mc-fee-label">Entry Fee</div><div class="mc-fee-amount"><span class="fee-coin">🪙</span> <span style="color:#fff">'+m.entryFee.toFixed(2)+'</span></div></div>' +
       '<div class="mc-arrow">→</div>' +
-      '<div class="mc-fee-item" style="text-align:right"><div class="mc-fee-label">Prize</div><div class="mc-fee-amount" style="justify-content:flex-end"><span class="prize-amount">👑 '+m.prize.toFixed(2)+'</span></div></div></div>' +
+      '<div class="mc-fee-item" style="text-align:right"><div class="mc-fee-label">Prize</div><div class="mc-fee-amount" style="justify-content:flex-end"><span class="prize-amount">'+m.prize.toFixed(2)+'</span></div></div></div>' +
       '<button class="mc-join-btn '+(m.status==='ongoing'?'spectate':'')+'" onclick="joinMatch('+m.id+','+(m.locked||false)+')">' +
-      (m.locked?'<span>🔒</span> ':'')+( m.status==='ongoing'?'👁️ Spectateur':'JOIN MATCH')+'</button></div>';
+      (m.locked?'<span>Prive</span> ':'')+( m.status==='ongoing'?'Spectateur':'JOIN MATCH')+'</button></div>';
   }).join('');
 
   filtered.forEach(function(m){ startTimer(m); });
@@ -933,7 +968,7 @@ function startTimer(m) {
 }
 function joinMatch(id, locked) {
   if (locked) notify('Match privé — tu as besoin d\'un code d\'accès !','🔒');
-  else notify('Match #'+id+' rejoint ! Bon courage ⚔️','⚔️');
+  else notify('Match #'+id+' rejoint ! Bon courage');
 }
 
 // ─── LEADERBOARD ───
@@ -953,18 +988,18 @@ function switchLb(p, btn) {
 
 // ─── SHOP ───
 var shopItems = [
-  {cat:'avatar',icon:'🦊',name:'Fox Elite Avatar',desc:'Avatar renard futuriste exclusif',price:800,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'ÉPIQUE'},
-  {cat:'titre',icon:'⚡',name:'Titre "Thunder God"',desc:'Affiche ton titre légendaire en jeu',price:1200,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LÉGENDAIRE'},
+  {cat:'avatar',icon:'🦊',name:'Fox Elite Avatar',desc:'Avatar renard futuriste exclusif',price:800,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {cat:'titre',icon:'⚡',name:'Thunder God',desc:'Affiche ton titre légendaire en jeu',price:1200,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
   {cat:'badge',icon:'🏅',name:'Badge Fortnite Pro',desc:'Badge exclusif joueurs Fortnite vétérans',price:600,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {cat:'effet',icon:'✨',name:'Effet Particules Néon',desc:'Aura de particules violettes sur ton profil',price:1500,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LÉGENDAIRE'},
+  {cat:'effet',icon:'✨',name:'Particules Neon',desc:'Aura de particules violettes sur ton profil',price:1500,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
   {cat:'cadre',icon:'🖼',name:'Cadre Cyber Blue',desc:'Cadre de profil holographique bleu',price:400,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
   {cat:'avatar',icon:'🐺',name:'Wolf Alpha Avatar',desc:'Avatar loup alpha dominateur',price:500,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {cat:'titre',icon:'👑',name:'Titre "Clash King"',desc:'Titre prestige pour les maîtres CR',price:1000,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'ÉPIQUE'},
+  {cat:'titre',icon:'👑',name:'Clash King',desc:'Titre prestige pour les maîtres CR',price:1000,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
   {cat:'badge',icon:'🛡️',name:'Badge Fair Play',desc:'Récompense les joueurs respectueux',price:200,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
-  {cat:'effet',icon:'🌊',name:'Effet Vague Cyan',desc:'Ondulation cyan autour de ton avatar',price:900,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'ÉPIQUE'},
-  {cat:'cadre',icon:'🔥',name:'Cadre Inferno',desc:'Cadre enflammé pour les warriors',price:700,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'ÉPIQUE'},
+  {cat:'effet',icon:'🌊',name:'Vague Cyan',desc:'Ondulation cyan autour de ton avatar',price:900,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {cat:'cadre',icon:'🔥',name:'Cadre Inferno',desc:'Cadre enflammé pour les warriors',price:700,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
   {cat:'avatar',icon:'🤖',name:'Xeno Bot Avatar',desc:'Avatar robot exclusif XENOVRA',price:300,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
-  {cat:'badge',icon:'⭐',name:'Badge Top 100',desc:'Pour les joueurs classés Top 100',price:1800,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LÉGENDAIRE'},
+  {cat:'badge',icon:'⭐',name:'Badge Top 100',desc:'Pour les joueurs classés Top 100',price:1800,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
 ];
 
 function filterShop(f, btn) {
@@ -993,7 +1028,7 @@ function buyItem(name, price) {
   var xp = parseInt(el.textContent.replace(/[\s\u00a0]/g,'')) || 0;
   if (xp >= price) {
     el.textContent = (xp-price).toLocaleString('fr-FR');
-    notify('"'+name+'" acheté ! ✨','🛍️');
+    notify('"'+name+'" acheté !');
   } else {
     notify('XP insuffisants ! Il manque '+(price-xp).toLocaleString('fr-FR')+' XP','❌');
   }
@@ -1001,17 +1036,17 @@ function buyItem(name, price) {
 
 // ─── TOURNAMENTS ───
 var tourneyData = [
-  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTÔT',name:'XENOVRA Fortnite Cup #1',mode:'1V1 Boxfight',prize:'10 000 XP',players:'0/64',date:'À définir',btnClass:'tc-join-soon',btnText:'Rappel →'},
-  {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTÔT',name:'Clash Royale Grand Prix #1',mode:'1V1 Draft',prize:'8 000 XP',players:'0/32',date:'À définir',btnClass:'tc-join-soon',btnText:'Rappel →'},
-  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTÔT',name:'Fortnite Zero Build Cup',mode:'1V1 Zero Build',prize:'15 000 XP',players:'0/128',date:'À définir',btnClass:'tc-join-soon',btnText:'Rappel →'},
-  {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTÔT',name:'CR Mega Draft Masters #1',mode:'Mega Draft 1v1',prize:'12 000 XP',players:'0/32',date:'À définir',btnClass:'tc-join-soon',btnText:'Rappel →'},
+  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTOT',name:'XENOVRA Fortnite Cup #1',mode:'Boxfight',prize:'10 000 XP',players:'0/64',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
+  {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTOT',name:'Clash Royale Grand Prix #1',mode:'Draft',prize:'8 000 XP',players:'0/32',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
+  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTOT',name:'Fortnite Zero Build Cup',mode:'ZB Realistic',prize:'15 000 XP',players:'0/128',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
+  {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTOT',name:'CR Mega Draft Masters #1',mode:'Mega Draft',prize:'12 000 XP',players:'0/32',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
 ];
 function renderTourneys() {
   document.getElementById('tourneyGrid').innerHTML = tourneyData.map(function(t){
     return '<div class="tourney-card">' +
       '<div class="tc-banner '+t.banner+'"><div class="tc-banner-emoji">'+t.emoji+'</div><span class="tc-status-badge '+t.statusClass+'">'+t.statusText+'</span></div>' +
       '<div class="tc-body">' +
-      '<div class="tc-game">'+(t.game==='fn'?'⚡ Fortnite':'👑 Clash Royale')+' · '+t.mode+'</div>' +
+      '<div class="tc-game">'+(t.game==='fn'?'Fortnite':'Clash Royale')+' · '+t.mode+'</div>' +
       '<div class="tc-name">'+t.name+'</div>' +
       '<div class="tc-info">' +
       '<div class="tc-info-item"><div class="tc-info-label">Prize Pool</div><div class="tc-info-val tc-prize">⚡ '+t.prize+'</div></div>' +
@@ -1024,7 +1059,7 @@ function renderTourneys() {
   }).join('');
 }
 function joinTourney(name) {
-  notify('Rappel activé pour "'+name+'" 🔔','🔔');
+  notify('Rappel activé pour "'+name+'"');
 }
 
 // ─── CURSOR ───
@@ -1080,12 +1115,10 @@ function initLoader() {
   setTimeout(function(){ clearInterval(iv); document.getElementById('loader').classList.add('hidden'); }, 2200);
 }
 
-// ─── MODAL CLOSE ON OVERLAY CLICK ───
 document.getElementById('authModal').addEventListener('click', function(e){
   if (e.target === document.getElementById('authModal')) closeModal();
 });
 
-// ─── INIT ON DOM READY ───
 document.addEventListener('DOMContentLoaded', function(){
   initCursor();
   initCanvas();
