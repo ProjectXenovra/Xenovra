@@ -137,8 +137,9 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .fdd-dot.pc{background:#10b981}
 .fdd-arrow{font-size:.6rem;margin-left:2px;opacity:.5;transition:transform .2s}
 .fdd.open .fdd-arrow{transform:rotate(180deg)}
-.dropdown-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:160px;background:var(--card2);border:1px solid rgba(59,130,246,.2);border-radius:8px;z-index:500;box-shadow:0 8px 24px rgba(0,0,0,.6);overflow:hidden}
+.dropdown-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:160px;background:var(--card2);border:1px solid rgba(59,130,246,.2);border-radius:8px;z-index:500;box-shadow:0 8px 24px rgba(0,0,0,.6);overflow:hidden;display:none}
 .dropdown-menu.right{left:auto;right:0}
+.dropdown-menu.open{display:block}
 .dropdown-opt{padding:8px 14px;font-size:.78rem;font-weight:600;color:var(--muted2);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:7px;font-family:'Exo 2',sans-serif}
 .dropdown-opt:hover{color:#fff;background:rgba(59,130,246,.1)}
 .dropdown-opt.selected{color:var(--blue2);background:rgba(59,130,246,.08)}
@@ -415,7 +416,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   </div>
 </div>
 
-<!-- ══════ SIDEBAR ══════ -->
+<!-- SIDEBAR -->
 <aside id="sidebar">
   <div class="sb-logo" onclick="showPage('home')">
     <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
@@ -449,7 +450,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 
   <div class="sb-section">
     <div class="sb-section-label">Compete</div>
-    <div class="sb-nav-item active" id="nav-matches" onclick="showPage('matches')"><span class="sb-icon">⚔️</span> Matchs</div>
+    <div class="sb-nav-item" id="nav-matches" onclick="showPage('matches')"><span class="sb-icon">⚔️</span> Matchs</div>
     <div class="sb-nav-item" id="nav-tournaments" onclick="showPage('tournaments')"><span class="sb-icon">🏆</span> Tournois</div>
     <div class="sb-nav-item" id="nav-leaderboard" onclick="showPage('leaderboard')"><span class="sb-icon">📊</span> Leaderboard</div>
   </div>
@@ -492,7 +493,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   <button class="sb-buy-btn" onclick="openModal('register')">⚡ Acheter des XP</button>
 </aside>
 
-<!-- ══════ TOPBAR ══════ -->
+<!-- TOPBAR -->
 <header id="topbar">
   <div class="tb-search">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -512,11 +513,11 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   </div>
 </header>
 
-<!-- ══════ MAIN ══════ -->
+<!-- MAIN -->
 <main id="main">
 
   <!-- HOME -->
-  <div class="page active" id="page-home">
+  <div class="page" id="page-home">
     <div class="hero-section">
       <div class="hero-orb1"></div><div class="hero-orb2"></div><div class="hero-grid"></div>
       <div class="hero-content">
@@ -540,7 +541,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   </div>
 
   <!-- MATCHES -->
-  <div class="page" id="page-matches">
+  <div class="page active" id="page-matches">
     <div class="matches-header">
       <h1 class="matches-title">Live Matches</h1>
       <div class="matches-actions">
@@ -560,11 +561,11 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
       </div>
       <div class="filter-dropdowns" id="filterDropdowns">
         <!-- Region -->
-        <div class="fdd" id="fdd-region" onclick="toggleDrop('region')">
+        <div class="fdd" id="fdd-region" onclick="toggleDrop(event,'region')">
           <span class="fdd-dot eu"></span>
           <span id="fdd-region-label">Toutes régions</span>
           <span class="fdd-arrow">▼</span>
-          <div class="dropdown-menu" id="drop-region" style="display:none">
+          <div class="dropdown-menu" id="drop-region">
             <div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'region','all','Toutes régions')">🌍 Toutes régions</div>
             <div class="dropdown-opt" data-val="EU" onclick="selectFilter(event,'region','EU','EU')"><span class="opt-dot" style="background:#3b82f6"></span> EU</div>
             <div class="dropdown-opt" data-val="NA" onclick="selectFilter(event,'region','NA','NA')"><span class="opt-dot" style="background:#10b981"></span> NA</div>
@@ -572,11 +573,11 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
           </div>
         </div>
         <!-- Platform -->
-        <div class="fdd" id="fdd-platform" onclick="toggleDrop('platform')">
+        <div class="fdd" id="fdd-platform" onclick="toggleDrop(event,'platform')">
           <span class="fdd-dot pc"></span>
           <span id="fdd-platform-label">Toutes plateformes</span>
           <span class="fdd-arrow">▼</span>
-          <div class="dropdown-menu" id="drop-platform" style="display:none">
+          <div class="dropdown-menu" id="drop-platform">
             <div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'platform','all','Toutes plateformes')">🖥️ Toutes plateformes</div>
             <div class="dropdown-opt" data-val="PC" onclick="selectFilter(event,'platform','PC','PC')"><span class="opt-dot" style="background:#10b981"></span> PC</div>
             <div class="dropdown-opt" data-val="Console" onclick="selectFilter(event,'platform','Console','Console')"><span class="opt-dot" style="background:#8b5cf6"></span> Console</div>
@@ -584,11 +585,11 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
           </div>
         </div>
         <!-- Gamemode -->
-        <div class="fdd" id="fdd-gamemode" onclick="toggleDrop('gamemode')">
+        <div class="fdd" id="fdd-gamemode" onclick="toggleDrop(event,'gamemode')">
           <span>🎮</span>
           <span id="fdd-gamemode-label">Tous les modes</span>
           <span class="fdd-arrow">▼</span>
-          <div class="dropdown-menu" id="drop-gamemode" style="display:none">
+          <div class="dropdown-menu" id="drop-gamemode">
             <div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'gamemode','all','Tous les modes')">🎮 Tous les modes</div>
             <div class="dropdown-opt" data-val="1V1 BOXFIGHT" onclick="selectFilter(event,'gamemode','1V1 BOXFIGHT','1V1 Boxfight')">⚔️ 1V1 Boxfight</div>
             <div class="dropdown-opt" data-val="1V1 REALISTIC" onclick="selectFilter(event,'gamemode','1V1 REALISTIC','1V1 Realistic')">🎯 1V1 Realistic</div>
@@ -598,10 +599,10 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
           </div>
         </div>
         <!-- Entry fee sort -->
-        <div class="fdd active-filter" id="fdd-fee" onclick="toggleDrop('fee')">
+        <div class="fdd active-filter" id="fdd-fee" onclick="toggleDrop(event,'fee')">
           <span id="fdd-fee-label">↓ Entry Fee</span>
           <span class="fdd-arrow">▼</span>
-          <div class="dropdown-menu right" id="drop-fee" style="display:none">
+          <div class="dropdown-menu right" id="drop-fee">
             <div class="dropdown-opt selected" data-val="asc" onclick="selectFilter(event,'fee','asc','↓ Entry Fee')">↓ Entry Fee (croissant)</div>
             <div class="dropdown-opt" data-val="desc" onclick="selectFilter(event,'fee','desc','↑ Entry Fee')">↑ Entry Fee (décroissant)</div>
             <div class="dropdown-opt" data-val="prize" onclick="selectFilter(event,'fee','prize','↓ Prize')">🏆 Plus gros prize</div>
@@ -701,66 +702,105 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 </main>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-try {
+// ════════════════════════════════════════
+// TOUTES LES FONCTIONS DANS LE SCOPE GLOBAL
+// (Fix: elles étaient enfermées dans DOMContentLoaded + try/catch
+//  ce qui les rendait inaccessibles depuis les onclick="" du HTML)
+// ════════════════════════════════════════
 
-// ─── CURSOR ───
-const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
-(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)})();
+// ─── STATE ───
+var currentGame = 'fn';
+var gameDropOpen = false;
+var matchTab = 'available';
+var activeFilters = {region:'all', platform:'all', gamemode:'all', fee:'asc'};
+var timers = {};
+var currentAuthTab = 'login';
 
-// ─── CANVAS ───
-const canvas=document.getElementById('bg'),ctx=canvas.getContext('2d');let pts=[];
-function resizeCv(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
-function makePts(){pts=[];const n=Math.min(55,Math.floor(window.innerWidth/20));for(let i=0;i<n;i++)pts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.1+.3,a:Math.random()*.35+.08,c:Math.random()>.5?'59,130,246':'124,58,237'})}
-function drawCv(){ctx.clearRect(0,0,canvas.width,canvas.height);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(${p.c},${p.a})`;ctx.fill()});pts.forEach((a,i)=>pts.slice(i+1).forEach(b=>{const d=Math.hypot(a.x-b.x,a.y-b.y);if(d<85){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(59,130,246,${.05*(1-d/85)})`;ctx.lineWidth=.4;ctx.stroke()}}));requestAnimationFrame(drawCv)}
-resizeCv();makePts();drawCv();
-window.addEventListener('resize',()=>{resizeCv();makePts()});
+// ─── NOTIFY ───
+function notify(msg, icon) {
+  icon = icon || '✅';
+  document.getElementById('notifText').textContent = msg;
+  document.getElementById('notifIcon').textContent = icon;
+  var n = document.getElementById('notif');
+  n.style.borderColor = icon==='❌' ? 'rgba(239,68,68,.3)' : icon==='⚠️' ? 'rgba(245,158,11,.3)' : 'rgba(16,185,129,.3)';
+  n.classList.add('show');
+  setTimeout(function(){ n.classList.remove('show'); }, 3200);
+}
 
-// ─── LOADER ───
-const msgs=['INITIALIZING SYSTEMS...','LOADING GAME DATA...','CONNECTING TO SERVERS...','CALIBRATING ANTI-CHEAT...','ENTERING THE ARENA...'];
-let mi=0;
-const miv=setInterval(()=>{mi++;if(mi<msgs.length)document.getElementById('loaderCode').textContent=msgs[mi];},420);
-setTimeout(()=>{clearInterval(miv);document.getElementById('loader').classList.add('hidden');},2200);
+// ─── PAGE SYSTEM ───
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+  var page = document.getElementById('page-'+id);
+  if (page) page.classList.add('active');
+  document.querySelectorAll('.sb-nav-item').forEach(function(i){ i.classList.remove('active'); });
+  var navEl = document.getElementById('nav-'+id);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo(0,0);
+  if (id==='matches') renderMatches();
+  if (id==='leaderboard') renderLb('day');
+  if (id==='shop') renderShop('all');
+  if (id==='tournaments') renderTourneys();
+}
+
+// ─── MODAL ───
+function openModal(tab) {
+  tab = tab || 'login';
+  document.getElementById('authModal').classList.add('open');
+  var btn = document.getElementById(tab==='register' ? 'tabRegister' : 'tabLogin');
+  switchAuthTab(tab, btn);
+}
+function closeModal() {
+  document.getElementById('authModal').classList.remove('open');
+}
+function switchAuthTab(tab, btn) {
+  currentAuthTab = tab;
+  document.querySelectorAll('.modal-tab').forEach(function(t){ t.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  document.getElementById('usernameGroup').style.display = tab==='register' ? 'block' : 'none';
+  document.getElementById('submitBtn').textContent = tab==='register' ? 'Créer mon compte →' : 'Se connecter →';
+}
+function handleEmailAuth() {
+  var email = document.getElementById('emailInput').value.trim();
+  var pass = document.getElementById('passInput').value.trim();
+  if (!email || !pass) { notify('Remplis tous les champs !','⚠️'); return; }
+  closeModal();
+  notify(currentAuthTab==='register' ? 'Compte créé ! Bienvenue 🎮' : 'Connexion réussie ! Bienvenue 🎮');
+}
 
 // ─── GAME SELECTOR ───
-let currentGame='fn';
-let gameDropOpen=false;
-function toggleGameDrop(){
-  gameDropOpen=!gameDropOpen;
-  document.getElementById('gameDrop').classList.toggle('open',gameDropOpen);
-  document.getElementById('gameChevron').classList.toggle('open',gameDropOpen);
+function toggleGameDrop() {
+  gameDropOpen = !gameDropOpen;
+  document.getElementById('gameDrop').classList.toggle('open', gameDropOpen);
+  document.getElementById('gameChevron').classList.toggle('open', gameDropOpen);
 }
-function selectGame(g){
-  currentGame=g;
-  gameDropOpen=false;
+function selectGame(g) {
+  currentGame = g;
+  gameDropOpen = false;
   document.getElementById('gameDrop').classList.remove('open');
   document.getElementById('gameChevron').classList.remove('open');
-  if(g==='fn'){
-    document.getElementById('gameIcon').textContent='⚡';
-    document.getElementById('gameIcon').className='sb-game-icon fn-bg';
-    document.getElementById('gameLabel').textContent='FN';
+  if (g === 'fn') {
+    document.getElementById('gameIcon').textContent = '⚡';
+    document.getElementById('gameIcon').className = 'sb-game-icon fn-bg';
+    document.getElementById('gameLabel').textContent = 'FN';
     document.getElementById('opt-fn').classList.add('active');
     document.getElementById('opt-cr').classList.remove('active');
   } else {
-    document.getElementById('gameIcon').textContent='👑';
-    document.getElementById('gameIcon').className='sb-game-icon cr-bg';
-    document.getElementById('gameLabel').textContent='CR';
+    document.getElementById('gameIcon').textContent = '👑';
+    document.getElementById('gameIcon').className = 'sb-game-icon cr-bg';
+    document.getElementById('gameLabel').textContent = 'CR';
     document.getElementById('opt-fn').classList.remove('active');
     document.getElementById('opt-cr').classList.add('active');
   }
-  // Update gamemode options based on game
   updateGamemodeOptions();
-  if(document.getElementById('page-matches').classList.contains('active')) renderMatches();
+  if (document.getElementById('page-matches').classList.contains('active')) renderMatches();
 }
 
-function updateGamemodeOptions(){
-  const menu=document.getElementById('drop-gamemode');
-  const fnModes=['1V1 BOXFIGHT','1V1 REALISTIC','1V1 PIECE CONTROL','1V1 BUILD FIGHT','2V2 ZONE WARS','1V1 ZERO BUILD'];
-  const crModes=['1V1 DRAFT','1V1 MEGA DRAFT','1V1 MIRROR','1V1 TOUCHDOWN','2V2 TOUCHDOWN','1V1 BATTLE'];
-  const modes=currentGame==='fn'?fnModes:crModes;
-  const labels={
+function updateGamemodeOptions() {
+  var menu = document.getElementById('drop-gamemode');
+  var fnModes = ['1V1 BOXFIGHT','1V1 REALISTIC','1V1 PIECE CONTROL','1V1 BUILD FIGHT','2V2 ZONE WARS','1V1 ZERO BUILD'];
+  var crModes = ['1V1 DRAFT','1V1 MEGA DRAFT','1V1 MIRROR','1V1 TOUCHDOWN','2V2 TOUCHDOWN','1V1 BATTLE'];
+  var modes = currentGame==='fn' ? fnModes : crModes;
+  var labels = {
     '1V1 BOXFIGHT':'⚔️ 1V1 Boxfight','1V1 REALISTIC':'🎯 1V1 Realistic',
     '1V1 PIECE CONTROL':'🧱 Piece Control','1V1 BUILD FIGHT':'🏗️ Build Fight',
     '2V2 ZONE WARS':'👥 2V2 Zone Wars','1V1 ZERO BUILD':'🌀 Zero Build',
@@ -768,243 +808,150 @@ function updateGamemodeOptions(){
     '1V1 MIRROR':'🪞 Mirror','1V1 TOUCHDOWN':'🏈 Touchdown',
     '2V2 TOUCHDOWN':'👥 2V2 Touchdown','1V1 BATTLE':'⚔️ Battle'
   };
-  // Reset filter
-  activeFilters.gamemode='all';
-  document.getElementById('fdd-gamemode-label').textContent='Tous les modes';
-  menu.innerHTML=`<div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'gamemode','all','Tous les modes')">🎮 Tous les modes</div>`;
-  modes.forEach(m=>{
-    menu.innerHTML+=`<div class="dropdown-opt" data-val="${m}" onclick="selectFilter(event,'gamemode','${m}','${labels[m]||m}')">${labels[m]||m}</div>`;
+  activeFilters.gamemode = 'all';
+  document.getElementById('fdd-gamemode-label').textContent = 'Tous les modes';
+  menu.innerHTML = '<div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,\'gamemode\',\'all\',\'Tous les modes\')">🎮 Tous les modes</div>';
+  modes.forEach(function(m){
+    menu.innerHTML += '<div class="dropdown-opt" data-val="'+m+'" onclick="selectFilter(event,\'gamemode\',\''+m+'\',\''+( labels[m]||m )+'\')">'+( labels[m]||m )+'</div>';
   });
 }
 
 // ─── DROPDOWN FILTERS ───
-let activeFilters={region:'all',platform:'all',gamemode:'all',fee:'asc'};
-
-function toggleDrop(id){
-  // Close all others
-  ['region','platform','gamemode','fee'].forEach(k=>{
-    if(k!==id){
-      const el=document.getElementById('drop-'+k);
-      if(el){el.style.display='none';}
+function toggleDrop(e, id) {
+  e.stopPropagation();
+  var keys = ['region','platform','gamemode','fee'];
+  keys.forEach(function(k){
+    if (k !== id) {
+      document.getElementById('drop-'+k).classList.remove('open');
       document.getElementById('fdd-'+k).classList.remove('open');
     }
   });
-  const el=document.getElementById('drop-'+id);
-  const fdd=document.getElementById('fdd-'+id);
-  const isOpen=el.style.display==='block';
-  el.style.display=isOpen?'none':'block';
-  fdd.classList.toggle('open',!isOpen);
+  var menu = document.getElementById('drop-'+id);
+  var fdd = document.getElementById('fdd-'+id);
+  var isOpen = menu.classList.contains('open');
+  menu.classList.toggle('open', !isOpen);
+  fdd.classList.toggle('open', !isOpen);
 }
 
-function selectFilter(e,key,val,label){
+function selectFilter(e, key, val, label) {
   e.stopPropagation();
-  activeFilters[key]=val;
-  document.getElementById('fdd-'+key+'-label').textContent=label;
-  // Update selected state
-  const menu=document.getElementById('drop-'+key);
-  menu.querySelectorAll('.dropdown-opt').forEach(o=>{
-    o.classList.toggle('selected',o.dataset.val===val);
+  activeFilters[key] = val;
+  document.getElementById('fdd-'+key+'-label').textContent = label;
+  var menu = document.getElementById('drop-'+key);
+  menu.querySelectorAll('.dropdown-opt').forEach(function(o){
+    o.classList.toggle('selected', o.dataset.val === val);
   });
-  // Close dropdown
-  document.getElementById('drop-'+key).style.display='none';
+  menu.classList.remove('open');
   document.getElementById('fdd-'+key).classList.remove('open');
-  // Mark active filter
-  document.getElementById('fdd-'+key).classList.toggle('active-filter',val!=='all');
-  if(key==='fee') document.getElementById('fdd-fee').classList.add('active-filter');
+  if (key !== 'fee') {
+    document.getElementById('fdd-'+key).classList.toggle('active-filter', val !== 'all');
+  }
   renderMatches();
 }
 
-// Close dropdowns when clicking outside
-document.addEventListener('click',e=>{
-  if(!e.target.closest('.fdd')){
-    ['region','platform','gamemode','fee'].forEach(k=>{
-      const el=document.getElementById('drop-'+k);
-      if(el) el.style.display='none';
-      const fdd=document.getElementById('fdd-'+k);
-      if(fdd) fdd.classList.remove('open');
+// Close dropdowns on outside click
+document.addEventListener('click', function(e){
+  if (!e.target.closest('.fdd')) {
+    ['region','platform','gamemode','fee'].forEach(function(k){
+      var el = document.getElementById('drop-'+k);
+      if (el) el.classList.remove('open');
+      var fdd = document.getElementById('fdd-'+k);
+      if (fdd) fdd.classList.remove('open');
     });
   }
 });
 
-// ─── PAGE SYSTEM ───
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  const page=document.getElementById('page-'+id);
-  if(page)page.classList.add('active');
-  document.querySelectorAll('.sb-nav-item').forEach(i=>i.classList.remove('active'));
-  const navEl=document.getElementById('nav-'+id);
-  if(navEl)navEl.classList.add('active');
-  window.scrollTo(0,0);
-  if(id==='matches')renderMatches();
-  if(id==='leaderboard')renderLb('day');
-  if(id==='shop')renderShop('all');
-  if(id==='tournaments')renderTourneys();
-}
+// ─── MATCH DATA ───
+var fnMatches = [];
+var crMatches = [];
 
-// ─── MODAL ───
-function openModal(tab='login'){
-  document.getElementById('authModal').classList.add('open');
-  switchAuthTab(tab, document.getElementById(tab==='register'?'tabRegister':'tabLogin'));
-}
-function closeModal(){document.getElementById('authModal').classList.remove('open')}
-let currentAuthTab='login';
-function switchAuthTab(tab,btn){
-  currentAuthTab=tab;
-  document.querySelectorAll('.modal-tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('usernameGroup').style.display=tab==='register'?'block':'none';
-  document.getElementById('submitBtn').textContent=tab==='register'?'Créer mon compte →':'Se connecter →';
-}
-function handleEmailAuth(){
-  const email=document.getElementById('emailInput').value.trim();
-  const pass=document.getElementById('passInput').value.trim();
-  if(!email||!pass){notify('Remplis tous les champs !','⚠️');return;}
-  closeModal();
-  notify(currentAuthTab==='register'?'Compte créé ! Bienvenue 🎮':'Connexion réussie ! Bienvenue 🎮');
-}
-document.getElementById('authModal').addEventListener('click',e=>{if(e.target===document.getElementById('authModal'))closeModal()});
-
-// ─── NOTIFY ───
-function notify(msg,icon='✅'){
-  document.getElementById('notifText').textContent=msg;
-  document.getElementById('notifIcon').textContent=icon;
-  const n=document.getElementById('notif');
-  n.style.borderColor=icon==='❌'?'rgba(239,68,68,.3)':icon==='⚠️'?'rgba(245,158,11,.3)':'rgba(16,185,129,.3)';
-  n.classList.add('show');
-  setTimeout(()=>n.classList.remove('show'),3200);
-}
-
-// ─── MATCH DATA — Vide au départ ───
-const fnMatches=[];
-const crMatches=[];
-
-let matchTab='available';
-function switchMatchTab(tab,btn){
-  matchTab=tab;
-  document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));
+function switchMatchTab(tab, btn) {
+  matchTab = tab;
+  document.querySelectorAll('.filter-tab').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
   renderMatches();
 }
 
-const timers={};
+function renderMatches() {
+  var data = currentGame==='fn' ? fnMatches.slice() : crMatches.slice();
+  var filtered = data.filter(function(m){ return matchTab==='available' ? m.status==='available' : m.status==='ongoing'; });
+  if (activeFilters.region !== 'all') filtered = filtered.filter(function(m){ return m.region===activeFilters.region; });
+  if (activeFilters.platform !== 'all') filtered = filtered.filter(function(m){ return !m.platform || m.platform===activeFilters.platform; });
+  if (activeFilters.gamemode !== 'all') filtered = filtered.filter(function(m){ return m.mode.includes(activeFilters.gamemode); });
+  if (activeFilters.fee==='asc') filtered.sort(function(a,b){ return a.entryFee-b.entryFee; });
+  else if (activeFilters.fee==='desc') filtered.sort(function(a,b){ return b.entryFee-a.entryFee; });
+  else if (activeFilters.fee==='prize') filtered.sort(function(a,b){ return b.prize-a.prize; });
 
-function renderMatches(){
-  let data=currentGame==='fn'?[...fnMatches]:[...crMatches];
-  
-  // Filter by status
-  let filtered=data.filter(m=>matchTab==='available'?m.status==='available':m.status==='ongoing');
-  
-  // Apply filters
-  if(activeFilters.region!=='all') filtered=filtered.filter(m=>m.region===activeFilters.region);
-  if(activeFilters.platform!=='all') filtered=filtered.filter(m=>!m.platform||m.platform===activeFilters.platform);
-  if(activeFilters.gamemode!=='all') filtered=filtered.filter(m=>m.mode.includes(activeFilters.gamemode)||m.mode===activeFilters.gamemode);
-  
-  // Sort by fee
-  if(activeFilters.fee==='asc') filtered.sort((a,b)=>a.entryFee-b.entryFee);
-  else if(activeFilters.fee==='desc') filtered.sort((a,b)=>b.entryFee-a.entryFee);
-  else if(activeFilters.fee==='prize') filtered.sort((a,b)=>b.prize-a.prize);
+  document.getElementById('count-available').textContent = data.filter(function(m){ return m.status==='available'; }).length;
+  document.getElementById('count-ongoing').textContent = data.filter(function(m){ return m.status==='ongoing'; }).length;
 
-  // Update counts
-  document.getElementById('count-available').textContent=data.filter(m=>m.status==='available').length;
-  document.getElementById('count-ongoing').textContent=data.filter(m=>m.status==='ongoing').length;
-
-  if(filtered.length===0){
-    document.getElementById('matchesGrid').innerHTML=`
-      <div class="empty-state" style="grid-column:1/-1">
-        <div class="empty-icon">⚔️</div>
-        <div class="empty-title">Aucun match disponible</div>
-        <div class="empty-sub">Aucun match n'est disponible pour le moment. Sois le premier à en créer un ou reviens plus tard !</div>
-      </div>`;
+  if (filtered.length === 0) {
+    document.getElementById('matchesGrid').innerHTML =
+      '<div class="empty-state" style="grid-column:1/-1">' +
+      '<div class="empty-icon">⚔️</div>' +
+      '<div class="empty-title">Aucun match disponible</div>' +
+      '<div class="empty-sub">Aucun match n\'est disponible pour le moment. Sois le premier à en créer un ou reviens plus tard !</div>' +
+      '</div>';
     return;
   }
 
-  document.getElementById('matchesGrid').innerHTML=filtered.map(m=>`
-    <div class="match-card" id="mc-${m.id}">
-      <div class="mc-top">
-        <div>
-          <div class="mc-mode-title">
-            ${m.mode}
-            ${m.noEdit?'<span class="mc-tag tag-noedit" style="font-size:.58rem;vertical-align:middle;margin-left:6px">NO SIMPLE EDIT</span>':''}
-          </div>
-          <div class="mc-tags">
-            <span class="mc-tag tag-region">${m.region}</span>
-            <span class="mc-tag tag-loadout">${m.loadout}</span>
-          </div>
-        </div>
-        <div class="mc-icons">
-          <div class="mc-game-dot ${currentGame==='fn'?'fn-bg':'cr-bg'}">${currentGame==='fn'?'⚡':'👑'}</div>
-        </div>
-      </div>
-      <div class="mc-info-row">
-        <div class="mc-info-item">
-          <div class="mc-info-label">First To</div>
-          <div class="mc-info-val"><span class="mc-flag">🏁</span> ${m.firstTo}</div>
-        </div>
-        <div class="mc-info-item">
-          <div class="mc-info-label">Expires In</div>
-          <div class="mc-info-val">
-            <span class="mc-timer-val" id="timer-${m.id}">${formatTime(m.expiresIn)}</span>
-          </div>
-          <div class="mc-timer-bar"><div class="mc-timer-fill" id="tbar-${m.id}" style="width:${Math.min(100,(m.expiresIn/3600)*100)}%"></div></div>
-        </div>
-      </div>
-      <div class="mc-fee-row">
-        <div class="mc-fee-item">
-          <div class="mc-fee-label">Entry Fee</div>
-          <div class="mc-fee-amount"><span class="fee-coin">🪙</span> <span style="color:#fff">${m.entryFee.toFixed(2)}</span></div>
-        </div>
-        <div class="mc-arrow">→</div>
-        <div class="mc-fee-item" style="text-align:right">
-          <div class="mc-fee-label">Prize</div>
-          <div class="mc-fee-amount" style="justify-content:flex-end"><span class="prize-amount">👑 ${m.prize.toFixed(2)}</span></div>
-        </div>
-      </div>
-      <button class="mc-join-btn ${m.status==='ongoing'?'spectate':''}" onclick="joinMatch(${m.id},${m.locked||false})">
-        ${m.locked?'<span>🔒</span> ':''}${m.status==='ongoing'?'👁️ Spectateur':'JOIN MATCH'}
-      </button>
-    </div>
-  `).join('');
+  document.getElementById('matchesGrid').innerHTML = filtered.map(function(m){
+    return '<div class="match-card" id="mc-'+m.id+'">' +
+      '<div class="mc-top"><div>' +
+      '<div class="mc-mode-title">'+m.mode+(m.noEdit?'<span class="mc-tag tag-noedit" style="font-size:.58rem;vertical-align:middle;margin-left:6px">NO SIMPLE EDIT</span>':'')+'</div>' +
+      '<div class="mc-tags"><span class="mc-tag tag-region">'+m.region+'</span><span class="mc-tag tag-loadout">'+m.loadout+'</span></div>' +
+      '</div><div class="mc-icons"><div class="mc-game-dot '+(currentGame==='fn'?'fn-bg':'cr-bg')+'">'+(currentGame==='fn'?'⚡':'👑')+'</div></div></div>' +
+      '<div class="mc-info-row"><div class="mc-info-item"><div class="mc-info-label">First To</div><div class="mc-info-val"><span class="mc-flag">🏁</span> '+m.firstTo+'</div></div>' +
+      '<div class="mc-info-item"><div class="mc-info-label">Expires In</div><div class="mc-info-val"><span class="mc-timer-val" id="timer-'+m.id+'">'+formatTime(m.expiresIn)+'</span></div>' +
+      '<div class="mc-timer-bar"><div class="mc-timer-fill" id="tbar-'+m.id+'" style="width:'+Math.min(100,(m.expiresIn/3600)*100)+'%"></div></div></div></div>' +
+      '<div class="mc-fee-row"><div class="mc-fee-item"><div class="mc-fee-label">Entry Fee</div><div class="mc-fee-amount"><span class="fee-coin">🪙</span> <span style="color:#fff">'+m.entryFee.toFixed(2)+'</span></div></div>' +
+      '<div class="mc-arrow">→</div>' +
+      '<div class="mc-fee-item" style="text-align:right"><div class="mc-fee-label">Prize</div><div class="mc-fee-amount" style="justify-content:flex-end"><span class="prize-amount">👑 '+m.prize.toFixed(2)+'</span></div></div></div>' +
+      '<button class="mc-join-btn '+(m.status==='ongoing'?'spectate':'')+'" onclick="joinMatch('+m.id+','+(m.locked||false)+')">' +
+      (m.locked?'<span>🔒</span> ':'')+( m.status==='ongoing'?'👁️ Spectateur':'JOIN MATCH')+'</button></div>';
+  }).join('');
 
-  filtered.forEach(m=>startTimer(m));
+  filtered.forEach(function(m){ startTimer(m); });
 }
 
-function formatTime(seconds){
-  var mm=Math.floor(seconds/60),ss=seconds%60;
+function formatTime(seconds) {
+  var mm = Math.floor(seconds/60), ss = seconds%60;
   return (mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss;
 }
-function startTimer(m){
-  if(timers[m.id])clearInterval(timers[m.id]);
-  let sec=m.expiresIn;
-  timers[m.id]=setInterval(()=>{
-    sec--;if(sec<=0){clearInterval(timers[m.id]);sec=0;}
-    const el=document.getElementById('timer-'+m.id);
-    const bar=document.getElementById('tbar-'+m.id);
-    if(el)el.textContent=formatTime(sec);
-    if(bar)bar.style.width=Math.max(0,(sec/m.expiresIn)*100)+'%';
-  },1000);
+function startTimer(m) {
+  if (timers[m.id]) clearInterval(timers[m.id]);
+  var sec = m.expiresIn;
+  timers[m.id] = setInterval(function(){
+    sec--;
+    if (sec<=0){ clearInterval(timers[m.id]); sec=0; }
+    var el = document.getElementById('timer-'+m.id);
+    var bar = document.getElementById('tbar-'+m.id);
+    if (el) el.textContent = formatTime(sec);
+    if (bar) bar.style.width = Math.max(0,(sec/m.expiresIn)*100)+'%';
+  }, 1000);
 }
-function joinMatch(id,locked){
-  if(locked)notify('Match privé — tu as besoin d\'un code d\'accès !','🔒');
-  else notify(`Match #${id} rejoint ! Bon courage ⚔️`,'⚔️');
+function joinMatch(id, locked) {
+  if (locked) notify('Match privé — tu as besoin d\'un code d\'accès !','🔒');
+  else notify('Match #'+id+' rejoint ! Bon courage ⚔️','⚔️');
 }
 
-// ─── LEADERBOARD — Vide ───
-function renderLb(period){
-  document.getElementById('lbRows').innerHTML=`
-    <div class="empty-state">
-      <div class="empty-icon">📊</div>
-      <div class="empty-title">Classement vide</div>
-      <div class="empty-sub">Aucune partie jouée pour l'instant. Le classement se remplira au fur et à mesure des matchs !</div>
-    </div>`;
+// ─── LEADERBOARD ───
+function renderLb(period) {
+  document.getElementById('lbRows').innerHTML =
+    '<div class="empty-state">' +
+    '<div class="empty-icon">📊</div>' +
+    '<div class="empty-title">Classement vide</div>' +
+    '<div class="empty-sub">Aucune partie jouée pour l\'instant. Le classement se remplira au fur et à mesure des matchs !</div>' +
+    '</div>';
 }
-function switchLb(p,btn){
-  document.querySelectorAll('.lb-tab').forEach(t=>t.classList.remove('active'));
+function switchLb(p, btn) {
+  document.querySelectorAll('.lb-tab').forEach(function(t){ t.classList.remove('active'); });
   btn.classList.add('active');
   renderLb(p);
 }
 
 // ─── SHOP ───
-const shopItems=[
+var shopItems = [
   {cat:'avatar',icon:'🦊',name:'Fox Elite Avatar',desc:'Avatar renard futuriste exclusif',price:800,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'ÉPIQUE'},
   {cat:'titre',icon:'⚡',name:'Titre "Thunder God"',desc:'Affiche ton titre légendaire en jeu',price:1200,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LÉGENDAIRE'},
   {cat:'badge',icon:'🏅',name:'Badge Fortnite Pro',desc:'Badge exclusif joueurs Fortnite vétérans',price:600,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
@@ -1018,73 +965,135 @@ const shopItems=[
   {cat:'avatar',icon:'🤖',name:'Xeno Bot Avatar',desc:'Avatar robot exclusif XENOVRA',price:300,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
   {cat:'badge',icon:'⭐',name:'Badge Top 100',desc:'Pour les joueurs classés Top 100',price:1800,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LÉGENDAIRE'},
 ];
-function filterShop(f,btn){
-  document.querySelectorAll('.shop-cat').forEach(b=>b.classList.remove('active'));
+
+function filterShop(f, btn) {
+  document.querySelectorAll('.shop-cat').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
   renderShop(f);
 }
-function renderShop(f){
-  const items=f==='all'?shopItems:shopItems.filter(i=>i.cat===f);
-  document.getElementById('shopGrid').innerHTML=items.map(i=>`
-    <div class="shop-item">
-      <div class="shop-item-img ${i.rarityClass}">
-        <span class="shop-rarity ${i.rarityLabel}">${i.rarityText}</span>
-        <span style="position:relative;z-index:1">${i.icon}</span>
-      </div>
-      <div class="shop-item-body">
-        <div class="shop-item-name">${i.name}</div>
-        <div class="shop-item-desc">${i.desc}</div>
-        <div class="shop-item-footer">
-          <div class="shop-price">⚡ ${i.price.toLocaleString('fr-FR')} XP</div>
-          <button class="shop-buy-btn" onclick="buyItem('${i.name}',${i.price})">Acheter</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
+function renderShop(f) {
+  var items = f==='all' ? shopItems : shopItems.filter(function(i){ return i.cat===f; });
+  document.getElementById('shopGrid').innerHTML = items.map(function(i){
+    return '<div class="shop-item">' +
+      '<div class="shop-item-img '+i.rarityClass+'">' +
+      '<span class="shop-rarity '+i.rarityLabel+'">'+i.rarityText+'</span>' +
+      '<span style="position:relative;z-index:1">'+i.icon+'</span></div>' +
+      '<div class="shop-item-body">' +
+      '<div class="shop-item-name">'+i.name+'</div>' +
+      '<div class="shop-item-desc">'+i.desc+'</div>' +
+      '<div class="shop-item-footer">' +
+      '<div class="shop-price">⚡ '+i.price.toLocaleString('fr-FR')+' XP</div>' +
+      '<button class="shop-buy-btn" onclick="buyItem(\''+i.name+'\','+i.price+')">Acheter</button>' +
+      '</div></div></div>';
+  }).join('');
 }
-function buyItem(name,price){
-  const el=document.getElementById('navXP');
-  const xp=parseInt(el.textContent.replace(/[\s\u00a0]/g,''));
-  if(xp>=price){el.textContent=(xp-price).toLocaleString('fr-FR');notify(`"${name}" acheté ! ✨`,'🛍️');}
-  else notify(`XP insuffisants ! Il manque ${(price-xp).toLocaleString('fr-FR')} XP`,'❌');
+function buyItem(name, price) {
+  var el = document.getElementById('navXP');
+  var xp = parseInt(el.textContent.replace(/[\s\u00a0]/g,'')) || 0;
+  if (xp >= price) {
+    el.textContent = (xp-price).toLocaleString('fr-FR');
+    notify('"'+name+'" acheté ! ✨','🛍️');
+  } else {
+    notify('XP insuffisants ! Il manque '+(price-xp).toLocaleString('fr-FR')+' XP','❌');
+  }
 }
 
-// ─── TOURNAMENTS — Uniquement "À VENIR" ───
-const tourneyData=[
+// ─── TOURNAMENTS ───
+var tourneyData = [
   {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTÔT',name:'XENOVRA Fortnite Cup #1',mode:'1V1 Boxfight',prize:'10 000 XP',players:'0/64',date:'À définir',btnClass:'tc-join-soon',btnText:'Rappel →'},
   {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTÔT',name:'Clash Royale Grand Prix #1',mode:'1V1 Draft',prize:'8 000 XP',players:'0/32',date:'À définir',btnClass:'tc-join-soon',btnText:'Rappel →'},
   {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTÔT',name:'Fortnite Zero Build Cup',mode:'1V1 Zero Build',prize:'15 000 XP',players:'0/128',date:'À définir',btnClass:'tc-join-soon',btnText:'Rappel →'},
   {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTÔT',name:'CR Mega Draft Masters #1',mode:'Mega Draft 1v1',prize:'12 000 XP',players:'0/32',date:'À définir',btnClass:'tc-join-soon',btnText:'Rappel →'},
 ];
-function renderTourneys(){
-  document.getElementById('tourneyGrid').innerHTML=tourneyData.map(t=>`
-    <div class="tourney-card">
-      <div class="tc-banner ${t.banner}">
-        <div class="tc-banner-emoji">${t.emoji}</div>
-        <span class="tc-status-badge ${t.statusClass}">${t.statusText}</span>
-      </div>
-      <div class="tc-body">
-        <div class="tc-game">${t.game==='fn'?'⚡ Fortnite':'👑 Clash Royale'} · ${t.mode}</div>
-        <div class="tc-name">${t.name}</div>
-        <div class="tc-info">
-          <div class="tc-info-item"><div class="tc-info-label">Prize Pool</div><div class="tc-info-val tc-prize">⚡ ${t.prize}</div></div>
-          <div class="tc-info-item"><div class="tc-info-label">Joueurs</div><div class="tc-info-val">${t.players}</div></div>
-          <div class="tc-info-item"><div class="tc-info-label">Date</div><div class="tc-info-val">${t.date}</div></div>
-          <div class="tc-info-item"><div class="tc-info-label">Format</div><div class="tc-info-val">Bracket</div></div>
-        </div>
-        <button class="tc-join-btn ${t.btnClass}" onclick="joinTourney('${t.name}')">${t.btnText}</button>
-      </div>
-    </div>
-  `).join('');
+function renderTourneys() {
+  document.getElementById('tourneyGrid').innerHTML = tourneyData.map(function(t){
+    return '<div class="tourney-card">' +
+      '<div class="tc-banner '+t.banner+'"><div class="tc-banner-emoji">'+t.emoji+'</div><span class="tc-status-badge '+t.statusClass+'">'+t.statusText+'</span></div>' +
+      '<div class="tc-body">' +
+      '<div class="tc-game">'+(t.game==='fn'?'⚡ Fortnite':'👑 Clash Royale')+' · '+t.mode+'</div>' +
+      '<div class="tc-name">'+t.name+'</div>' +
+      '<div class="tc-info">' +
+      '<div class="tc-info-item"><div class="tc-info-label">Prize Pool</div><div class="tc-info-val tc-prize">⚡ '+t.prize+'</div></div>' +
+      '<div class="tc-info-item"><div class="tc-info-label">Joueurs</div><div class="tc-info-val">'+t.players+'</div></div>' +
+      '<div class="tc-info-item"><div class="tc-info-label">Date</div><div class="tc-info-val">'+t.date+'</div></div>' +
+      '<div class="tc-info-item"><div class="tc-info-label">Format</div><div class="tc-info-val">Bracket</div></div>' +
+      '</div>' +
+      '<button class="tc-join-btn '+t.btnClass+'" onclick="joinTourney(\''+t.name.replace(/'/g,"\\'")+'\')" >'+t.btnText+'</button>' +
+      '</div></div>';
+  }).join('');
 }
-function joinTourney(name){notify(`Rappel activé pour "${name}" 🔔`,'🔔')}
+function joinTourney(name) {
+  notify('Rappel activé pour "'+name+'" 🔔','🔔');
+}
 
-// ─── INIT ───
-showPage('matches');
+// ─── CURSOR ───
+var cur = null, ring = null, mx = 0, my = 0, rx = 0, ry = 0;
+function initCursor() {
+  cur = document.getElementById('cursor');
+  ring = document.getElementById('cursor-ring');
+  document.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+  (function animRing(){
+    rx += (mx-rx)*.12; ry += (my-ry)*.12;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+    requestAnimationFrame(animRing);
+  })();
+}
 
-} catch(e){ console.error("XENOVRA init error:", e); }
+// ─── CANVAS ───
+function initCanvas() {
+  var canvas = document.getElementById('bg');
+  var ctx = canvas.getContext('2d');
+  var pts = [];
+  function resize(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight; }
+  function makePts(){
+    pts = [];
+    var n = Math.min(55, Math.floor(window.innerWidth/20));
+    for (var i=0; i<n; i++) pts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.1+.3,a:Math.random()*.35+.08,c:Math.random()>.5?'59,130,246':'124,58,237'});
+  }
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pts.forEach(function(p){
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
+      if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba('+p.c+','+p.a+')'; ctx.fill();
+    });
+    pts.forEach(function(a,i){
+      pts.slice(i+1).forEach(function(b){
+        var d=Math.hypot(a.x-b.x,a.y-b.y);
+        if(d<85){ ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.strokeStyle='rgba(59,130,246,'+(0.05*(1-d/85))+')'; ctx.lineWidth=.4; ctx.stroke(); }
+      });
+    });
+    requestAnimationFrame(draw);
+  }
+  resize(); makePts(); draw();
+  window.addEventListener('resize', function(){ resize(); makePts(); });
+}
+
+// ─── LOADER ───
+function initLoader() {
+  var msgs = ['INITIALIZING SYSTEMS...','LOADING GAME DATA...','CONNECTING TO SERVERS...','CALIBRATING ANTI-CHEAT...','ENTERING THE ARENA...'];
+  var mi = 0;
+  var iv = setInterval(function(){ mi++; if(mi<msgs.length) document.getElementById('loaderCode').textContent=msgs[mi]; }, 420);
+  setTimeout(function(){ clearInterval(iv); document.getElementById('loader').classList.add('hidden'); }, 2200);
+}
+
+// ─── MODAL CLOSE ON OVERLAY CLICK ───
+document.getElementById('authModal').addEventListener('click', function(e){
+  if (e.target === document.getElementById('authModal')) closeModal();
+});
+
+// ─── INIT ON DOM READY ───
+document.addEventListener('DOMContentLoaded', function(){
+  initCursor();
+  initCanvas();
+  initLoader();
+  renderMatches();
+  renderShop('all');
+  renderTourneys();
+  renderLb('day');
 });
 </script>
-
 </body>
 </html>
