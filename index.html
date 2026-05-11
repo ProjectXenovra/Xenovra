@@ -4,13 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>XENOVRA — Building The Future of Gaming</title>
-<meta name="description" content="XENOVRA - La plateforme compétitive #1 pour Fortnite & Clash Royale. Matchs, tournois, XCoins, leaderboard.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap");</style>
 <style>
 :root{
   --void:#010205;--deep:#03060f;--card:#070d1c;--card2:#0a1225;
-  --b1:rgba(30,60,120,.25);--b2:rgba(80,40,160,.2);
   --blue:#3b82f6;--blue2:#60a5fa;--blue3:#93c5fd;
   --violet:#7c3aed;--violet2:#8b5cf6;--violet3:#a78bfa;
   --cyan:#06b6d4;--cyan2:#22d3ee;
@@ -19,368 +16,374 @@
   --glow-b:0 0 30px rgba(59,130,246,.4),0 0 80px rgba(59,130,246,.15);
   --glow-v:0 0 30px rgba(124,58,237,.4),0 0 80px rgba(124,58,237,.15);
   --glow-c:0 0 20px rgba(6,182,212,.4);
+  --sidebar:220px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;overflow-x:hidden;cursor:none}
+html{overflow-x:hidden}
+body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;overflow-x:hidden;cursor:none;display:flex;min-height:100vh}
 ::selection{background:rgba(124,58,237,.4)}
-::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--deep)}
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--blue),var(--violet));border-radius:3px}
 
-/* CUSTOM CURSOR */
-#cursor{position:fixed;width:12px;height:12px;background:var(--cyan2);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s;mix-blend-mode:screen}
-#cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(6,182,212,.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:transform .1s,width .3s,height .3s,opacity .3s}
-
-/* LOADER */
-#loader{position:fixed;inset:0;z-index:9999;background:var(--void);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity .8s,visibility .8s}
-#loader.hidden{opacity:0;visibility:hidden}
-.loader-logo-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
-.loader-x{width:80px;height:80px;animation:spinGlow 2s linear infinite}
-@keyframes spinGlow{0%{filter:drop-shadow(0 0 10px var(--blue))}50%{filter:drop-shadow(0 0 30px var(--violet))}100%{filter:drop-shadow(0 0 10px var(--blue))}}
-.loader-name{font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;letter-spacing:8px;background:linear-gradient(90deg,var(--blue2),var(--violet3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.loader-sub{font-size:.7rem;letter-spacing:5px;color:var(--muted2);text-transform:uppercase;font-family:'Share Tech Mono',monospace}
-.loader-bar{width:240px;height:2px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
-.loader-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--violet),var(--cyan2));animation:fill 2s ease forwards;border-radius:2px}
-@keyframes fill{0%{width:0}100%{width:100%}}
-.loader-code{font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--cyan);animation:blink2 .8s infinite}
-@keyframes blink2{0%,100%{opacity:1}50%{opacity:.3}}
-
-/* CANVAS */
+#cursor{position:fixed;width:10px;height:10px;background:var(--cyan2);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:screen}
+#cursor-ring{position:fixed;width:32px;height:32px;border:1px solid rgba(6,182,212,.4);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:transform .08s}
 #bg{position:fixed;inset:0;z-index:0;pointer-events:none}
 
-/* NAVBAR */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:68px;display:flex;align-items:center;justify-content:space-between;padding:0 4%;background:rgba(1,2,5,.6);backdrop-filter:blur(24px);border-bottom:1px solid rgba(59,130,246,.1);transition:all .3s}
-nav.scrolled{background:rgba(1,2,5,.92);box-shadow:0 4px 30px rgba(0,0,0,.5)}
-.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
-.nav-logo svg{width:36px;height:36px;filter:drop-shadow(0 0 8px var(--blue))}
-.nav-logo-text{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:900;letter-spacing:4px;background:linear-gradient(90deg,var(--blue2),var(--violet3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.nav-links{display:flex;align-items:center;gap:6px;list-style:none}
-.nav-links a{padding:8px 14px;border-radius:8px;color:var(--muted2);text-decoration:none;font-size:.82rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;transition:all .3s;display:flex;align-items:center;gap:6px;cursor:pointer}
-.nav-links a:hover,.nav-links a.active{color:#fff;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2)}
-.nav-links a span{font-size:.9rem}
-.nav-right{display:flex;align-items:center;gap:10px}
-.xcoins-display{display:flex;align-items:center;gap:6px;padding:7px 14px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:8px;font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--gold)}
-.btn-login{padding:8px 18px;border:1px solid rgba(59,130,246,.3);border-radius:8px;background:transparent;color:var(--blue2);font-family:'Exo 2',sans-serif;font-size:.82rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
-.btn-login:hover{background:rgba(59,130,246,.1);box-shadow:var(--glow-b)}
-.btn-register{padding:8px 18px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-family:'Exo 2',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
-.btn-register:hover{transform:translateY(-2px);box-shadow:var(--glow-v)}
-.hamburger{display:none;background:transparent;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:5px}
-.hamburger span{width:22px;height:2px;background:var(--text);border-radius:2px;display:block;transition:all .3s}
+#loader{position:fixed;inset:0;z-index:9999;background:var(--void);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .8s,visibility .8s}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-x{width:72px;height:72px;animation:spinGlow 2s linear infinite}
+@keyframes spinGlow{0%{filter:drop-shadow(0 0 10px var(--blue))}50%{filter:drop-shadow(0 0 28px var(--violet))}100%{filter:drop-shadow(0 0 10px var(--blue))}}
+.loader-name{font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:900;letter-spacing:8px;background:linear-gradient(90deg,var(--blue2),var(--violet3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.loader-sub{font-size:.65rem;letter-spacing:5px;color:var(--muted2);text-transform:uppercase;font-family:'Share Tech Mono',monospace}
+.loader-bar{width:220px;height:2px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.loader-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--violet),var(--cyan2));animation:fill 2s ease forwards}
+@keyframes fill{0%{width:0}100%{width:100%}}
+.loader-code{font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--cyan);animation:blink2 .8s infinite}
+@keyframes blink2{0%,100%{opacity:1}50%{opacity:.3}}
 
-/* PAGE SYSTEM */
-.page{display:none;min-height:100vh;position:relative;z-index:1}
+/* SIDEBAR */
+#sidebar{position:fixed;left:0;top:0;bottom:0;width:var(--sidebar);background:rgba(3,6,15,.97);border-right:1px solid rgba(59,130,246,.1);display:flex;flex-direction:column;z-index:100;transition:transform .3s}
+.sb-logo{display:flex;align-items:center;gap:10px;padding:20px 18px 16px;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer}
+.sb-logo svg{width:32px;height:32px;flex-shrink:0;filter:drop-shadow(0 0 6px var(--blue))}
+.sb-logo-text{font-family:'Orbitron',sans-serif;font-size:.95rem;font-weight:900;letter-spacing:3px;background:linear-gradient(90deg,var(--blue2),var(--violet3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sb-game-selector{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05)}
+.sb-game-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:8px;border:1px solid rgba(59,130,246,.2);background:rgba(59,130,246,.06);cursor:pointer;transition:all .3s;font-family:'Exo 2',sans-serif;font-size:.82rem;font-weight:700;color:#fff}
+.sb-game-btn:hover{border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.1)}
+.sb-game-badge{display:flex;align-items:center;gap:7px}
+.sb-game-icon{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.8rem}
+.fn-bg{background:linear-gradient(135deg,#051830,#0a4080)}
+.cr-bg{background:linear-gradient(135deg,#1a0530,#5010a0)}
+.sb-chevron{font-size:.65rem;color:var(--muted2);transition:transform .3s}
+.sb-chevron.open{transform:rotate(180deg)}
+.sb-game-dropdown{margin:0 14px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);overflow:hidden;max-height:0;transition:max-height .3s ease}
+.sb-game-dropdown.open{max-height:100px}
+.sb-game-option{display:flex;align-items:center;gap:8px;padding:9px 12px;font-size:.82rem;font-weight:600;color:var(--muted2);cursor:pointer;transition:all .2s}
+.sb-game-option:hover,.sb-game-option.active{color:#fff;background:rgba(59,130,246,.08)}
+.sb-game-option.active{color:var(--blue2)}
+.sb-section{padding:16px 14px 4px}
+.sb-section-label{font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-family:'Share Tech Mono',monospace;margin-bottom:8px;padding-left:4px}
+.sb-nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;margin-bottom:3px;color:var(--muted2);font-size:.82rem;font-weight:600;cursor:pointer;transition:all .25s;border:1px solid transparent;letter-spacing:.3px}
+.sb-nav-item:hover{color:#fff;background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.06)}
+.sb-nav-item.active{color:#fff;background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.2)}
+.sb-icon{display:flex;align-items:center;justify-content:center;font-size:.9rem;width:16px;height:16px;flex-shrink:0}
+.sb-recent-item{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:6px;margin-bottom:2px;color:var(--muted2);font-size:.78rem;cursor:pointer;transition:color .2s}
+.sb-recent-item:hover{color:#fff}
+.sb-recent-dot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sb-spacer{flex:1}
+.sb-pass{margin:10px 12px;padding:12px 14px;background:linear-gradient(135deg,rgba(124,58,237,.18),rgba(59,130,246,.12));border:1px solid rgba(124,58,237,.3);border-radius:10px;cursor:pointer;transition:all .3s}
+.sb-pass:hover{border-color:rgba(124,58,237,.5);box-shadow:0 0 20px rgba(124,58,237,.15)}
+.sb-pass-top{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.sb-pass-icon{font-size:1.1rem}
+.sb-pass-name{font-family:'Orbitron',sans-serif;font-size:.7rem;font-weight:700;color:#fff;letter-spacing:1px}
+.sb-pass-season{font-size:.6rem;color:var(--violet3);font-family:'Share Tech Mono',monospace;letter-spacing:1px}
+.sb-pass-arrow{margin-left:auto;color:var(--violet3);font-size:.75rem}
+.sb-pass-bar{height:3px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+.sb-pass-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--violet),var(--blue2));border-radius:2px}
+.sb-buy-btn{margin:6px 12px 16px;width:calc(100% - 24px);padding:10px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--gold),#d97706);color:#000;font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:6px}
+.sb-buy-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,158,11,.35)}
+
+/* TOPBAR */
+#topbar{position:fixed;top:0;left:var(--sidebar);right:0;height:58px;background:rgba(1,2,5,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(59,130,246,.08);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:99}
+.tb-search{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:7px 14px;width:240px;transition:all .3s}
+.tb-search:focus-within{border-color:rgba(59,130,246,.3);background:rgba(59,130,246,.04)}
+.tb-search input{background:transparent;border:none;outline:none;color:var(--text);font-family:'Exo 2',sans-serif;font-size:.82rem;width:100%}
+.tb-search input::placeholder{color:var(--muted2)}
+.tb-search svg{color:var(--muted2);flex-shrink:0;width:14px;height:14px}
+.tb-center{display:flex;align-items:center;gap:12px}
+.tb-currency{display:flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.18);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--gold)}
+.tb-xp{display:flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(124,58,237,.07);border:1px solid rgba(124,58,237,.18);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--violet3)}
+.tb-right{display:flex;align-items:center;gap:10px}
+.tb-rank-badge{display:flex;align-items:center;gap:5px;padding:5px 10px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:6px;font-size:.7rem;font-weight:700;color:var(--blue2);font-family:'Share Tech Mono',monospace;letter-spacing:1px}
+.tb-icon-btn{width:32px;height:32px;border-radius:7px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;transition:all .3s;color:var(--muted2)}
+.tb-icon-btn:hover{border-color:rgba(59,130,246,.3);color:#fff}
+.tb-notif{position:relative}
+.tb-notif-dot{position:absolute;top:-2px;right:-2px;width:8px;height:8px;background:var(--red);border-radius:50%;border:1px solid var(--void)}
+.tb-avatar{width:32px;height:32px;border-radius:7px;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:.75rem;font-weight:700;color:#fff;cursor:pointer;border:1px solid rgba(124,58,237,.3)}
+.tb-btn{padding:7px 16px;border-radius:7px;font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.tb-login{background:transparent;border:1px solid rgba(59,130,246,.3);color:var(--blue2)}
+.tb-login:hover{background:rgba(59,130,246,.1)}
+.tb-register{background:linear-gradient(135deg,var(--blue),var(--violet));border:none;color:#fff}
+.tb-register:hover{box-shadow:var(--glow-v);transform:translateY(-1px)}
+
+/* MAIN */
+#main{margin-left:var(--sidebar);margin-top:58px;min-height:calc(100vh - 58px);position:relative;z-index:1;flex:1}
+.page{display:none;padding:28px 24px}
 .page.active{display:block}
 
-/* ─── HOME PAGE ─── */
-.hero{min-height:100vh;display:flex;align-items:center;padding:0 4%;position:relative;overflow:hidden}
-.hero-bg-effects{position:absolute;inset:0;pointer-events:none}
-.hero-orb1{position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,.12),transparent 70%);top:-100px;left:-100px;animation:orbFloat 8s ease-in-out infinite}
-.hero-orb2{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(124,58,237,.1),transparent 70%);bottom:-100px;right:-50px;animation:orbFloat 10s ease-in-out infinite reverse}
-@keyframes orbFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-30px)}}
-.hero-grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(59,130,246,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.04) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black,transparent)}
-.hero-left{flex:1;max-width:650px;z-index:2;animation:slideIn .9s ease forwards}
-@keyframes slideIn{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 16px;background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.2);border-radius:4px;margin-bottom:24px;font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--cyan2);font-family:'Share Tech Mono',monospace}
-.live-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 1.5s infinite;box-shadow:0 0 6px var(--green)}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
-.hero-title{font-family:'Orbitron',sans-serif;font-size:clamp(2.2rem,5.5vw,4.5rem);font-weight:900;line-height:1.05;margin-bottom:18px;letter-spacing:-1px}
-.hero-title .t1{display:block;color:#fff}
-.hero-title .t2{display:block;background:linear-gradient(135deg,var(--blue2),var(--violet3),var(--cyan2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 20px rgba(124,58,237,.5))}
-.hero-desc{font-size:1rem;color:var(--muted2);max-width:500px;margin-bottom:36px;line-height:1.8;font-weight:400}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:50px}
-.btn-hero-main{padding:14px 32px;background:linear-gradient(135deg,var(--blue),var(--violet));border:none;border-radius:6px;color:#fff;font-family:'Exo 2',sans-serif;font-size:.95rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
-.btn-hero-main::before{content:'';position:absolute;inset:0;background:rgba(255,255,255,.1);opacity:0;transition:opacity .3s}
-.btn-hero-main:hover{transform:translateY(-3px);box-shadow:0 10px 40px rgba(124,58,237,.4)}
-.btn-hero-main:hover::before{opacity:1}
-.btn-hero-sec{padding:14px 32px;background:transparent;border:1px solid rgba(6,182,212,.3);border-radius:6px;color:var(--cyan2);font-family:'Exo 2',sans-serif;font-size:.95rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
-.btn-hero-sec:hover{background:rgba(6,182,212,.06);box-shadow:var(--glow-c);transform:translateY(-3px)}
-.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:480px}
-.hstat{padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(59,130,246,.1);border-radius:8px;transition:all .3s}
-.hstat:hover{border-color:rgba(59,130,246,.3);background:rgba(59,130,246,.05)}
-.hstat-num{font-family:'Orbitron',sans-serif;font-size:1.5rem;font-weight:900;color:#fff;display:block}
-.hstat-label{font-size:.72rem;color:var(--muted2);text-transform:uppercase;letter-spacing:1px}
-.hero-right{flex:1;display:flex;justify-content:flex-end;align-items:center;z-index:2;padding-left:40px;animation:slideInR .9s ease .2s both forwards}
-@keyframes slideInR{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
-.live-matches-card{background:rgba(7,13,28,.9);border:1px solid rgba(59,130,246,.2);border-radius:16px;padding:24px;width:360px;backdrop-filter:blur(20px);box-shadow:0 20px 60px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.05)}
-.lmc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.lmc-title{font-family:'Orbitron',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff}
-.live-badge{display:flex;align-items:center;gap:5px;padding:3px 10px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:4px;font-size:.65rem;letter-spacing:2px;color:#ef4444;font-family:'Share Tech Mono',monospace}
-.match-item{display:flex;align-items:center;gap:10px;padding:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:8px;margin-bottom:8px;transition:all .3s;cursor:pointer}
-.match-item:hover{border-color:rgba(59,130,246,.2);background:rgba(59,130,246,.04)}
-.match-game-icon{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
-.fn-icon{background:linear-gradient(135deg,#051830,#0a4080)}
-.cr-icon-bg{background:linear-gradient(135deg,#1a0530,#5010a0)}
-.match-info{flex:1}
-.match-name{font-size:.82rem;font-weight:600;color:#fff;margin-bottom:2px}
-.match-meta{font-size:.7rem;color:var(--muted2);font-family:'Share Tech Mono',monospace}
-.match-bet{text-align:right}
-.match-bet-amount{font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--gold);font-weight:700}
-.match-bet-label{font-size:.65rem;color:var(--muted2)}
-.match-status-live{display:inline-flex;align-items:center;gap:3px;font-size:.65rem;color:var(--green);font-family:'Share Tech Mono',monospace}
+/* MATCHES */
+.matches-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:14px}
+.matches-title{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:#fff;letter-spacing:1px}
+.matches-actions{display:flex;gap:10px;align-items:center}
+.btn-requeue{display:flex;align-items:center;gap:7px;padding:9px 18px;border-radius:8px;border:1px solid rgba(59,130,246,.3);background:rgba(59,130,246,.06);color:var(--blue2);font-family:'Exo 2',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.btn-requeue:hover{background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.5)}
+.btn-create{display:flex;align-items:center;gap:7px;padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,var(--gold),#d97706);color:#000;font-family:'Exo 2',sans-serif;font-size:.8rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.btn-create:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,158,11,.3)}
 
-/* ─── SECTION COMMONS ─── */
-.section{padding:90px 4%;position:relative;z-index:1}
-.sec-header{text-align:center;margin-bottom:56px}
-.sec-tag{display:inline-block;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--cyan2);padding:4px 14px;border:1px solid rgba(6,182,212,.2);border-radius:3px;background:rgba(6,182,212,.04);margin-bottom:12px;font-family:'Share Tech Mono',monospace}
-.sec-title{font-family:'Orbitron',sans-serif;font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:900;color:#fff;margin-bottom:12px;line-height:1.2}
-.sec-title span{background:linear-gradient(135deg,var(--blue2),var(--violet3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.sec-sub{color:var(--muted2);font-size:.95rem;max-width:500px;margin:0 auto}
-.fade-up{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
-.fade-up.vis{opacity:1;transform:translateY(0)}
+/* Filter bar */
+.filter-bar{display:flex;align-items:center;gap:10px;margin-bottom:22px;flex-wrap:wrap}
+.filter-tabs{display:flex;gap:0;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden}
+.filter-tab{padding:7px 18px;font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;color:var(--muted2);cursor:pointer;transition:all .25s;border:none;background:transparent;letter-spacing:.3px;position:relative}
+.filter-tab.active{color:#fff;background:rgba(59,130,246,.12)}
+.filter-tab .tab-count{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:rgba(59,130,246,.3);font-size:.65rem;font-weight:700;color:#fff;margin-left:5px}
+.filter-tab.active .tab-count{background:var(--blue)}
+.filter-sep{width:1px;background:rgba(255,255,255,.07)}
+.filter-dropdowns{display:flex;gap:8px;flex-wrap:wrap;position:relative}
+.fdd{display:flex;align-items:center;gap:5px;padding:6px 12px;border-radius:7px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--muted2);font-family:'Exo 2',sans-serif;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .3s;position:relative;user-select:none}
+.fdd:hover,.fdd.open{border-color:rgba(59,130,246,.3);color:#fff;background:rgba(59,130,246,.06)}
+.fdd.active-filter{border-color:rgba(245,158,11,.4);color:var(--gold);background:rgba(245,158,11,.05)}
+.fdd-dot{width:7px;height:7px;border-radius:50%}
+.fdd-dot.eu{background:#3b82f6}
+.fdd-dot.pc{background:#10b981}
+.fdd-arrow{font-size:.6rem;margin-left:2px;opacity:.5;transition:transform .2s}
+.fdd.open .fdd-arrow{transform:rotate(180deg)}
+.dropdown-menu{position:absolute;top:calc(100% + 6px);left:0;min-width:160px;background:var(--card2);border:1px solid rgba(59,130,246,.2);border-radius:8px;z-index:500;box-shadow:0 8px 24px rgba(0,0,0,.6);overflow:hidden}
+.dropdown-menu.right{left:auto;right:0}
+.dropdown-opt{padding:8px 14px;font-size:.78rem;font-weight:600;color:var(--muted2);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:7px;font-family:'Exo 2',sans-serif}
+.dropdown-opt:hover{color:#fff;background:rgba(59,130,246,.1)}
+.dropdown-opt.selected{color:var(--blue2);background:rgba(59,130,246,.08)}
+.dropdown-opt .opt-dot{width:7px;height:7px;border-radius:50%}
 
-/* ─── MATCHES ─── */
-.matches-section{background:linear-gradient(180deg,var(--void) 0%,var(--deep) 100%)}
-.games-tabs{display:flex;gap:8px;justify-content:center;margin-bottom:40px}
-.gtab{padding:10px 28px;border-radius:6px;border:1px solid rgba(255,255,255,.08);background:transparent;color:var(--muted2);font-family:'Exo 2',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .3s}
-.gtab.active,.gtab:hover{color:#fff}
-.gtab-fn.active,.gtab-fn:hover{border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.08);box-shadow:var(--glow-b)}
-.gtab-cr.active,.gtab-cr:hover{border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.08);box-shadow:var(--glow-v)}
-.modes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:36px}
-.mode-card{padding:16px 14px;background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:10px;text-align:center;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
-.mode-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .3s}
-.mode-card.fn-mode::before{background:linear-gradient(135deg,rgba(59,130,246,.08),transparent)}
-.mode-card.cr-mode::before{background:linear-gradient(135deg,rgba(124,58,237,.08),transparent)}
-.mode-card:hover{transform:translateY(-4px)}
-.mode-card.fn-mode:hover{border-color:rgba(59,130,246,.3);box-shadow:0 8px 30px rgba(59,130,246,.15)}
-.mode-card.cr-mode:hover{border-color:rgba(124,58,237,.3);box-shadow:0 8px 30px rgba(124,58,237,.15)}
-.mode-card:hover::before{opacity:1}
-.mode-icon{font-size:1.6rem;margin-bottom:8px;display:block}
-.mode-name{font-family:'Orbitron',sans-serif;font-size:.72rem;font-weight:700;color:#fff;margin-bottom:4px}
-.mode-players{font-size:.68rem;color:var(--muted2)}
-.open-matches{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
-.open-match-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:20px;transition:all .4s;cursor:default}
-.open-match-card:hover{border-color:rgba(59,130,246,.25);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
-.omc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.omc-game{display:flex;align-items:center;gap:8px}
-.omc-game-icon{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1rem}
-.omc-game-name{font-size:.8rem;font-weight:600;color:#fff}
-.omc-game-mode{font-size:.7rem;color:var(--muted2)}
-.omc-status{padding:3px 10px;border-radius:4px;font-size:.65rem;font-weight:700;letter-spacing:1px;font-family:'Share Tech Mono',monospace}
-.status-open{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:var(--green)}
-.status-live{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#ef4444}
-.omc-players{display:flex;align-items:center;gap:8px;margin-bottom:14px}
-.player-avatar{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;font-family:'Orbitron',sans-serif;border:1px solid rgba(255,255,255,.1)}
-.vs-label{font-size:.7rem;color:var(--muted2);font-family:'Share Tech Mono',monospace;padding:0 4px}
-.omc-bet{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.12);border-radius:6px;margin-bottom:14px}
-.omc-bet span:first-child{font-size:.72rem;color:var(--muted2)}
-.omc-bet-amount{font-family:'Share Tech Mono',monospace;font-size:.9rem;color:var(--gold);font-weight:700}
-.join-btn{width:100%;padding:10px;border:none;border-radius:6px;background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-family:'Exo 2',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .3s}
-.join-btn:hover{box-shadow:var(--glow-v);transform:translateY(-2px)}
+/* Empty state */
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;text-align:center;gap:16px}
+.empty-icon{font-size:3rem;opacity:.4}
+.empty-title{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:700;color:var(--muted2);letter-spacing:1px}
+.empty-sub{font-size:.82rem;color:var(--muted);max-width:320px;line-height:1.7}
 
-/* ─── LEADERBOARD ─── */
-.lb-section{background:var(--card2)}
-.lb-tabs{display:flex;gap:8px;justify-content:center;margin-bottom:36px}
-.lb-tab{padding:8px 22px;border-radius:6px;border:1px solid rgba(255,255,255,.08);background:transparent;color:var(--muted2);font-family:'Exo 2',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+/* Match cards */
+.matches-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.match-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px;transition:all .35s;cursor:default;position:relative;overflow:hidden}
+.match-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,.04),transparent 60%);opacity:0;transition:opacity .3s}
+.match-card:hover{border-color:rgba(59,130,246,.25);transform:translateY(-3px);box-shadow:0 12px 35px rgba(0,0,0,.4)}
+.match-card:hover::before{opacity:1}
+.mc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
+.mc-mode-title{font-family:'Orbitron',sans-serif;font-size:.9rem;font-weight:900;color:#fff;letter-spacing:.5px;margin-bottom:6px}
+.mc-tags{display:flex;gap:5px;flex-wrap:wrap}
+.mc-tag{padding:2px 8px;border-radius:3px;font-size:.62rem;font-weight:700;letter-spacing:1px;font-family:'Share Tech Mono',monospace}
+.tag-region{background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);color:var(--blue2)}
+.tag-loadout{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:var(--muted2)}
+.tag-noedit{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:var(--gold);font-size:.58rem}
+.mc-icons{display:flex;gap:5px;align-items:center}
+.mc-game-dot{width:22px;height:22px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:.75rem}
+.mc-info-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.mc-info-label{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-family:'Share Tech Mono',monospace;margin-bottom:4px}
+.mc-info-val{display:flex;align-items:center;gap:5px;font-family:'Orbitron',sans-serif;font-size:.82rem;font-weight:700;color:#fff}
+.mc-flag{font-size:.75rem}
+.mc-timer-val{font-family:'Share Tech Mono',monospace;font-size:.88rem;color:var(--gold);font-weight:700}
+.mc-timer-bar{height:2px;background:rgba(245,158,11,.15);border-radius:1px;margin-top:6px;overflow:hidden}
+.mc-timer-fill{height:100%;background:var(--gold);border-radius:1px;transition:width 1s linear}
+.mc-fee-row{display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:8px;margin-bottom:12px}
+.mc-fee-item{flex:1}
+.mc-fee-label{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-family:'Share Tech Mono',monospace;margin-bottom:3px}
+.mc-fee-amount{display:flex;align-items:center;gap:4px;font-family:'Share Tech Mono',monospace;font-size:.9rem;font-weight:700}
+.fee-coin{font-size:.85rem}
+.mc-arrow{color:var(--muted);font-size:.75rem;flex-shrink:0}
+.prize-amount{color:var(--green)}
+.mc-join-btn{width:100%;padding:10px;border:none;border-radius:7px;background:linear-gradient(135deg,var(--gold),#d97706);color:#000;font-family:'Exo 2',sans-serif;font-size:.82rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:7px}
+.mc-join-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,158,11,.35)}
+.mc-join-btn.spectate{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);color:var(--blue2)}
+.mc-join-btn.spectate:hover{background:rgba(59,130,246,.15);box-shadow:var(--glow-b)}
+
+/* LEADERBOARD */
+.lb-container{max-width:820px}
+.lb-tabs{display:flex;gap:8px;margin-bottom:24px}
+.lb-tab{padding:8px 20px;border-radius:6px;border:1px solid rgba(255,255,255,.08);background:transparent;color:var(--muted2);font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .lb-tab.active{border-color:rgba(6,182,212,.4);background:rgba(6,182,212,.08);color:var(--cyan2)}
-.lb-container{max-width:800px;margin:0 auto}
-.lb-header-row{display:grid;grid-template-columns:60px 1fr 100px 100px 100px;gap:8px;padding:10px 16px;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-family:'Share Tech Mono',monospace;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:8px}
-.lb-row{display:grid;grid-template-columns:60px 1fr 100px 100px 100px;gap:8px;padding:14px 16px;background:var(--card);border:1px solid rgba(255,255,255,.05);border-radius:8px;margin-bottom:6px;transition:all .3s;align-items:center;cursor:default}
-.lb-row:hover{border-color:rgba(59,130,246,.2);background:rgba(59,130,246,.04);transform:translateX(4px)}
+.lb-header-row{display:grid;grid-template-columns:52px 1fr 100px 90px 80px;gap:8px;padding:10px 16px;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-family:'Share Tech Mono',monospace;border-bottom:1px solid rgba(255,255,255,.05);margin-bottom:8px}
+.lb-row{display:grid;grid-template-columns:52px 1fr 100px 90px 80px;gap:8px;padding:13px 16px;background:var(--card);border:1px solid rgba(255,255,255,.05);border-radius:8px;margin-bottom:5px;transition:all .3s;align-items:center}
+.lb-row:hover{border-color:rgba(59,130,246,.2);background:rgba(59,130,246,.04);transform:translateX(3px)}
 .lb-row.top1{border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.04)}
-.lb-row.top2{border-color:rgba(156,163,175,.2);background:rgba(156,163,175,.03)}
-.lb-row.top3{border-color:rgba(180,83,9,.2);background:rgba(180,83,9,.03)}
-.lb-rank{font-family:'Orbitron',sans-serif;font-size:.9rem;font-weight:900;text-align:center}
-.lb-rank.gold{color:var(--gold);text-shadow:0 0 10px rgba(245,158,11,.5)}
+.lb-row.top2{border-color:rgba(156,163,175,.2)}
+.lb-row.top3{border-color:rgba(180,83,9,.2)}
+.lb-rank{font-family:'Orbitron',sans-serif;font-size:.88rem;font-weight:900;text-align:center}
+.lb-rank.gold{color:var(--gold);text-shadow:0 0 8px rgba(245,158,11,.5)}
 .lb-rank.silver{color:#9ca3af}
 .lb-rank.bronze{color:#b45309}
 .lb-rank.normal{color:var(--muted2)}
 .lb-player{display:flex;align-items:center;gap:10px}
-.lb-avatar{width:34px;height:34px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;font-family:'Orbitron',sans-serif;flex-shrink:0}
-.lb-pname{font-size:.88rem;font-weight:600;color:#fff}
-.lb-ptag{font-size:.7rem;color:var(--muted2);font-family:'Share Tech Mono',monospace}
-.lb-coins{font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--gold);font-weight:700}
-.lb-wins{font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--green)}
-.lb-ratio{font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--blue2)}
+.lb-avatar{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;font-family:'Orbitron',sans-serif;flex-shrink:0}
+.lb-pname{font-size:.85rem;font-weight:600;color:#fff}
+.lb-ptag{font-size:.68rem;color:var(--muted2);font-family:'Share Tech Mono',monospace}
+.lb-xp{font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--violet3)}
+.lb-wins{font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--green)}
+.lb-ratio{font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--blue2)}
 
-/* ─── SHOP ─── */
-.shop-section{background:var(--void)}
-.shop-cats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:36px}
-.shop-cat{padding:7px 18px;border-radius:6px;border:1px solid rgba(255,255,255,.08);background:transparent;color:var(--muted2);font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+/* SHOP */
+.shop-cats{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.shop-cat{padding:7px 16px;border-radius:6px;border:1px solid rgba(255,255,255,.08);background:transparent;color:var(--muted2);font-family:'Exo 2',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .shop-cat.active,.shop-cat:hover{border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.08);color:var(--violet3)}
-.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
-.shop-item{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:14px;overflow:hidden;transition:all .4s;cursor:default;position:relative}
-.shop-item:hover{transform:translateY(-8px) scale(1.02);border-color:rgba(124,58,237,.3);box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 30px rgba(124,58,237,.12)}
-.shop-item-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.shop-item{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;transition:all .4s}
+.shop-item:hover{transform:translateY(-6px);border-color:rgba(124,58,237,.3);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.shop-item-img{height:140px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
 .shop-item-img::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent,rgba(0,0,0,.3))}
 .rarity-common{background:linear-gradient(135deg,#1a2040,#2a3060)}
 .rarity-rare{background:linear-gradient(135deg,#0a2060,#1040a0)}
 .rarity-epic{background:linear-gradient(135deg,#2a0a60,#6010c0)}
 .rarity-legendary{background:linear-gradient(135deg,#402000,#a05000)}
-.shop-rarity{position:absolute;top:10px;left:10px;padding:3px 10px;border-radius:4px;font-size:.62rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;z-index:2;font-family:'Share Tech Mono',monospace}
+.shop-rarity{position:absolute;top:8px;left:8px;padding:2px 8px;border-radius:3px;font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;z-index:2;font-family:'Share Tech Mono',monospace}
 .r-common{background:rgba(107,114,128,.2);border:1px solid rgba(107,114,128,.4);color:#9ca3af}
 .r-rare{background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.4);color:var(--blue2)}
 .r-epic{background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:var(--violet3)}
 .r-legendary{background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.4);color:var(--gold)}
-.shop-item-body{padding:16px}
-.shop-item-name{font-family:'Orbitron',sans-serif;font-size:.82rem;font-weight:700;color:#fff;margin-bottom:4px}
-.shop-item-desc{font-size:.75rem;color:var(--muted2);margin-bottom:14px;line-height:1.5}
+.shop-item-body{padding:14px}
+.shop-item-name{font-family:'Orbitron',sans-serif;font-size:.78rem;font-weight:700;color:#fff;margin-bottom:3px}
+.shop-item-desc{font-size:.72rem;color:var(--muted2);margin-bottom:12px;line-height:1.5}
 .shop-item-footer{display:flex;align-items:center;justify-content:space-between}
-.shop-price{display:flex;align-items:center;gap:4px;font-family:'Share Tech Mono',monospace;font-size:.88rem;color:var(--gold);font-weight:700}
-.shop-buy-btn{padding:7px 14px;border:none;border-radius:6px;background:linear-gradient(135deg,var(--violet),var(--blue));color:#fff;font-family:'Exo 2',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.shop-price{display:flex;align-items:center;gap:3px;font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--violet3);font-weight:700}
+.shop-buy-btn{padding:6px 12px;border:none;border-radius:5px;background:linear-gradient(135deg,var(--violet),var(--blue));color:#fff;font-family:'Exo 2',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .shop-buy-btn:hover{transform:scale(1.05);box-shadow:var(--glow-v)}
 
-/* ─── TOURNAMENTS ─── */
-.tourney-section{background:var(--deep)}
-.tourney-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
-.tourney-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:14px;overflow:hidden;transition:all .4s;cursor:default}
-.tourney-card:hover{transform:translateY(-6px);border-color:rgba(59,130,246,.25);box-shadow:0 20px 50px rgba(0,0,0,.4)}
-.tc-banner{height:120px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+/* TOURNAMENTS */
+.tourney-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.tourney-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;transition:all .4s}
+.tourney-card:hover{transform:translateY(-5px);border-color:rgba(59,130,246,.25);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.tc-banner{height:110px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .tc-banner-fn{background:linear-gradient(135deg,#020818,#041840,#082880)}
 .tc-banner-cr{background:linear-gradient(135deg,#08020e,#200450,#400880)}
-.tc-banner-emoji{font-size:3rem;filter:drop-shadow(0 0 20px rgba(255,255,255,.3))}
-.tc-status-badge{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:4px;font-size:.65rem;font-weight:700;letter-spacing:1.5px;font-family:'Share Tech Mono',monospace}
+.tc-banner-emoji{font-size:2.6rem;filter:drop-shadow(0 0 16px rgba(255,255,255,.25))}
+.tc-status-badge{position:absolute;top:10px;right:10px;padding:3px 9px;border-radius:3px;font-size:.62rem;font-weight:700;letter-spacing:1.5px;font-family:'Share Tech Mono',monospace}
 .tc-open{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4);color:var(--green)}
 .tc-soon{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);color:var(--gold)}
 .tc-ended{background:rgba(107,114,128,.1);border:1px solid rgba(107,114,128,.3);color:var(--muted2)}
-.tc-body{padding:20px}
-.tc-game{font-size:.68rem;color:var(--muted2);letter-spacing:2px;text-transform:uppercase;font-family:'Share Tech Mono',monospace;margin-bottom:6px}
-.tc-name{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:12px}
-.tc-info{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.tc-info-item{padding:8px 12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:6px}
-.tc-info-label{font-size:.65rem;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
-.tc-info-val{font-family:'Share Tech Mono',monospace;font-size:.82rem;color:#fff;font-weight:600}
-.tc-prize{font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--gold)}
-.tc-join-btn{width:100%;padding:10px;border:none;border-radius:8px;font-family:'Exo 2',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.tc-body{padding:16px}
+.tc-game{font-size:.65rem;color:var(--muted2);letter-spacing:2px;text-transform:uppercase;font-family:'Share Tech Mono',monospace;margin-bottom:5px}
+.tc-name{font-family:'Orbitron',sans-serif;font-size:.9rem;font-weight:700;color:#fff;margin-bottom:10px}
+.tc-info{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+.tc-info-item{padding:7px 10px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:5px}
+.tc-info-label{font-size:.6rem;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.tc-info-val{font-family:'Share Tech Mono',monospace;font-size:.78rem;color:#fff}
+.tc-prize{color:var(--violet3)}
+.tc-join-btn{width:100%;padding:9px;border:none;border-radius:7px;font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .tc-join-open{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff}
 .tc-join-soon{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);color:var(--gold)}
 .tc-join-ended{background:rgba(107,114,128,.08);border:1px solid rgba(107,114,128,.2);color:var(--muted2);cursor:default}
 .tc-join-btn:hover:not(.tc-join-ended){transform:translateY(-2px);box-shadow:var(--glow-v)}
 
-/* ─── PROFILE ─── */
-.profile-section{background:var(--void)}
-.profile-card{max-width:900px;margin:0 auto;background:var(--card);border:1px solid rgba(59,130,246,.15);border-radius:20px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5)}
-.profile-banner{height:160px;background:linear-gradient(135deg,#010818,#02204a,#030e2a);position:relative;overflow:hidden}
-.profile-banner-glow{position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 30% 50%,rgba(59,130,246,.15),transparent)}
-.profile-avatar-wrap{position:absolute;bottom:-40px;left:30px}
-.profile-avatar{width:80px;height:80px;border-radius:14px;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:700;font-family:'Orbitron',sans-serif;color:#fff;border:3px solid var(--card);box-shadow:0 0 20px rgba(124,58,237,.4)}
-.profile-body{padding:60px 30px 30px}
-.profile-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:30px;flex-wrap:wrap;gap:20px}
-.profile-info .profile-name{font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;color:#fff;margin-bottom:4px}
-.profile-info .profile-tag{font-size:.78rem;color:var(--cyan2);font-family:'Share Tech Mono',monospace;margin-bottom:8px}
-.profile-info .profile-bio{font-size:.88rem;color:var(--muted2);max-width:400px}
-.profile-coins-display{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-.xcoins-big{display:flex;align-items:center;gap:8px;font-family:'Share Tech Mono',monospace;font-size:1.4rem;color:var(--gold);font-weight:700}
-.profile-level{font-size:.75rem;color:var(--muted2);font-family:'Share Tech Mono',monospace}
-.profile-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
-.pstat{padding:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:8px;text-align:center}
-.pstat-val{font-family:'Orbitron',sans-serif;font-size:1.2rem;font-weight:900;color:#fff;margin-bottom:4px}
-.pstat-key{font-size:.68rem;color:var(--muted2);text-transform:uppercase;letter-spacing:1px}
-.profile-badges{display:flex;gap:8px;flex-wrap:wrap}
-.badge-item{padding:5px 12px;border-radius:4px;font-size:.7rem;font-weight:700;letter-spacing:1px;font-family:'Share Tech Mono',monospace}
+/* PROFILE */
+.profile-card{max-width:860px;background:var(--card);border:1px solid rgba(59,130,246,.15);border-radius:16px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.profile-banner{height:140px;background:linear-gradient(135deg,#010818,#02204a,#030e2a);position:relative;overflow:hidden}
+.profile-banner-glow{position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 30% 50%,rgba(59,130,246,.12),transparent)}
+.profile-avatar-wrap{position:absolute;bottom:-36px;left:24px}
+.profile-avatar{width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:700;font-family:'Orbitron',sans-serif;color:#fff;border:3px solid var(--card);box-shadow:0 0 18px rgba(124,58,237,.4)}
+.profile-body{padding:50px 24px 24px}
+.profile-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:16px}
+.profile-name{font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;color:#fff;margin-bottom:3px}
+.profile-tag{font-size:.75rem;color:var(--cyan2);font-family:'Share Tech Mono',monospace;margin-bottom:7px}
+.profile-bio{font-size:.85rem;color:var(--muted2);max-width:380px}
+.xp-big{display:flex;align-items:center;gap:7px;font-family:'Share Tech Mono',monospace;font-size:1.3rem;color:var(--violet3);font-weight:700}
+.profile-level{font-size:.72rem;color:var(--muted2);font-family:'Share Tech Mono',monospace;text-align:right;margin-top:4px}
+.profile-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
+.pstat{padding:13px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:8px;text-align:center}
+.pstat-val{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:900;color:#fff;margin-bottom:3px}
+.pstat-key{font-size:.65rem;color:var(--muted2);text-transform:uppercase;letter-spacing:1px}
+.profile-badges{display:flex;gap:7px;flex-wrap:wrap}
+.badge-item{padding:4px 10px;border-radius:3px;font-size:.68rem;font-weight:700;letter-spacing:1px;font-family:'Share Tech Mono',monospace}
 .badge-fn{background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.3);color:var(--blue2)}
 .badge-cr{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);color:var(--violet3)}
 .badge-gold{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);color:var(--gold)}
 .badge-green{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:var(--green)}
 
-/* ─── AUTH MODAL ─── */
+/* PAGE HEADER */
+.page-header{margin-bottom:24px}
+.page-tag{display:inline-block;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--cyan2);padding:3px 12px;border:1px solid rgba(6,182,212,.2);border-radius:3px;background:rgba(6,182,212,.04);margin-bottom:8px;font-family:'Share Tech Mono',monospace}
+.page-title{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:#fff;letter-spacing:1px}
+.page-title span{background:linear-gradient(135deg,var(--blue2),var(--violet3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.page-sub{color:var(--muted2);font-size:.88rem;margin-top:6px}
+
+/* AUTH MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s;backdrop-filter:blur(8px)}
 .modal-overlay.open{opacity:1;visibility:visible}
-.modal{background:var(--card2);border:1px solid rgba(59,130,246,.2);border-radius:20px;padding:36px;width:420px;max-width:92vw;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 40px rgba(59,130,246,.1)}
-.modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted2);transition:all .3s}
-.modal-close:hover{color:#fff;border-color:rgba(255,255,255,.3)}
-.modal-logo{text-align:center;margin-bottom:24px}
-.modal-logo-text{font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;background:linear-gradient(90deg,var(--blue2),var(--violet3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:4px}
-.modal-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:28px}
-.modal-tab{flex:1;padding:10px;text-align:center;font-family:'Exo 2',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted2);cursor:pointer;transition:all .3s;border-bottom:2px solid transparent;margin-bottom:-1px}
+.modal{background:var(--card2);border:1px solid rgba(59,130,246,.2);border-radius:16px;padding:32px;width:400px;max-width:92vw;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.7)}
+.modal-close{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted2);transition:all .3s}
+.modal-close:hover{color:#fff}
+.modal-logo-text{font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;background:linear-gradient(90deg,var(--blue2),var(--violet3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:4px;text-align:center;margin-bottom:22px}
+.modal-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:24px}
+.modal-tab{flex:1;padding:9px;text-align:center;font-family:'Exo 2',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted2);cursor:pointer;transition:all .3s;border-bottom:2px solid transparent;margin-bottom:-1px}
 .modal-tab.active{color:var(--blue2);border-bottom-color:var(--blue)}
-.form-group{margin-bottom:16px}
-.form-label{display:block;font-size:.75rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted2);margin-bottom:7px;font-family:'Share Tech Mono',monospace}
-.form-input{width:100%;padding:12px 16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-family:'Exo 2',sans-serif;font-size:.9rem;outline:none;transition:all .3s;cursor:text}
-.form-input:focus{border-color:rgba(59,130,246,.5);background:rgba(59,130,246,.04);box-shadow:0 0 15px rgba(59,130,246,.15)}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:.72rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted2);margin-bottom:6px;font-family:'Share Tech Mono',monospace}
+.form-input{width:100%;padding:11px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:7px;color:#fff;font-family:'Exo 2',sans-serif;font-size:.88rem;outline:none;transition:all .3s}
+.form-input:focus{border-color:rgba(59,130,246,.5);background:rgba(59,130,246,.04)}
 .form-input::placeholder{color:var(--muted)}
-.form-submit{width:100%;padding:13px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-family:'Exo 2',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:8px}
+.form-submit{width:100%;padding:12px;border:none;border-radius:7px;background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-family:'Exo 2',sans-serif;font-size:.88rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .3s;margin-top:6px}
 .form-submit:hover{box-shadow:var(--glow-v);transform:translateY(-2px)}
-.social-divider{display:flex;align-items:center;gap:12px;margin:18px 0}
+.social-divider{display:flex;align-items:center;gap:10px;margin:16px 0}
 .social-divider::before,.social-divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.08)}
-.social-divider span{font-size:.72rem;color:var(--muted2);font-family:'Share Tech Mono',monospace;letter-spacing:2px;white-space:nowrap}
-.social-logins{display:flex;gap:10px;margin-top:4px}
-/* ─── BOUTONS OAUTH CORRIGÉS ─── */
-.social-login-btn{flex:1;padding:11px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--text);font-family:'Exo 2',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
-.social-login-btn:hover{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.25);transform:translateY(-2px)}
-.social-login-btn.discord:hover{border-color:rgba(88,101,242,.5);background:rgba(88,101,242,.12);box-shadow:0 0 20px rgba(88,101,242,.2)}
-.social-login-btn.google:hover{border-color:rgba(234,67,53,.4);background:rgba(234,67,53,.08);box-shadow:0 0 20px rgba(234,67,53,.15)}
-.oauth-note{text-align:center;margin-top:14px;font-size:.7rem;color:var(--muted2);font-family:'Share Tech Mono',monospace;line-height:1.5}
-.oauth-note a{color:var(--blue2);text-decoration:none}
+.social-divider span{font-size:.68rem;color:var(--muted2);font-family:'Share Tech Mono',monospace;letter-spacing:2px}
+.social-logins{display:flex;gap:8px}
+.social-login-btn{flex:1;padding:10px;border-radius:7px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);color:var(--text);font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:7px}
+.social-login-btn:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.2)}
+.social-login-btn.discord:hover{border-color:rgba(88,101,242,.5);background:rgba(88,101,242,.1)}
+.social-login-btn.google:hover{border-color:rgba(234,67,53,.4);background:rgba(234,67,53,.07)}
 
-/* ─── NOTIF ─── */
-.notif{position:fixed;bottom:24px;right:24px;z-index:3000;background:var(--card2);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 30px rgba(0,0,0,.5);transform:translateY(80px);opacity:0;transition:all .4s cubic-bezier(.175,.885,.32,1.275);max-width:300px}
+/* NOTIF */
+.notif{position:fixed;bottom:20px;right:20px;z-index:3000;background:var(--card2);border:1px solid rgba(16,185,129,.3);border-radius:9px;padding:12px 16px;display:flex;align-items:center;gap:9px;box-shadow:0 6px 24px rgba(0,0,0,.5);transform:translateY(70px);opacity:0;transition:all .4s cubic-bezier(.175,.885,.32,1.275);max-width:280px}
 .notif.show{transform:translateY(0);opacity:1}
-.notif-text{font-size:.85rem;color:#fff;font-weight:500}
+.notif-text{font-size:.82rem;color:#fff;font-weight:500}
 
-/* ─── FOOTER ─── */
-footer{background:var(--deep);border-top:1px solid rgba(59,130,246,.08);padding:60px 4% 28px}
-.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:50px;margin-bottom:48px}
-.footer-brand .fl{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:900;background:linear-gradient(90deg,var(--blue2),var(--violet3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:4px;display:block;margin-bottom:12px}
-.footer-brand p{font-size:.85rem;color:var(--muted2);line-height:1.7;margin-bottom:18px}
-.socials{display:flex;gap:8px}
-.social-btn{width:36px;height:36px;border-radius:6px;border:1px solid rgba(255,255,255,.08);background:transparent;display:flex;align-items:center;justify-content:center;color:var(--muted2);font-size:.9rem;cursor:pointer;transition:all .3s;text-decoration:none}
-.social-btn:hover{border-color:rgba(59,130,246,.3);color:var(--blue2);background:rgba(59,130,246,.06)}
-.footer-col h4{font-family:'Orbitron',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#fff;margin-bottom:16px}
-.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
-.footer-col ul a{color:var(--muted2);text-decoration:none;font-size:.83rem;transition:color .3s;cursor:pointer}
-.footer-col ul a:hover{color:var(--blue2)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.05);padding-top:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
-.footer-bottom p{font-size:.78rem;color:var(--muted)}
-.footer-badges{display:flex;gap:8px}
-.fbadge{padding:4px 10px;border-radius:4px;font-size:.68rem;font-weight:600;letter-spacing:.5px;font-family:'Share Tech Mono',monospace}
-.fbadge-s{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);color:var(--green)}
+/* HOME */
+.hero-section{min-height:calc(100vh - 58px);display:flex;align-items:center;padding:40px 24px;position:relative;overflow:hidden}
+.hero-orb1{position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(59,130,246,.1),transparent 70%);top:-80px;left:-60px;pointer-events:none;animation:orbFloat 8s ease-in-out infinite}
+.hero-orb2{position:absolute;width:400px;height:400px;background:radial-gradient(circle,rgba(124,58,237,.08),transparent 70%);bottom:-60px;right:0;pointer-events:none;animation:orbFloat 10s ease-in-out infinite reverse}
+@keyframes orbFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-20px)}}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(59,130,246,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.03) 1px,transparent 1px);background-size:50px 50px;pointer-events:none}
+.hero-content{position:relative;z-index:2;max-width:620px}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:4px 14px;background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.2);border-radius:3px;margin-bottom:20px;font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--cyan2);font-family:'Share Tech Mono',monospace}
+.live-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 1.5s infinite;box-shadow:0 0 5px var(--green)}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
+.hero-title{font-family:'Orbitron',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:900;line-height:1.05;margin-bottom:16px}
+.hero-title .t1{display:block;color:#fff}
+.hero-title .t2{display:block;background:linear-gradient(135deg,var(--blue2),var(--violet3),var(--cyan2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 16px rgba(124,58,237,.4))}
+.hero-desc{font-size:.95rem;color:var(--muted2);max-width:480px;margin-bottom:32px;line-height:1.8}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:44px}
+.btn-hero-main{padding:13px 28px;background:linear-gradient(135deg,var(--blue),var(--violet));border:none;border-radius:6px;color:#fff;font-family:'Exo 2',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.btn-hero-main:hover{transform:translateY(-3px);box-shadow:0 10px 36px rgba(124,58,237,.4)}
+.btn-hero-sec{padding:13px 28px;background:transparent;border:1px solid rgba(6,182,212,.3);border-radius:6px;color:var(--cyan2);font-family:'Exo 2',sans-serif;font-size:.9rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.btn-hero-sec:hover{background:rgba(6,182,212,.06);box-shadow:var(--glow-c);transform:translateY(-3px)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:440px}
+.hstat{padding:14px;background:rgba(255,255,255,.02);border:1px solid rgba(59,130,246,.1);border-radius:7px;transition:all .3s}
+.hstat:hover{border-color:rgba(59,130,246,.3);background:rgba(59,130,246,.04)}
+.hstat-num{font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:900;color:#fff;display:block}
+.hstat-label{font-size:.68rem;color:var(--muted2);text-transform:uppercase;letter-spacing:1px}
 
-/* ─── RESPONSIVE ─── */
-@media(max-width:1024px){
-  .hero{flex-direction:column;padding-top:100px;text-align:center}
-  .hero-left{max-width:100%}
-  .hero-desc{margin:0 auto 36px}
-  .hero-btns{justify-content:center}
-  .hero-stats{margin:0 auto}
-  .hero-right{display:none}
-  .footer-top{grid-template-columns:1fr 1fr}
-}
 @media(max-width:768px){
-  .nav-links{display:none;position:fixed;top:68px;left:0;right:0;background:rgba(1,2,5,.97);flex-direction:column;padding:20px;gap:6px;border-bottom:1px solid rgba(59,130,246,.1)}
-  .nav-links.open{display:flex}
-  .hamburger{display:flex}
-  .lb-header-row,.lb-row{grid-template-columns:48px 1fr 80px}
-  .lb-row>:nth-child(4),.lb-row>:nth-child(5),.lb-header-row>:nth-child(4),.lb-header-row>:nth-child(5){display:none}
+  :root{--sidebar:0px}
+  #sidebar{transform:translateX(-220px);width:220px}
+  #sidebar.mob-open{transform:translateX(0)}
+  #topbar{left:0}
+  #main{margin-left:0}
   .profile-stats{grid-template-columns:repeat(2,1fr)}
-  .footer-top{grid-template-columns:1fr}
-  .footer-bottom{flex-direction:column;text-align:center}
-  /* FIX MOBILE : curseur normal sur mobile */
+  .lb-header-row,.lb-row{grid-template-columns:44px 1fr 80px}
+  .lb-row>:nth-child(4),.lb-row>:nth-child(5),.lb-header-row>:nth-child(4),.lb-header-row>:nth-child(5){display:none}
   #cursor,#cursor-ring{display:none}
   body{cursor:auto}
-  /* Tous les boutons cliquables sur mobile */
-  button,a,.modal-tab,.gtab,.lb-tab,.shop-cat,.mode-card,.social-btn{cursor:pointer}
 }
 </style>
 </head>
 <body>
 
-<!-- CURSOR -->
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
+<canvas id="bg"></canvas>
 
 <!-- LOADER -->
 <div id="loader">
-  <div class="loader-logo-wrap">
-    <svg class="loader-x" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 10 L38 38 L10 70" stroke="url(#gb)" stroke-width="6" stroke-linecap="round"/>
-      <path d="M70 10 L42 38 L70 70" stroke="url(#gv)" stroke-width="6" stroke-linecap="round"/>
-      <path d="M38 38 L42 38" stroke="url(#gc)" stroke-width="6" stroke-linecap="round"/>
-      <defs>
-        <linearGradient id="gb" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
-        <linearGradient id="gv" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7c3aed"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
-        <linearGradient id="gc" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
-      </defs>
-    </svg>
-    <div class="loader-name">XENOVRA</div>
-    <div class="loader-sub">Building The Future of Gaming</div>
-  </div>
+  <svg class="loader-x" viewBox="0 0 80 80" fill="none">
+    <path d="M10 10 L38 38 L10 70" stroke="url(#lb1)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M70 10 L42 38 L70 70" stroke="url(#lb2)" stroke-width="6" stroke-linecap="round"/>
+    <path d="M38 38 L42 38" stroke="url(#lb3)" stroke-width="6" stroke-linecap="round"/>
+    <defs>
+      <linearGradient id="lb1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
+      <linearGradient id="lb2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7c3aed"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
+      <linearGradient id="lb3" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06b6d4"/><stop offset="1" stop-color="#22d3ee"/></linearGradient>
+    </defs>
+  </svg>
+  <div class="loader-name">XENOVRA</div>
+  <div class="loader-sub">Building The Future of Gaming</div>
   <div class="loader-bar"><div class="loader-fill"></div></div>
   <div class="loader-code" id="loaderCode">INITIALIZING SYSTEMS...</div>
 </div>
-
-<!-- CANVAS -->
-<canvas id="bg"></canvas>
 
 <!-- NOTIF -->
 <div class="notif" id="notif"><span id="notifIcon">✅</span><span class="notif-text" id="notifText">Action effectuée !</span></div>
@@ -389,192 +392,254 @@ footer{background:var(--deep);border-top:1px solid rgba(59,130,246,.08);padding:
 <div class="modal-overlay" id="authModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-logo"><div class="modal-logo-text">XENOVRA</div></div>
+    <div class="modal-logo-text">XENOVRA</div>
     <div class="modal-tabs">
       <div class="modal-tab active" id="tabLogin" onclick="switchAuthTab('login',this)">Connexion</div>
       <div class="modal-tab" id="tabRegister" onclick="switchAuthTab('register',this)">Inscription</div>
     </div>
-    <div id="authForm">
-      <!-- Formulaire Email/Mot de passe -->
-      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="emailInput" placeholder="gamer@xenovra.gg"></div>
-      <div class="form-group"><label class="form-label">Mot de passe</label><input class="form-input" type="password" id="passInput" placeholder="••••••••"></div>
-      <div class="form-group" id="usernameGroup" style="display:none"><label class="form-label">Pseudo</label><input class="form-input" type="text" id="userInput" placeholder="GamerXenovra01"></div>
-      <button class="form-submit" id="submitBtn" onclick="handleEmailAuth()">Se connecter →</button>
-
-      <!-- Séparateur -->
-      <div class="social-divider"><span>ou continuer avec</span></div>
-
-      <!-- ✅ FIX : Boutons Discord et Google redirigent vers OAuth -->
-      <div class="social-logins">
-        <button class="social-login-btn discord" onclick="loginWithDiscord()">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#5865F2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.034.055a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
-          Discord
-        </button>
-        <button class="social-login-btn google" onclick="loginWithGoogle()">
-          <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-          Google
-        </button>
-      </div>
-      <!-- Note explicative -->
-      <p class="oauth-note" id="oauthNote">
-        ⚠️ Pour activer Discord/Google, configure ton Client ID dans le script.<br>
-        <span style="color:var(--muted);font-size:.65rem">Voir les commentaires dans le code JavaScript</span>
-      </p>
+    <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" id="emailInput" placeholder="gamer@xenovra.gg"></div>
+    <div class="form-group"><label class="form-label">Mot de passe</label><input class="form-input" type="password" id="passInput" placeholder="••••••••"></div>
+    <div class="form-group" id="usernameGroup" style="display:none"><label class="form-label">Pseudo</label><input class="form-input" type="text" id="userInput" placeholder="GamerXenovra01"></div>
+    <button class="form-submit" id="submitBtn" onclick="handleEmailAuth()">Se connecter →</button>
+    <div class="social-divider"><span>ou continuer avec</span></div>
+    <div class="social-logins">
+      <button class="social-login-btn discord" onclick="notify('Configure ton Discord Client ID !','⚙️')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#5865F2"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.034.055a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        Discord
+      </button>
+      <button class="social-login-btn google" onclick="notify('Configure ton Google Client ID !','⚙️')">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Google
+      </button>
     </div>
   </div>
 </div>
 
-<!-- NAVBAR -->
-<nav id="nav">
-  <!-- FIX : href="javascript:void(0)" pour éviter les sauts de page -->
-  <a href="javascript:void(0)" class="nav-logo" onclick="showPage('home')">
-    <svg width="36" height="36" viewBox="0 0 80 80" fill="none">
-      <path d="M10 10 L38 38 L10 70" stroke="url(#nb1)" stroke-width="6" stroke-linecap="round"/>
-      <path d="M70 10 L42 38 L70 70" stroke="url(#nb2)" stroke-width="6" stroke-linecap="round"/>
+<!-- ══════ SIDEBAR ══════ -->
+<aside id="sidebar">
+  <div class="sb-logo" onclick="showPage('home')">
+    <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
+      <path d="M10 10 L38 38 L10 70" stroke="url(#sb1)" stroke-width="6" stroke-linecap="round"/>
+      <path d="M70 10 L42 38 L70 70" stroke="url(#sb2)" stroke-width="6" stroke-linecap="round"/>
       <defs>
-        <linearGradient id="nb1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
-        <linearGradient id="nb2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7c3aed"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
+        <linearGradient id="sb1" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3b82f6"/><stop offset="1" stop-color="#60a5fa"/></linearGradient>
+        <linearGradient id="sb2" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7c3aed"/><stop offset="1" stop-color="#a78bfa"/></linearGradient>
       </defs>
     </svg>
-    <span class="nav-logo-text">XENOVRA</span>
-  </a>
-  <ul class="nav-links" id="navLinks">
-    <!-- FIX : href="javascript:void(0)" sur tous les liens nav -->
-    <li><a href="javascript:void(0)" onclick="showPage('matches')" data-page="matches"><span>⚔️</span> Matchs</a></li>
-    <li><a href="javascript:void(0)" onclick="showPage('tournaments')" data-page="tournaments"><span>🏆</span> Tournois</a></li>
-    <li><a href="javascript:void(0)" onclick="showPage('leaderboard')" data-page="leaderboard"><span>📊</span> Classement</a></li>
-    <li><a href="javascript:void(0)" onclick="showPage('shop')" data-page="shop"><span>🛍️</span> Boutique</a></li>
-    <li><a href="javascript:void(0)" onclick="showPage('profile')" data-page="profile"><span>👤</span> Profil</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="xcoins-display">⚡ <span id="navCoins">4 250</span> XC</div>
-    <button class="btn-login" onclick="openModal('login')">Connexion</button>
-    <button class="btn-register" onclick="openModal('register')">S'inscrire</button>
-    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <span class="sb-logo-text">XENOVRA</span>
   </div>
-</nav>
 
-<!-- ══════ HOME PAGE ══════ -->
-<div class="page active" id="page-home">
-  <section class="hero">
-    <div class="hero-bg-effects">
-      <div class="hero-orb1"></div>
-      <div class="hero-orb2"></div>
-      <div class="hero-grid-lines"></div>
-    </div>
-    <div class="hero-left">
-      <div class="hero-badge"><span class="live-dot"></span> 847 joueurs en ligne maintenant</div>
-      <h1 class="hero-title">
-        <span class="t1">L'Arène Compétitive</span>
-        <span class="t2">Du Gaming Futur</span>
-      </h1>
-      <p class="hero-desc">Affronte les meilleurs joueurs Fortnite & Clash Royale. Mise des XCoins, gagne des tournois, grimpe dans les classements mondiaux.</p>
-      <div class="hero-btns">
-        <button class="btn-hero-main" onclick="showPage('matches')">⚔️ Trouver un match</button>
-        <button class="btn-hero-sec" onclick="showPage('tournaments')">🏆 Voir les tournois</button>
+  <div class="sb-game-selector">
+    <div class="sb-game-btn" onclick="toggleGameDrop()" id="gameBtn">
+      <div class="sb-game-badge">
+        <div class="sb-game-icon fn-bg" id="gameIcon">⚡</div>
+        <span id="gameLabel">FN</span>
       </div>
-      <div class="hero-stats">
-        <div class="hstat"><span class="hstat-num" data-target="12450">0</span><span class="hstat-label">Joueurs</span></div>
-        <div class="hstat"><span class="hstat-num" data-target="98740">0</span><span class="hstat-label">Matchs joués</span></div>
-        <div class="hstat"><span class="hstat-num" data-target="2850000">0</span><span class="hstat-label">XCoins distribués</span></div>
+      <span class="sb-chevron" id="gameChevron">▼</span>
+    </div>
+    <div class="sb-game-dropdown" id="gameDrop">
+      <div class="sb-game-option active" id="opt-fn" onclick="selectGame('fn')">
+        <div class="sb-game-icon fn-bg">⚡</div><span>Fortnite</span>
+      </div>
+      <div class="sb-game-option" id="opt-cr" onclick="selectGame('cr')">
+        <div class="sb-game-icon cr-bg">👑</div><span>Clash Royale</span>
       </div>
     </div>
-    <div class="hero-right">
-      <div class="live-matches-card">
-        <div class="lmc-header">
-          <div class="lmc-title">Matchs en cours</div>
-          <div class="live-badge"><span style="width:6px;height:6px;background:#ef4444;border-radius:50%;display:inline-block"></span> LIVE</div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-label">Compete</div>
+    <div class="sb-nav-item active" id="nav-matches" onclick="showPage('matches')"><span class="sb-icon">⚔️</span> Matchs</div>
+    <div class="sb-nav-item" id="nav-tournaments" onclick="showPage('tournaments')"><span class="sb-icon">🏆</span> Tournois</div>
+    <div class="sb-nav-item" id="nav-leaderboard" onclick="showPage('leaderboard')"><span class="sb-icon">📊</span> Leaderboard</div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-label">Shop</div>
+    <div class="sb-nav-item" id="nav-shop" onclick="showPage('shop')">
+      <span class="sb-icon">🛍️</span> Boutique
+      <span style="margin-left:auto;padding:1px 6px;background:rgba(124,58,237,.3);border-radius:3px;font-size:.6rem;color:var(--violet3);font-family:'Share Tech Mono',monospace">NEW</span>
+    </div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-label">Récents</div>
+    <div class="sb-recent-item" onclick="notify('Aucune partie récente','📂')">
+      <div class="sb-recent-dot"></div><span style="color:var(--muted);font-style:italic;font-size:.74rem">Aucune partie jouée</span>
+    </div>
+  </div>
+
+  <div class="sb-section">
+    <div class="sb-section-label">Profile</div>
+    <div class="sb-nav-item" id="nav-profile" onclick="showPage('profile')"><span class="sb-icon">👤</span> Profil</div>
+    <div class="sb-nav-item" onclick="notify('Paramètres bientôt disponibles !','⚙️')"><span class="sb-icon">⚙️</span> Paramètres</div>
+  </div>
+
+  <div class="sb-spacer"></div>
+
+  <div class="sb-pass" onclick="notify('XENOVRA Pass — Saison 1 en cours !','⭐')">
+    <div class="sb-pass-top">
+      <span class="sb-pass-icon">⭐</span>
+      <div>
+        <div class="sb-pass-name">XENOVRA PASS</div>
+        <div class="sb-pass-season">SAISON 1</div>
+      </div>
+      <span class="sb-pass-arrow">→</span>
+    </div>
+    <div class="sb-pass-bar"><div class="sb-pass-fill"></div></div>
+  </div>
+
+  <button class="sb-buy-btn" onclick="openModal('register')">⚡ Acheter des XP</button>
+</aside>
+
+<!-- ══════ TOPBAR ══════ -->
+<header id="topbar">
+  <div class="tb-search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" placeholder="Rechercher un joueur...">
+  </div>
+  <div class="tb-center">
+    <div class="tb-currency">🪙 <span id="tokenDisplay">0.00</span></div>
+    <div class="tb-xp">⚡ <span id="navXP">0</span> XP</div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-rank-badge">⭐ NIVEAU 1</div>
+    <div class="tb-icon-btn" onclick="notify('Discord bientôt !')">💬</div>
+    <div class="tb-icon-btn" onclick="notify('YouTube bientôt !')">▶️</div>
+    <div class="tb-icon-btn tb-notif" onclick="notify('Pas de nouvelles notifications')">🔔<span class="tb-notif-dot"></span></div>
+    <button class="tb-btn tb-login" onclick="openModal('login')">Connexion</button>
+    <button class="tb-btn tb-register" onclick="openModal('register')">S'inscrire</button>
+  </div>
+</header>
+
+<!-- ══════ MAIN ══════ -->
+<main id="main">
+
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <div class="hero-section">
+      <div class="hero-orb1"></div><div class="hero-orb2"></div><div class="hero-grid"></div>
+      <div class="hero-content">
+        <div class="hero-badge"><span class="live-dot"></span> 0 joueurs en ligne</div>
+        <h1 class="hero-title">
+          <span class="t1">L'Arène Compétitive</span>
+          <span class="t2">Du Gaming Futur</span>
+        </h1>
+        <p class="hero-desc">Affronte les meilleurs joueurs Fortnite & Clash Royale. Gagne des XP, participe aux tournois, grimpe dans les classements.</p>
+        <div class="hero-btns">
+          <button class="btn-hero-main" onclick="showPage('matches')">⚔️ Trouver un match</button>
+          <button class="btn-hero-sec" onclick="showPage('tournaments')">🏆 Voir les tournois</button>
         </div>
-        <div id="liveMatchesList"></div>
-        <div style="text-align:center;margin-top:12px">
-          <button style="background:transparent;border:none;color:var(--blue2);font-size:.78rem;font-family:'Share Tech Mono',monospace;cursor:pointer;letter-spacing:1px" onclick="showPage('matches')">Voir tous les matchs →</button>
+        <div class="hero-stats">
+          <div class="hstat"><span class="hstat-num">0</span><span class="hstat-label">Joueurs</span></div>
+          <div class="hstat"><span class="hstat-num">0</span><span class="hstat-label">Matchs joués</span></div>
+          <div class="hstat"><span class="hstat-num">0</span><span class="hstat-label">XP distribués</span></div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- QUICK FEATURES -->
-  <section class="section" style="padding-top:0">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;max-width:1100px;margin:0 auto" class="fade-up">
-      <div style="padding:24px;background:var(--card);border:1px solid rgba(59,130,246,.12);border-radius:12px;transition:all .3s" onmouseover="this.style.borderColor='rgba(59,130,246,.3)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(59,130,246,.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:1.8rem;margin-bottom:12px">⚔️</div>
-        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:#fff;margin-bottom:6px">Matchs compétitifs</div>
-        <div style="font-size:.8rem;color:var(--muted2);line-height:1.6">1v1 à 4v4 sur Fortnite & Clash Royale avec paris de XCoins</div>
-      </div>
-      <div style="padding:24px;background:var(--card);border:1px solid rgba(124,58,237,.12);border-radius:12px;transition:all .3s" onmouseover="this.style.borderColor='rgba(124,58,237,.3)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(124,58,237,.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:1.8rem;margin-bottom:12px">🏆</div>
-        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:#fff;margin-bottom:6px">Tournois officiels</div>
-        <div style="font-size:.8rem;color:var(--muted2);line-height:1.6">Brackets organisés avec prize pools en XCoins et récompenses exclusives</div>
-      </div>
-      <div style="padding:24px;background:var(--card);border:1px solid rgba(6,182,212,.12);border-radius:12px;transition:all .3s" onmouseover="this.style.borderColor='rgba(6,182,212,.3)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(6,182,212,.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:1.8rem;margin-bottom:12px">⚡</div>
-        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:#fff;margin-bottom:6px">XCoins System</div>
-        <div style="font-size:.8rem;color:var(--muted2);line-height:1.6">Gagne des XCoins en jouant, mise sur tes matchs, achète des cosmétiques</div>
-      </div>
-      <div style="padding:24px;background:var(--card);border:1px solid rgba(245,158,11,.12);border-radius:12px;transition:all .3s" onmouseover="this.style.borderColor='rgba(245,158,11,.3)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='rgba(245,158,11,.12)';this.style.transform='translateY(0)'">
-        <div style="font-size:1.8rem;margin-bottom:12px">🛡️</div>
-        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:#fff;margin-bottom:6px">Anti-triche</div>
-        <div style="font-size:.8rem;color:var(--muted2);line-height:1.6">Système de validation des résultats, screenshots obligatoires, modération active</div>
+  <!-- MATCHES -->
+  <div class="page" id="page-matches">
+    <div class="matches-header">
+      <h1 class="matches-title">Live Matches</h1>
+      <div class="matches-actions">
+        <button class="btn-requeue" onclick="notify('Requeue activé !','🔄')">🔄 Requeue</button>
+        <button class="btn-create" onclick="notify('Création de match bientôt !','🔨')">+ Créer un match</button>
       </div>
     </div>
-  </section>
-</div>
+    <div class="filter-bar">
+      <div class="filter-tabs">
+        <button class="filter-tab active" id="tab-available" onclick="switchMatchTab('available',this)">
+          Disponibles <span class="tab-count" id="count-available">0</span>
+        </button>
+        <div class="filter-sep"></div>
+        <button class="filter-tab" id="tab-ongoing" onclick="switchMatchTab('ongoing',this)">
+          En cours <span class="tab-count" id="count-ongoing">0</span>
+        </button>
+      </div>
+      <div class="filter-dropdowns" id="filterDropdowns">
+        <!-- Region -->
+        <div class="fdd" id="fdd-region" onclick="toggleDrop('region')">
+          <span class="fdd-dot eu"></span>
+          <span id="fdd-region-label">Toutes régions</span>
+          <span class="fdd-arrow">▼</span>
+          <div class="dropdown-menu" id="drop-region" style="display:none">
+            <div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'region','all','Toutes régions')">🌍 Toutes régions</div>
+            <div class="dropdown-opt" data-val="EU" onclick="selectFilter(event,'region','EU','EU')"><span class="opt-dot" style="background:#3b82f6"></span> EU</div>
+            <div class="dropdown-opt" data-val="NA" onclick="selectFilter(event,'region','NA','NA')"><span class="opt-dot" style="background:#10b981"></span> NA</div>
+            <div class="dropdown-opt" data-val="AS" onclick="selectFilter(event,'region','AS','AS')"><span class="opt-dot" style="background:#f59e0b"></span> AS</div>
+          </div>
+        </div>
+        <!-- Platform -->
+        <div class="fdd" id="fdd-platform" onclick="toggleDrop('platform')">
+          <span class="fdd-dot pc"></span>
+          <span id="fdd-platform-label">Toutes plateformes</span>
+          <span class="fdd-arrow">▼</span>
+          <div class="dropdown-menu" id="drop-platform" style="display:none">
+            <div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'platform','all','Toutes plateformes')">🖥️ Toutes plateformes</div>
+            <div class="dropdown-opt" data-val="PC" onclick="selectFilter(event,'platform','PC','PC')"><span class="opt-dot" style="background:#10b981"></span> PC</div>
+            <div class="dropdown-opt" data-val="Console" onclick="selectFilter(event,'platform','Console','Console')"><span class="opt-dot" style="background:#8b5cf6"></span> Console</div>
+            <div class="dropdown-opt" data-val="Mobile" onclick="selectFilter(event,'platform','Mobile','Mobile')"><span class="opt-dot" style="background:#f59e0b"></span> Mobile</div>
+          </div>
+        </div>
+        <!-- Gamemode -->
+        <div class="fdd" id="fdd-gamemode" onclick="toggleDrop('gamemode')">
+          <span>🎮</span>
+          <span id="fdd-gamemode-label">Tous les modes</span>
+          <span class="fdd-arrow">▼</span>
+          <div class="dropdown-menu" id="drop-gamemode" style="display:none">
+            <div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'gamemode','all','Tous les modes')">🎮 Tous les modes</div>
+            <div class="dropdown-opt" data-val="1V1 BOXFIGHT" onclick="selectFilter(event,'gamemode','1V1 BOXFIGHT','1V1 Boxfight')">⚔️ 1V1 Boxfight</div>
+            <div class="dropdown-opt" data-val="1V1 REALISTIC" onclick="selectFilter(event,'gamemode','1V1 REALISTIC','1V1 Realistic')">🎯 1V1 Realistic</div>
+            <div class="dropdown-opt" data-val="1V1 PIECE CONTROL" onclick="selectFilter(event,'gamemode','1V1 PIECE CONTROL','Piece Control')">🧱 Piece Control</div>
+            <div class="dropdown-opt" data-val="1V1 BUILD FIGHT" onclick="selectFilter(event,'gamemode','1V1 BUILD FIGHT','Build Fight')">🏗️ Build Fight</div>
+            <div class="dropdown-opt" data-val="2V2" onclick="selectFilter(event,'gamemode','2V2','2V2')">👥 2V2</div>
+          </div>
+        </div>
+        <!-- Entry fee sort -->
+        <div class="fdd active-filter" id="fdd-fee" onclick="toggleDrop('fee')">
+          <span id="fdd-fee-label">↓ Entry Fee</span>
+          <span class="fdd-arrow">▼</span>
+          <div class="dropdown-menu right" id="drop-fee" style="display:none">
+            <div class="dropdown-opt selected" data-val="asc" onclick="selectFilter(event,'fee','asc','↓ Entry Fee')">↓ Entry Fee (croissant)</div>
+            <div class="dropdown-opt" data-val="desc" onclick="selectFilter(event,'fee','desc','↑ Entry Fee')">↑ Entry Fee (décroissant)</div>
+            <div class="dropdown-opt" data-val="prize" onclick="selectFilter(event,'fee','prize','↓ Prize')">🏆 Plus gros prize</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="matches-grid" id="matchesGrid"></div>
+  </div>
 
-<!-- ══════ MATCHES PAGE ══════ -->
-<div class="page" id="page-matches" style="padding-top:88px">
-  <section class="section matches-section">
-    <div class="sec-header fade-up">
-      <div class="sec-tag">Arène</div>
-      <h2 class="sec-title">Matchs <span>Compétitifs</span></h2>
-      <p class="sec-sub">Rejoins un match ouvert ou crée le tien et mise tes XCoins</p>
+  <!-- LEADERBOARD -->
+  <div class="page" id="page-leaderboard">
+    <div class="page-header">
+      <div class="page-tag">Classement</div>
+      <h2 class="page-title">Les Meilleurs <span>Joueurs</span></h2>
+      <p class="page-sub">Aucune partie jouée pour l'instant — sois le premier !</p>
     </div>
-    <div class="games-tabs fade-up">
-      <button class="gtab gtab-fn active" onclick="switchGame('fn',this)">⚡ Fortnite</button>
-      <button class="gtab gtab-cr" onclick="switchGame('cr',this)">👑 Clash Royale</button>
-    </div>
-    <div class="fade-up">
-      <div style="font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--cyan2);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px">// MODES DE JEU</div>
-      <div class="modes-grid" id="modesGrid"></div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
-        <div style="font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--cyan2);letter-spacing:2px;text-transform:uppercase">// MATCHS OUVERTS</div>
-        <button onclick="showCreateMatch()" style="padding:10px 22px;background:linear-gradient(135deg,var(--blue),var(--violet));border:none;border-radius:6px;color:#fff;font-family:'Exo 2',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .3s" onmouseover="this.style.boxShadow='var(--glow-v)'" onmouseout="this.style.boxShadow='none'">+ Créer un match</button>
+    <div class="lb-container">
+      <div class="lb-tabs">
+        <button class="lb-tab active" onclick="switchLb('day',this)">Aujourd'hui</button>
+        <button class="lb-tab" onclick="switchLb('week',this)">Cette semaine</button>
+        <button class="lb-tab" onclick="switchLb('month',this)">Ce mois</button>
       </div>
-      <div class="open-matches" id="openMatches"></div>
-    </div>
-  </section>
-</div>
-
-<!-- ══════ LEADERBOARD PAGE ══════ -->
-<div class="page" id="page-leaderboard" style="padding-top:88px">
-  <section class="section lb-section">
-    <div class="sec-header fade-up">
-      <div class="sec-tag">Classement</div>
-      <h2 class="sec-title">Les Meilleurs <span>Joueurs</span></h2>
-      <p class="sec-sub">Top joueurs par XCoins gagnés cette semaine</p>
-    </div>
-    <div class="lb-tabs fade-up">
-      <button class="lb-tab active" onclick="switchLb('day',this)">Aujourd'hui</button>
-      <button class="lb-tab" onclick="switchLb('week',this)">Cette semaine</button>
-      <button class="lb-tab" onclick="switchLb('month',this)">Ce mois</button>
-    </div>
-    <div class="lb-container fade-up">
       <div class="lb-header-row">
-        <div>#</div><div>Joueur</div><div>XCoins</div><div>Victoires</div><div>Ratio</div>
+        <div>#</div><div>Joueur</div><div>XP</div><div>Victoires</div><div>Ratio</div>
       </div>
       <div id="lbRows"></div>
     </div>
-  </section>
-</div>
+  </div>
 
-<!-- ══════ SHOP PAGE ══════ -->
-<div class="page" id="page-shop" style="padding-top:88px">
-  <section class="section shop-section">
-    <div class="sec-header fade-up">
-      <div class="sec-tag">Boutique</div>
-      <h2 class="sec-title">Boutique <span>XCoins</span></h2>
-      <p class="sec-sub">Dépense tes XCoins pour personnaliser ton profil</p>
+  <!-- SHOP -->
+  <div class="page" id="page-shop">
+    <div class="page-header">
+      <div class="page-tag">Boutique</div>
+      <h2 class="page-title">Boutique <span>XP</span></h2>
+      <p class="page-sub">Dépense tes XP pour personnaliser ton profil</p>
     </div>
-    <div class="shop-cats fade-up">
+    <div class="shop-cats">
       <button class="shop-cat active" onclick="filterShop('all',this)">Tout</button>
       <button class="shop-cat" onclick="filterShop('avatar',this)">🖼️ Avatars</button>
       <button class="shop-cat" onclick="filterShop('titre',this)">🏷️ Titres</button>
@@ -582,30 +647,26 @@ footer{background:var(--deep);border-top:1px solid rgba(59,130,246,.08);padding:
       <button class="shop-cat" onclick="filterShop('effet',this)">✨ Effets</button>
       <button class="shop-cat" onclick="filterShop('cadre',this)">🖼 Cadres</button>
     </div>
-    <div class="shop-grid fade-up" id="shopGrid"></div>
-  </section>
-</div>
+    <div class="shop-grid" id="shopGrid"></div>
+  </div>
 
-<!-- ══════ TOURNAMENTS PAGE ══════ -->
-<div class="page" id="page-tournaments" style="padding-top:88px">
-  <section class="section tourney-section">
-    <div class="sec-header fade-up">
-      <div class="sec-tag">Tournois</div>
-      <h2 class="sec-title">Tournois <span>Officiels</span></h2>
-      <p class="sec-sub">Inscris-toi et bats-toi pour la gloire et les XCoins</p>
+  <!-- TOURNAMENTS -->
+  <div class="page" id="page-tournaments">
+    <div class="page-header">
+      <div class="page-tag">Tournois</div>
+      <h2 class="page-title">Tournois <span>Officiels</span></h2>
+      <p class="page-sub">Inscris-toi et bats-toi pour la gloire et les XP</p>
     </div>
-    <div class="tourney-grid fade-up" id="tourneyGrid"></div>
-  </section>
-</div>
+    <div class="tourney-grid" id="tourneyGrid"></div>
+  </div>
 
-<!-- ══════ PROFILE PAGE ══════ -->
-<div class="page" id="page-profile" style="padding-top:88px">
-  <section class="section profile-section">
-    <div class="sec-header fade-up">
-      <div class="sec-tag">Espace Joueur</div>
-      <h2 class="sec-title">Mon <span>Profil</span></h2>
+  <!-- PROFILE -->
+  <div class="page" id="page-profile">
+    <div class="page-header">
+      <div class="page-tag">Espace Joueur</div>
+      <h2 class="page-title">Mon <span>Profil</span></h2>
     </div>
-    <div class="profile-card fade-up">
+    <div class="profile-card">
       <div class="profile-banner">
         <div class="profile-banner-glow"></div>
         <div class="profile-avatar-wrap">
@@ -614,421 +675,354 @@ footer{background:var(--deep);border-top:1px solid rgba(59,130,246,.08);padding:
       </div>
       <div class="profile-body">
         <div class="profile-top">
-          <div class="profile-info">
+          <div>
             <div class="profile-name">XenoPlayer_01</div>
             <div class="profile-tag">@xenoplayer · Membre depuis Jan 2025</div>
-            <div class="profile-bio">Joueur compétitif Fortnite & Clash Royale. Top 50 leaderboard. Let's go ! 🔥</div>
+            <div class="profile-bio">Nouveau joueur XENOVRA. Prêt à tout donner 🔥</div>
           </div>
-          <div class="profile-coins-display">
-            <div class="xcoins-big">⚡ 4 250 <span style="font-size:.9rem;color:var(--muted2)">XC</span></div>
-            <div class="profile-level">Niveau 47 · Rang Elite</div>
+          <div>
+            <div class="xp-big">⚡ 0 <span style="font-size:.85rem;color:var(--muted2)">XP</span></div>
+            <div class="profile-level">Niveau 1 · Rang Débutant</div>
           </div>
         </div>
         <div class="profile-stats">
-          <div class="pstat"><div class="pstat-val" style="color:var(--green)">127</div><div class="pstat-key">Victoires</div></div>
-          <div class="pstat"><div class="pstat-val" style="color:#ef4444">43</div><div class="pstat-key">Défaites</div></div>
-          <div class="pstat"><div class="pstat-val" style="color:var(--blue2)">74%</div><div class="pstat-key">Win Rate</div></div>
-          <div class="pstat"><div class="pstat-val" style="color:var(--gold)">18 400</div><div class="pstat-key">XC gagnés</div></div>
+          <div class="pstat"><div class="pstat-val" style="color:var(--green)">0</div><div class="pstat-key">Victoires</div></div>
+          <div class="pstat"><div class="pstat-val" style="color:#ef4444">0</div><div class="pstat-key">Défaites</div></div>
+          <div class="pstat"><div class="pstat-val" style="color:var(--blue2)">—</div><div class="pstat-key">Win Rate</div></div>
+          <div class="pstat"><div class="pstat-val" style="color:var(--violet3)">0</div><div class="pstat-key">XP gagnés</div></div>
         </div>
         <div class="profile-badges">
-          <span class="badge-item badge-fn">⚡ Fortnite Elite</span>
-          <span class="badge-item badge-cr">👑 CR Champion</span>
-          <span class="badge-item badge-gold">⭐ Top 50</span>
-          <span class="badge-item badge-green">🛡️ Fair Play</span>
+          <span class="badge-item badge-fn">⚡ Nouveau joueur</span>
         </div>
       </div>
     </div>
-  </section>
-</div>
+  </div>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <span class="fl">XENOVRA</span>
-      <p>La plateforme compétitive gaming de nouvelle génération. Fortnite, Clash Royale, XCoins, tournois et plus encore.</p>
-      <div class="socials">
-        <a class="social-btn" onclick="notify('Discord bientôt !')">💬</a>
-        <a class="social-btn" onclick="notify('Telegram bientôt !')">✈️</a>
-        <a class="social-btn" onclick="notify('TikTok bientôt !')">🎵</a>
-        <a class="social-btn" onclick="notify('Instagram bientôt !')">📸</a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4>Jeux</h4>
-      <ul>
-        <li><a onclick="showPage('matches')">Fortnite</a></li>
-        <li><a onclick="showPage('matches')">Clash Royale</a></li>
-        <li><a onclick="showPage('matches')">Matchs</a></li>
-        <li><a onclick="showPage('tournaments')">Tournois</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Communauté</h4>
-      <ul>
-        <li><a onclick="showPage('leaderboard')">Classement</a></li>
-        <li><a onclick="showPage('shop')">Boutique</a></li>
-        <li><a onclick="notify('Discord bientôt !')">Discord</a></li>
-        <li><a onclick="notify('Règles bientôt disponibles !')">Règles</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Support</h4>
-      <ul>
-        <li><a onclick="notify('Contact bientôt disponible !')">Contact</a></li>
-        <li><a onclick="notify('FAQ bientôt disponible !')">FAQ</a></li>
-        <li><a onclick="notify('CGU bientôt disponible !')">CGU</a></li>
-        <li><a onclick="notify('Confidentialité bientôt disponible !')">Confidentialité</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2025 XENOVRA — Building The Future of Gaming · Non affilié à Epic Games ou Supercell</p>
-    <div class="footer-badges">
-      <span class="fbadge fbadge-s">🔒 SSL</span>
-      <span class="fbadge fbadge-s">✅ Sécurisé</span>
-      <span class="fbadge fbadge-s">⚡ Anti-triche</span>
-    </div>
-  </div>
-</footer>
+</main>
 
 <script>
-// ══════════════════════════════════════════════════════
-//  ⚙️  CONFIGURATION OAUTH — REMPLIS ICI TES CLÉS
-// ══════════════════════════════════════════════════════
-const OAUTH_CONFIG = {
-  // Discord OAuth2 :
-  // 1. Va sur https://discord.com/developers/applications
-  // 2. Crée une application → OAuth2 → Ajoute ton URL de redirect
-  // 3. Copie le Client ID ici
-  DISCORD_CLIENT_ID: 'TON_CLIENT_ID_DISCORD', // ← à remplacer
-  DISCORD_REDIRECT_URI: window.location.origin + window.location.pathname, // auto-détecté
-  DISCORD_SCOPE: 'identify email',
-
-  // Google OAuth2 :
-  // 1. Va sur https://console.cloud.google.com
-  // 2. APIs & Services → Identifiants → Créer un identifiant OAuth 2.0
-  // 3. Copie le Client ID ici
-  GOOGLE_CLIENT_ID: 'TON_CLIENT_ID_GOOGLE.apps.googleusercontent.com', // ← à remplacer
-  GOOGLE_REDIRECT_URI: window.location.origin + window.location.pathname, // auto-détecté
-};
-// ══════════════════════════════════════════════════════
+document.addEventListener("DOMContentLoaded", function() {
+try {
 
 // ─── CURSOR ───
-const cur = document.getElementById('cursor');
-const ring = document.getElementById('cursor-ring');
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
-function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)}
-animRing();
+(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing)})();
 
 // ─── CANVAS ───
-const canvas=document.getElementById('bg');
-const ctx=canvas.getContext('2d');
-let pts=[];
+const canvas=document.getElementById('bg'),ctx=canvas.getContext('2d');let pts=[];
 function resizeCv(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
-function makePts(){pts=[];const n=Math.min(60,Math.floor(window.innerWidth/18));for(let i=0;i<n;i++)pts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.2+.4,a:Math.random()*.4+.1,c:Math.random()>.5?'59,130,246':'124,58,237'})}
-function drawCv(){ctx.clearRect(0,0,canvas.width,canvas.height);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(${p.c},${p.a})`;ctx.fill()});pts.forEach((a,i)=>pts.slice(i+1).forEach(b=>{const d=Math.hypot(a.x-b.x,a.y-b.y);if(d<90){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(59,130,246,${.06*(1-d/90)})`;ctx.lineWidth=.5;ctx.stroke()}}));requestAnimationFrame(drawCv)}
+function makePts(){pts=[];const n=Math.min(55,Math.floor(window.innerWidth/20));for(let i=0;i<n;i++)pts.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,r:Math.random()*1.1+.3,a:Math.random()*.35+.08,c:Math.random()>.5?'59,130,246':'124,58,237'})}
+function drawCv(){ctx.clearRect(0,0,canvas.width,canvas.height);pts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=canvas.width;if(p.x>canvas.width)p.x=0;if(p.y<0)p.y=canvas.height;if(p.y>canvas.height)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(${p.c},${p.a})`;ctx.fill()});pts.forEach((a,i)=>pts.slice(i+1).forEach(b=>{const d=Math.hypot(a.x-b.x,a.y-b.y);if(d<85){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=`rgba(59,130,246,${.05*(1-d/85)})`;ctx.lineWidth=.4;ctx.stroke()}}));requestAnimationFrame(drawCv)}
 resizeCv();makePts();drawCv();
 window.addEventListener('resize',()=>{resizeCv();makePts()});
 
 // ─── LOADER ───
-const loaderMessages=['INITIALIZING SYSTEMS...','LOADING GAME DATA...','CONNECTING TO SERVERS...','CALIBRATING ANTI-CHEAT...','ENTERING THE ARENA...'];
-let lmi=0;
-const lmInterval=setInterval(()=>{lmi++;if(lmi<loaderMessages.length)document.getElementById('loaderCode').textContent=loaderMessages[lmi];},400);
-setTimeout(()=>{clearInterval(lmInterval);document.getElementById('loader').classList.add('hidden');initCounters();},2200);
+const msgs=['INITIALIZING SYSTEMS...','LOADING GAME DATA...','CONNECTING TO SERVERS...','CALIBRATING ANTI-CHEAT...','ENTERING THE ARENA...'];
+let mi=0;
+const miv=setInterval(()=>{mi++;if(mi<msgs.length)document.getElementById('loaderCode').textContent=msgs[mi];},420);
+setTimeout(()=>{clearInterval(miv);document.getElementById('loader').classList.add('hidden');},2200);
 
-// ─── NAVBAR ───
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>40));
-function toggleMenu(){
-  document.getElementById('navLinks').classList.toggle('open');
+// ─── GAME SELECTOR ───
+let currentGame='fn';
+let gameDropOpen=false;
+function toggleGameDrop(){
+  gameDropOpen=!gameDropOpen;
+  document.getElementById('gameDrop').classList.toggle('open',gameDropOpen);
+  document.getElementById('gameChevron').classList.toggle('open',gameDropOpen);
+}
+function selectGame(g){
+  currentGame=g;
+  gameDropOpen=false;
+  document.getElementById('gameDrop').classList.remove('open');
+  document.getElementById('gameChevron').classList.remove('open');
+  if(g==='fn'){
+    document.getElementById('gameIcon').textContent='⚡';
+    document.getElementById('gameIcon').className='sb-game-icon fn-bg';
+    document.getElementById('gameLabel').textContent='FN';
+    document.getElementById('opt-fn').classList.add('active');
+    document.getElementById('opt-cr').classList.remove('active');
+  } else {
+    document.getElementById('gameIcon').textContent='👑';
+    document.getElementById('gameIcon').className='sb-game-icon cr-bg';
+    document.getElementById('gameLabel').textContent='CR';
+    document.getElementById('opt-fn').classList.remove('active');
+    document.getElementById('opt-cr').classList.add('active');
+  }
+  // Update gamemode options based on game
+  updateGamemodeOptions();
+  if(document.getElementById('page-matches').classList.contains('active')) renderMatches();
 }
 
-// ─── PAGE SYSTEM ─── FIX : reset correct de la nav active
+function updateGamemodeOptions(){
+  const menu=document.getElementById('drop-gamemode');
+  const fnModes=['1V1 BOXFIGHT','1V1 REALISTIC','1V1 PIECE CONTROL','1V1 BUILD FIGHT','2V2 ZONE WARS','1V1 ZERO BUILD'];
+  const crModes=['1V1 DRAFT','1V1 MEGA DRAFT','1V1 MIRROR','1V1 TOUCHDOWN','2V2 TOUCHDOWN','1V1 BATTLE'];
+  const modes=currentGame==='fn'?fnModes:crModes;
+  const labels={
+    '1V1 BOXFIGHT':'⚔️ 1V1 Boxfight','1V1 REALISTIC':'🎯 1V1 Realistic',
+    '1V1 PIECE CONTROL':'🧱 Piece Control','1V1 BUILD FIGHT':'🏗️ Build Fight',
+    '2V2 ZONE WARS':'👥 2V2 Zone Wars','1V1 ZERO BUILD':'🌀 Zero Build',
+    '1V1 DRAFT':'🃏 Draft','1V1 MEGA DRAFT':'👑 Mega Draft',
+    '1V1 MIRROR':'🪞 Mirror','1V1 TOUCHDOWN':'🏈 Touchdown',
+    '2V2 TOUCHDOWN':'👥 2V2 Touchdown','1V1 BATTLE':'⚔️ Battle'
+  };
+  // Reset filter
+  activeFilters.gamemode='all';
+  document.getElementById('fdd-gamemode-label').textContent='Tous les modes';
+  menu.innerHTML=`<div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'gamemode','all','Tous les modes')">🎮 Tous les modes</div>`;
+  modes.forEach(m=>{
+    menu.innerHTML+=`<div class="dropdown-opt" data-val="${m}" onclick="selectFilter(event,'gamemode','${m}','${labels[m]||m}')">${labels[m]||m}</div>`;
+  });
+}
+
+// ─── DROPDOWN FILTERS ───
+let activeFilters={region:'all',platform:'all',gamemode:'all',fee:'asc'};
+
+function toggleDrop(id){
+  // Close all others
+  ['region','platform','gamemode','fee'].forEach(k=>{
+    if(k!==id){
+      const el=document.getElementById('drop-'+k);
+      if(el){el.style.display='none';}
+      document.getElementById('fdd-'+k).classList.remove('open');
+    }
+  });
+  const el=document.getElementById('drop-'+id);
+  const fdd=document.getElementById('fdd-'+id);
+  const isOpen=el.style.display==='block';
+  el.style.display=isOpen?'none':'block';
+  fdd.classList.toggle('open',!isOpen);
+}
+
+function selectFilter(e,key,val,label){
+  e.stopPropagation();
+  activeFilters[key]=val;
+  document.getElementById('fdd-'+key+'-label').textContent=label;
+  // Update selected state
+  const menu=document.getElementById('drop-'+key);
+  menu.querySelectorAll('.dropdown-opt').forEach(o=>{
+    o.classList.toggle('selected',o.dataset.val===val);
+  });
+  // Close dropdown
+  document.getElementById('drop-'+key).style.display='none';
+  document.getElementById('fdd-'+key).classList.remove('open');
+  // Mark active filter
+  document.getElementById('fdd-'+key).classList.toggle('active-filter',val!=='all');
+  if(key==='fee') document.getElementById('fdd-fee').classList.add('active-filter');
+  renderMatches();
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.fdd')){
+    ['region','platform','gamemode','fee'].forEach(k=>{
+      const el=document.getElementById('drop-'+k);
+      if(el) el.style.display='none';
+      const fdd=document.getElementById('fdd-'+k);
+      if(fdd) fdd.classList.remove('open');
+    });
+  }
+});
+
+// ─── PAGE SYSTEM ───
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  const page = document.getElementById('page-'+id);
-  if(page) page.classList.add('active');
-  // FIX : mise à jour correcte du lien actif dans la nav
-  document.querySelectorAll('.nav-links a').forEach(a=>{
-    a.classList.remove('active');
-    a.style.border = '';
-    if(a.dataset.page===id) a.classList.add('active');
-  });
-  // Fermer le menu mobile si ouvert
-  document.getElementById('navLinks').classList.remove('open');
+  const page=document.getElementById('page-'+id);
+  if(page)page.classList.add('active');
+  document.querySelectorAll('.sb-nav-item').forEach(i=>i.classList.remove('active'));
+  const navEl=document.getElementById('nav-'+id);
+  if(navEl)navEl.classList.add('active');
   window.scrollTo(0,0);
-  // FIX : observer après un court délai pour que le DOM soit prêt
-  setTimeout(()=>{
-    document.querySelectorAll('#page-'+id+' .fade-up').forEach(el=>observer.observe(el));
-  },50);
-  if(id==='leaderboard') renderLb('day');
-  if(id==='matches') renderMatches('fn');
-  if(id==='shop') renderShop('all');
-  if(id==='tournaments') renderTourneys();
+  if(id==='matches')renderMatches();
+  if(id==='leaderboard')renderLb('day');
+  if(id==='shop')renderShop('all');
+  if(id==='tournaments')renderTourneys();
 }
-
-// ─── OBSERVER ───
-const observer=new IntersectionObserver(entries=>entries.forEach(e=>{
-  if(e.isIntersecting){
-    e.target.classList.add('vis');
-    if(e.target.querySelector('[data-target]')) e.target.querySelectorAll('[data-target]').forEach(animCount);
-  }
-}),{threshold:.1});
-// FIX : init après le loader
-setTimeout(()=>document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el)),2300);
-
-// ─── COUNTERS ───
-function animCount(el){
-  const t=parseInt(el.dataset.target.replace(/,/g,''));
-  let c=0;
-  const s=t/(2000/16);
-  const iv=setInterval(()=>{c=Math.min(c+s,t);el.textContent=Math.floor(c).toLocaleString('fr-FR')+'+';if(c>=t)clearInterval(iv)},16);
-}
-function initCounters(){document.querySelectorAll('[data-target]').forEach(animCount)}
 
 // ─── MODAL ───
 function openModal(tab='login'){
   document.getElementById('authModal').classList.add('open');
-  // Activer le bon onglet selon le bouton cliqué
-  if(tab==='register'){
-    switchAuthTab('register', document.getElementById('tabRegister'));
-  } else {
-    switchAuthTab('login', document.getElementById('tabLogin'));
-  }
+  switchAuthTab(tab, document.getElementById(tab==='register'?'tabRegister':'tabLogin'));
 }
 function closeModal(){document.getElementById('authModal').classList.remove('open')}
-
-// FIX : switchAuthTab change aussi le formulaire selon l'onglet
-let currentAuthTab = 'login';
-function switchAuthTab(tab, btn){
-  currentAuthTab = tab;
+let currentAuthTab='login';
+function switchAuthTab(tab,btn){
+  currentAuthTab=tab;
   document.querySelectorAll('.modal-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
-  const usernameGroup = document.getElementById('usernameGroup');
-  const submitBtn = document.getElementById('submitBtn');
-  if(tab==='register'){
-    usernameGroup.style.display='block';
-    submitBtn.textContent = 'Créer mon compte →';
-  } else {
-    usernameGroup.style.display='none';
-    submitBtn.textContent = 'Se connecter →';
-  }
+  document.getElementById('usernameGroup').style.display=tab==='register'?'block':'none';
+  document.getElementById('submitBtn').textContent=tab==='register'?'Créer mon compte →':'Se connecter →';
 }
-
-// FIX : connexion email/mdp (simulation — à connecter à ton backend)
 function handleEmailAuth(){
-  const email = document.getElementById('emailInput').value.trim();
-  const pass = document.getElementById('passInput').value.trim();
-  if(!email || !pass){
-    notify('Remplis tous les champs !','⚠️');
-    return;
-  }
-  // Ici tu peux appeler ton API backend
-  // fetch('/api/login', { method: 'POST', body: JSON.stringify({email, pass}) })
+  const email=document.getElementById('emailInput').value.trim();
+  const pass=document.getElementById('passInput').value.trim();
+  if(!email||!pass){notify('Remplis tous les champs !','⚠️');return;}
   closeModal();
-  notify(currentAuthTab==='register' ? 'Compte créé ! Bienvenue sur XENOVRA 🎮' : 'Connexion réussie ! Bienvenue sur XENOVRA 🎮');
+  notify(currentAuthTab==='register'?'Compte créé ! Bienvenue 🎮':'Connexion réussie ! Bienvenue 🎮');
 }
-
-// ══════════════════════════════════════════════════════
-// ✅ FIX PRINCIPAL : Connexion Discord — vraie redirection OAuth
-// ══════════════════════════════════════════════════════
-function loginWithDiscord(){
-  // Vérifie que le Client ID est configuré
-  if(OAUTH_CONFIG.DISCORD_CLIENT_ID === 'TON_CLIENT_ID_DISCORD'){
-    notify('Configure ton Discord Client ID dans le script !','⚙️');
-    return;
-  }
-  // Construction de l'URL OAuth Discord officielle
-  const params = new URLSearchParams({
-    client_id: OAUTH_CONFIG.DISCORD_CLIENT_ID,
-    redirect_uri: OAUTH_CONFIG.DISCORD_REDIRECT_URI,
-    response_type: 'token',
-    scope: OAUTH_CONFIG.DISCORD_SCOPE,
-  });
-  // Redirection réelle vers Discord
-  window.location.href = `https://discord.com/api/oauth2/authorize?${params.toString()}`;
-}
-
-// ══════════════════════════════════════════════════════
-// ✅ FIX PRINCIPAL : Connexion Google — vraie redirection OAuth
-// ══════════════════════════════════════════════════════
-function loginWithGoogle(){
-  // Vérifie que le Client ID est configuré
-  if(OAUTH_CONFIG.GOOGLE_CLIENT_ID === 'TON_CLIENT_ID_GOOGLE.apps.googleusercontent.com'){
-    notify('Configure ton Google Client ID dans le script !','⚙️');
-    return;
-  }
-  // Construction de l'URL OAuth Google officielle
-  const params = new URLSearchParams({
-    client_id: OAUTH_CONFIG.GOOGLE_CLIENT_ID,
-    redirect_uri: OAUTH_CONFIG.GOOGLE_REDIRECT_URI,
-    response_type: 'token',
-    scope: 'openid email profile',
-    include_granted_scopes: 'true',
-  });
-  // Redirection réelle vers Google
-  window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
-}
-
-// Fermer le modal en cliquant dehors
-document.getElementById('authModal').addEventListener('click',e=>{
-  if(e.target===document.getElementById('authModal')) closeModal();
-});
+document.getElementById('authModal').addEventListener('click',e=>{if(e.target===document.getElementById('authModal'))closeModal()});
 
 // ─── NOTIFY ───
 function notify(msg,icon='✅'){
   document.getElementById('notifText').textContent=msg;
   document.getElementById('notifIcon').textContent=icon;
   const n=document.getElementById('notif');
+  n.style.borderColor=icon==='❌'?'rgba(239,68,68,.3)':icon==='⚠️'?'rgba(245,158,11,.3)':'rgba(16,185,129,.3)';
   n.classList.add('show');
-  setTimeout(()=>n.classList.remove('show'),3500);
+  setTimeout(()=>n.classList.remove('show'),3200);
 }
 
-// ─── DATA ───
-const fnModes=[{icon:'🥊',name:'Boxfight',players:'1v1 · 2v2 · 3v3 · 4v4'},{icon:'🌀',name:'Zone Wars',players:'1v1 · 2v2 · 4v4'},{icon:'🏗️',name:'Build Fight',players:'1v1 · 2v2'},{icon:'🎯',name:'Realistic',players:'1v1 · 2v2 · 3v3'},{icon:'🧩',name:'Piece Control',players:'1v1'},{icon:'🚫',name:'Zero Build',players:'1v1 · 2v2 · 4v4'}];
-const crModes=[{icon:'⚔️',name:'Battle',players:'1v1'},{icon:'🔄',name:'Duel',players:'1v1'},{icon:'📋',name:'Draft',players:'1v1'},{icon:'🌟',name:'Mega Draft',players:'1v1'},{icon:'3️⃣',name:'Triple Draft',players:'1v1'},{icon:'🪞',name:'Mirror',players:'1v1'},{icon:'🏈',name:'Touchdown',players:'1v1 · 2v2'},{icon:'⚡',name:'x7 Elixir',players:'1v1'},{icon:'👥',name:'2v2 Touchdown',players:'2v2'}];
-const openMatchesData=[
-  {id:1,game:'fn',icon:'⚡',gameName:'Fortnite',mode:'Boxfight 1v1',p1:{name:'NovaBeast',color:'#3b82f6'},p2:null,bet:500,status:'open'},
-  {id:2,game:'cr',icon:'👑',gameName:'Clash Royale',mode:'Draft 1v1',p1:{name:'CRKingdom',color:'#7c3aed'},p2:{name:'RoyalCrush',color:'#a78bfa'},bet:1200,status:'live'},
-  {id:3,game:'fn',icon:'⚡',gameName:'Fortnite',mode:'Zone Wars 2v2',p1:{name:'ProBuilderX',color:'#06b6d4'},p2:null,bet:800,status:'open'},
-  {id:4,game:'cr',icon:'👑',gameName:'Clash Royale',mode:'Mega Draft 1v1',p1:{name:'GoblinQueen',color:'#10b981'},p2:null,bet:350,status:'open'},
-  {id:5,game:'fn',icon:'⚡',gameName:'Fortnite',mode:'Realistic 3v3',p1:{name:'TeamAlpha',color:'#f59e0b'},p2:{name:'TeamBeta',color:'#ef4444'},bet:2000,status:'live'},
-  {id:6,game:'fn',icon:'⚡',gameName:'Fortnite',mode:'Zero Build 1v1',p1:{name:'StealthFN',color:'#8b5cf6'},p2:null,bet:600,status:'open'},
-];
-const lbData={
-  day:[{name:'XenoProFN',tag:'#1024',coins:8450,wins:12,ratio:92,color:'#3b82f6'},{name:'CRMaster99',tag:'#0887',coins:6200,wins:9,ratio:88,color:'#7c3aed'},{name:'ZeroGravity',tag:'#3341',coins:5800,wins:11,ratio:85,color:'#06b6d4'},{name:'NovaBeast',tag:'#7712',coins:4900,wins:8,ratio:80,color:'#10b981'},{name:'RoyalCrush',tag:'#5521',coins:3700,wins:7,ratio:77,color:'#f59e0b'},{name:'StealthFN',tag:'#9904',coins:3200,wins:6,ratio:75,color:'#8b5cf6'},{name:'GoblinKing',tag:'#4413',coins:2800,wins:5,ratio:71,color:'#ef4444'},{name:'ProBuilderX',tag:'#2267',coins:2400,wins:4,ratio:68,color:'#ec4899'}],
-  week:[{name:'CRMaster99',tag:'#0887',coins:42000,wins:67,ratio:91,color:'#7c3aed'},{name:'XenoProFN',tag:'#1024',coins:38500,wins:58,ratio:88,color:'#3b82f6'},{name:'NovaBeast',tag:'#7712',coins:31000,wins:49,ratio:84,color:'#10b981'},{name:'ZeroGravity',tag:'#3341',coins:27500,wins:44,ratio:82,color:'#06b6d4'},{name:'RoyalCrush',tag:'#5521',coins:24000,wins:40,ratio:79,color:'#f59e0b'},{name:'StealthFN',tag:'#9904',coins:21000,wins:36,ratio:76,color:'#8b5cf6'},{name:'GoblinKing',tag:'#4413',coins:18500,wins:31,ratio:73,color:'#ef4444'},{name:'ProBuilderX',tag:'#2267',coins:15000,wins:25,ratio:70,color:'#ec4899'}],
-  month:[{name:'ZeroGravity',tag:'#3341',coins:180000,wins:280,ratio:90,color:'#06b6d4'},{name:'XenoProFN',tag:'#1024',coins:165000,wins:255,ratio:87,color:'#3b82f6'},{name:'CRMaster99',tag:'#0887',coins:154000,wins:240,ratio:86,color:'#7c3aed'},{name:'NovaBeast',tag:'#7712',coins:142000,wins:220,ratio:83,color:'#10b981'},{name:'StealthFN',tag:'#9904',coins:128000,wins:198,ratio:80,color:'#8b5cf6'},{name:'RoyalCrush',tag:'#5521',coins:115000,wins:178,ratio:77,color:'#f59e0b'},{name:'ProBuilderX',tag:'#2267',coins:98000,wins:152,ratio:74,color:'#ec4899'},{name:'GoblinKing',tag:'#4413',coins:87000,wins:134,ratio:71,color:'#ef4444'}]
-};
-const shopItems=[
-  {cat:'avatar',icon:'🦊',name:'Fox Elite Avatar',desc:'Avatar renard futuriste exclusif',price:800,rarity:'epic',rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'ÉPIQUE'},
-  {cat:'titre',icon:'⚡',name:'Titre "Thunder God"',desc:'Affiche ton titre légendaire en jeu',price:1200,rarity:'legendary',rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LÉGENDAIRE'},
-  {cat:'badge',icon:'🏅',name:'Badge Fortnite Pro',desc:'Badge exclusif joueurs Fortnite vétérans',price:600,rarity:'rare',rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {cat:'effet',icon:'✨',name:'Effet Particules Néon',desc:'Aura de particules violettes sur ton profil',price:1500,rarity:'legendary',rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LÉGENDAIRE'},
-  {cat:'cadre',icon:'🖼',name:'Cadre Cyber Blue',desc:'Cadre de profil holographique bleu',price:400,rarity:'rare',rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {cat:'avatar',icon:'🐺',name:'Wolf Alpha Avatar',desc:'Avatar loup alpha dominateur',price:500,rarity:'rare',rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {cat:'titre',icon:'👑',name:'Titre "Clash King"',desc:'Titre prestige pour les maîtres CR',price:1000,rarity:'epic',rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'ÉPIQUE'},
-  {cat:'badge',icon:'🛡️',name:'Badge Fair Play',desc:'Récompense les joueurs respectueux',price:200,rarity:'common',rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
-  {cat:'effet',icon:'🌊',name:'Effet Vague Cyan',desc:'Ondulation cyan autour de ton avatar',price:900,rarity:'epic',rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'ÉPIQUE'},
-  {cat:'cadre',icon:'🔥',name:'Cadre Inferno',desc:'Cadre enflammé pour les warriors',price:700,rarity:'epic',rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'ÉPIQUE'},
-  {cat:'avatar',icon:'🤖',name:'Xeno Bot Avatar',desc:'Avatar robot exclusif XENOVRA',price:300,rarity:'common',rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
-  {cat:'badge',icon:'⭐',name:'Badge Top 100',desc:'Pour les joueurs classés Top 100',price:1800,rarity:'legendary',rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LÉGENDAIRE'},
-];
-const tourneyData=[
-  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',status:'open',statusClass:'tc-open',statusText:'INSCRIPTIONS',name:'XENOVRA Fortnite Cup #8',mode:'Zero Build 1v1',prize:'25 000 XC',players:'64/128',date:'15 Jan 2025',btnClass:'tc-join-open',btnText:"S'inscrire →"},
-  {game:'cr',banner:'tc-banner-cr',emoji:'👑',status:'open',statusClass:'tc-open',statusText:'INSCRIPTIONS',name:'Clash Royale Grand Prix',mode:'Draft 1v1',prize:'18 000 XC',players:'32/64',date:'18 Jan 2025',btnClass:'tc-join-open',btnText:"S'inscrire →"},
-  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',status:'soon',statusClass:'tc-soon',statusText:'BIENTÔT',name:'Fortnite Boxfight Elite',mode:'Boxfight 2v2',prize:'40 000 XC',players:'0/32',date:'22 Jan 2025',btnClass:'tc-join-soon',btnText:'Rappel →'},
-  {game:'cr',banner:'tc-banner-cr',emoji:'👑',status:'open',statusClass:'tc-open',statusText:'INSCRIPTIONS',name:'CR Mega Draft Masters',mode:'Mega Draft',prize:'12 000 XC',players:'18/32',date:'20 Jan 2025',btnClass:'tc-join-open',btnText:"S'inscrire →"},
-  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',status:'ended',statusClass:'tc-ended',statusText:'TERMINÉ',name:'XENOVRA Fortnite Cup #7',mode:'Zone Wars 1v1',prize:'20 000 XC',players:'128/128',date:'8 Jan 2025',btnClass:'tc-join-ended',btnText:'Voir résultats'},
-  {game:'cr',banner:'tc-banner-cr',emoji:'👑',status:'soon',statusClass:'tc-soon',statusText:'BIENTÔT',name:'CR 2v2 Touchdown Cup',mode:'2v2 Touchdown',prize:'30 000 XC',players:'0/16',date:'28 Jan 2025',btnClass:'tc-join-soon',btnText:'Rappel →'},
-];
-const liveMatchesPreview=[
-  {icon:'⚡',iconClass:'fn-icon',game:'Fortnite · Boxfight 1v1',bet:500,p1:'XenoPro',p2:'GhostFN'},
-  {icon:'👑',iconClass:'cr-icon-bg',game:'Clash Royale · Draft',bet:1200,p1:'CRMaster',p2:'RoyalX'},
-  {icon:'⚡',iconClass:'fn-icon',game:'Fortnite · Zone Wars 2v2',bet:800,p1:'TeamA',p2:'TeamB'},
-];
+// ─── MATCH DATA — Vide au départ ───
+const fnMatches=[];
+const crMatches=[];
 
-// ─── RENDER FUNCTIONS ───
-function renderLiveMatchesPreview(){
-  document.getElementById('liveMatchesList').innerHTML=liveMatchesPreview.map(m=>`
-    <div class="match-item">
-      <div class="match-game-icon ${m.iconClass}">${m.icon}</div>
-      <div class="match-info">
-        <div class="match-name">${m.p1} vs ${m.p2}</div>
-        <div class="match-meta">${m.game}</div>
-      </div>
-      <div class="match-bet">
-        <div class="match-bet-amount">⚡${m.bet}</div>
-        <div class="match-bet-label">XCoins</div>
-        <div class="match-status-live"><span style="width:5px;height:5px;background:var(--green);border-radius:50%;display:inline-block;animation:pulse 1.5s infinite"></span> LIVE</div>
-      </div>
-    </div>
-  `).join('');
-}
-
-let currentGame='fn';
-function switchGame(g,btn){
-  currentGame=g;
-  document.querySelectorAll('.gtab').forEach(b=>b.classList.remove('active'));
+let matchTab='available';
+function switchMatchTab(tab,btn){
+  matchTab=tab;
+  document.querySelectorAll('.filter-tab').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  renderMatches(g);
+  renderMatches();
 }
 
-// FIX : accolade fermante manquante sur renderMatches corrigée
-function renderMatches(g){
-  const modes=g==='fn'?fnModes:crModes;
-  document.getElementById('modesGrid').innerHTML=modes.map(m=>`
-    <div class="mode-card ${g}-mode" onclick="notify('Mode ${m.name} sélectionné !')">
-      <span class="mode-icon">${m.icon}</span>
-      <div class="mode-name">${m.name}</div>
-      <div class="mode-players">${m.players}</div>
-    </div>
-  `).join('');
-  const filtered=openMatchesData.filter(m=>g==='fn'?m.game==='fn':m.game==='cr');
-  document.getElementById('openMatches').innerHTML=filtered.map(m=>`
-    <div class="open-match-card">
-      <div class="omc-top">
-        <div class="omc-game">
-          <div class="omc-game-icon ${m.game==='fn'?'fn-icon':'cr-icon-bg'}">${m.icon}</div>
-          <div>
-            <div class="omc-game-name">${m.gameName}</div>
-            <div class="omc-game-mode">${m.mode}</div>
+const timers={};
+
+function renderMatches(){
+  let data=currentGame==='fn'?[...fnMatches]:[...crMatches];
+  
+  // Filter by status
+  let filtered=data.filter(m=>matchTab==='available'?m.status==='available':m.status==='ongoing');
+  
+  // Apply filters
+  if(activeFilters.region!=='all') filtered=filtered.filter(m=>m.region===activeFilters.region);
+  if(activeFilters.platform!=='all') filtered=filtered.filter(m=>!m.platform||m.platform===activeFilters.platform);
+  if(activeFilters.gamemode!=='all') filtered=filtered.filter(m=>m.mode.includes(activeFilters.gamemode)||m.mode===activeFilters.gamemode);
+  
+  // Sort by fee
+  if(activeFilters.fee==='asc') filtered.sort((a,b)=>a.entryFee-b.entryFee);
+  else if(activeFilters.fee==='desc') filtered.sort((a,b)=>b.entryFee-a.entryFee);
+  else if(activeFilters.fee==='prize') filtered.sort((a,b)=>b.prize-a.prize);
+
+  // Update counts
+  document.getElementById('count-available').textContent=data.filter(m=>m.status==='available').length;
+  document.getElementById('count-ongoing').textContent=data.filter(m=>m.status==='ongoing').length;
+
+  if(filtered.length===0){
+    document.getElementById('matchesGrid').innerHTML=`
+      <div class="empty-state" style="grid-column:1/-1">
+        <div class="empty-icon">⚔️</div>
+        <div class="empty-title">Aucun match disponible</div>
+        <div class="empty-sub">Aucun match n'est disponible pour le moment. Sois le premier à en créer un ou reviens plus tard !</div>
+      </div>`;
+    return;
+  }
+
+  document.getElementById('matchesGrid').innerHTML=filtered.map(m=>`
+    <div class="match-card" id="mc-${m.id}">
+      <div class="mc-top">
+        <div>
+          <div class="mc-mode-title">
+            ${m.mode}
+            ${m.noEdit?'<span class="mc-tag tag-noedit" style="font-size:.58rem;vertical-align:middle;margin-left:6px">NO SIMPLE EDIT</span>':''}
+          </div>
+          <div class="mc-tags">
+            <span class="mc-tag tag-region">${m.region}</span>
+            <span class="mc-tag tag-loadout">${m.loadout}</span>
           </div>
         </div>
-        <div class="omc-status ${m.status==='live'?'status-live':'status-open'}">${m.status==='live'?'🔴 LIVE':'🟢 OUVERT'}</div>
+        <div class="mc-icons">
+          <div class="mc-game-dot ${currentGame==='fn'?'fn-bg':'cr-bg'}">${currentGame==='fn'?'⚡':'👑'}</div>
+        </div>
       </div>
-      <div class="omc-players">
-        <div class="player-avatar" style="background:linear-gradient(135deg,${m.p1.color}44,${m.p1.color}22);color:${m.p1.color}">${m.p1.name[0]}</div>
-        <span style="font-size:.82rem;color:#fff;font-weight:600">${m.p1.name}</span>
-        ${m.p2
-          ? `<span class="vs-label">VS</span><div class="player-avatar" style="background:linear-gradient(135deg,${m.p2.color}44,${m.p2.color}22);color:${m.p2.color}">${m.p2.name[0]}</div><span style="font-size:.82rem;color:#fff;font-weight:600">${m.p2.name}</span>`
-          : '<span class="vs-label">VS</span><div class="player-avatar" style="background:rgba(255,255,255,.05);border:1px dashed rgba(255,255,255,.2);color:var(--muted2)">?</div><span style="font-size:.78rem;color:var(--muted2)">En attente...</span>'
-        }
+      <div class="mc-info-row">
+        <div class="mc-info-item">
+          <div class="mc-info-label">First To</div>
+          <div class="mc-info-val"><span class="mc-flag">🏁</span> ${m.firstTo}</div>
+        </div>
+        <div class="mc-info-item">
+          <div class="mc-info-label">Expires In</div>
+          <div class="mc-info-val">
+            <span class="mc-timer-val" id="timer-${m.id}">${formatTime(m.expiresIn)}</span>
+          </div>
+          <div class="mc-timer-bar"><div class="mc-timer-fill" id="tbar-${m.id}" style="width:${Math.min(100,(m.expiresIn/3600)*100)}%"></div></div>
+        </div>
       </div>
-      <div class="omc-bet"><span>Mise</span><span class="omc-bet-amount">⚡ ${m.bet.toLocaleString('fr-FR')} XC</span></div>
-      <button class="join-btn" onclick="joinMatch(${m.id})">${m.status==='live'?'👁️ Spectateur':'⚔️ Rejoindre'}</button>
+      <div class="mc-fee-row">
+        <div class="mc-fee-item">
+          <div class="mc-fee-label">Entry Fee</div>
+          <div class="mc-fee-amount"><span class="fee-coin">🪙</span> <span style="color:#fff">${m.entryFee.toFixed(2)}</span></div>
+        </div>
+        <div class="mc-arrow">→</div>
+        <div class="mc-fee-item" style="text-align:right">
+          <div class="mc-fee-label">Prize</div>
+          <div class="mc-fee-amount" style="justify-content:flex-end"><span class="prize-amount">👑 ${m.prize.toFixed(2)}</span></div>
+        </div>
+      </div>
+      <button class="mc-join-btn ${m.status==='ongoing'?'spectate':''}" onclick="joinMatch(${m.id},${m.locked||false})">
+        ${m.locked?'<span>🔒</span> ':''}${m.status==='ongoing'?'👁️ Spectateur':'JOIN MATCH'}
+      </button>
     </div>
   `).join('');
+
+  filtered.forEach(m=>startTimer(m));
 }
 
-function joinMatch(id){notify(`Match #${id} rejoint ! Bon courage ⚔️`,'⚔️')}
-function showCreateMatch(){notify('Création de match bientôt disponible !','🔨')}
+function formatTime(seconds){
+  var mm=Math.floor(seconds/60),ss=seconds%60;
+  return (mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss;
+}
+function startTimer(m){
+  if(timers[m.id])clearInterval(timers[m.id]);
+  let sec=m.expiresIn;
+  timers[m.id]=setInterval(()=>{
+    sec--;if(sec<=0){clearInterval(timers[m.id]);sec=0;}
+    const el=document.getElementById('timer-'+m.id);
+    const bar=document.getElementById('tbar-'+m.id);
+    if(el)el.textContent=formatTime(sec);
+    if(bar)bar.style.width=Math.max(0,(sec/m.expiresIn)*100)+'%';
+  },1000);
+}
+function joinMatch(id,locked){
+  if(locked)notify('Match privé — tu as besoin d\'un code d\'accès !','🔒');
+  else notify(`Match #${id} rejoint ! Bon courage ⚔️`,'⚔️');
+}
 
-// FIX : accolade fermante manquante sur renderLb corrigée
+// ─── LEADERBOARD — Vide ───
 function renderLb(period){
-  const data=lbData[period];
-  const ranks=['gold','silver','bronze'];
-  const icons=['🥇','🥈','🥉'];
-  document.getElementById('lbRows').innerHTML=data.map((p,i)=>`
-    <div class="lb-row ${i<3?'top'+(i+1):''}">
-      <div class="lb-rank ${i<3?ranks[i]:'normal'}">${i<3?icons[i]:i+1}</div>
-      <div class="lb-player">
-        <div class="lb-avatar" style="background:linear-gradient(135deg,${p.color}44,${p.color}22);color:${p.color};border:1px solid ${p.color}33">${p.name[0]}</div>
-        <div><div class="lb-pname">${p.name}</div><div class="lb-ptag">${p.tag}</div></div>
-      </div>
-      <div class="lb-coins">⚡ ${p.coins.toLocaleString('fr-FR')}</div>
-      <div class="lb-wins">${p.wins}W</div>
-      <div class="lb-ratio">${p.ratio}%</div>
-    </div>
-  `).join('');
+  document.getElementById('lbRows').innerHTML=`
+    <div class="empty-state">
+      <div class="empty-icon">📊</div>
+      <div class="empty-title">Classement vide</div>
+      <div class="empty-sub">Aucune partie jouée pour l'instant. Le classement se remplira au fur et à mesure des matchs !</div>
+    </div>`;
 }
-
 function switchLb(p,btn){
   document.querySelectorAll('.lb-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
   renderLb(p);
 }
 
-let currentShopFilter='all';
+// ─── SHOP ───
+const shopItems=[
+  {cat:'avatar',icon:'🦊',name:'Fox Elite Avatar',desc:'Avatar renard futuriste exclusif',price:800,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'ÉPIQUE'},
+  {cat:'titre',icon:'⚡',name:'Titre "Thunder God"',desc:'Affiche ton titre légendaire en jeu',price:1200,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LÉGENDAIRE'},
+  {cat:'badge',icon:'🏅',name:'Badge Fortnite Pro',desc:'Badge exclusif joueurs Fortnite vétérans',price:600,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
+  {cat:'effet',icon:'✨',name:'Effet Particules Néon',desc:'Aura de particules violettes sur ton profil',price:1500,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LÉGENDAIRE'},
+  {cat:'cadre',icon:'🖼',name:'Cadre Cyber Blue',desc:'Cadre de profil holographique bleu',price:400,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
+  {cat:'avatar',icon:'🐺',name:'Wolf Alpha Avatar',desc:'Avatar loup alpha dominateur',price:500,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
+  {cat:'titre',icon:'👑',name:'Titre "Clash King"',desc:'Titre prestige pour les maîtres CR',price:1000,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'ÉPIQUE'},
+  {cat:'badge',icon:'🛡️',name:'Badge Fair Play',desc:'Récompense les joueurs respectueux',price:200,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
+  {cat:'effet',icon:'🌊',name:'Effet Vague Cyan',desc:'Ondulation cyan autour de ton avatar',price:900,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'ÉPIQUE'},
+  {cat:'cadre',icon:'🔥',name:'Cadre Inferno',desc:'Cadre enflammé pour les warriors',price:700,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'ÉPIQUE'},
+  {cat:'avatar',icon:'🤖',name:'Xeno Bot Avatar',desc:'Avatar robot exclusif XENOVRA',price:300,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
+  {cat:'badge',icon:'⭐',name:'Badge Top 100',desc:'Pour les joueurs classés Top 100',price:1800,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LÉGENDAIRE'},
+];
 function filterShop(f,btn){
-  currentShopFilter=f;
   document.querySelectorAll('.shop-cat').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderShop(f);
 }
-
-// FIX : accolade fermante manquante sur renderShop corrigée
 function renderShop(f){
   const items=f==='all'?shopItems:shopItems.filter(i=>i.cat===f);
   document.getElementById('shopGrid').innerHTML=items.map(i=>`
@@ -1041,24 +1035,27 @@ function renderShop(f){
         <div class="shop-item-name">${i.name}</div>
         <div class="shop-item-desc">${i.desc}</div>
         <div class="shop-item-footer">
-          <div class="shop-price">⚡ ${i.price.toLocaleString('fr-FR')} XC</div>
+          <div class="shop-price">⚡ ${i.price.toLocaleString('fr-FR')} XP</div>
           <button class="shop-buy-btn" onclick="buyItem('${i.name}',${i.price})">Acheter</button>
         </div>
       </div>
     </div>
   `).join('');
 }
-
 function buyItem(name,price){
-  const coins=parseInt(document.getElementById('navCoins').textContent.replace(/\s/g,'').replace(/\u00a0/g,''));
-  if(coins>=price){
-    document.getElementById('navCoins').textContent=(coins-price).toLocaleString('fr-FR');
-    notify(`"${name}" acheté ! ✨`,'🛍️');
-  } else {
-    notify(`XCoins insuffisants ! Il te manque ${(price-coins).toLocaleString('fr-FR')} XC`,'❌');
-  }
+  const el=document.getElementById('navXP');
+  const xp=parseInt(el.textContent.replace(/[\s\u00a0]/g,''));
+  if(xp>=price){el.textContent=(xp-price).toLocaleString('fr-FR');notify(`"${name}" acheté ! ✨`,'🛍️');}
+  else notify(`XP insuffisants ! Il manque ${(price-xp).toLocaleString('fr-FR')} XP`,'❌');
 }
 
+// ─── TOURNAMENTS — Uniquement "À VENIR" ───
+const tourneyData=[
+  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTÔT',name:'XENOVRA Fortnite Cup #1',mode:'1V1 Boxfight',prize:'10 000 XP',players:'0/64',date:'À définir',btnClass:'tc-join-soon',btnText:'Rappel →'},
+  {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTÔT',name:'Clash Royale Grand Prix #1',mode:'1V1 Draft',prize:'8 000 XP',players:'0/32',date:'À définir',btnClass:'tc-join-soon',btnText:'Rappel →'},
+  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTÔT',name:'Fortnite Zero Build Cup',mode:'1V1 Zero Build',prize:'15 000 XP',players:'0/128',date:'À définir',btnClass:'tc-join-soon',btnText:'Rappel →'},
+  {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTÔT',name:'CR Mega Draft Masters #1',mode:'Mega Draft 1v1',prize:'12 000 XP',players:'0/32',date:'À définir',btnClass:'tc-join-soon',btnText:'Rappel →'},
+];
 function renderTourneys(){
   document.getElementById('tourneyGrid').innerHTML=tourneyData.map(t=>`
     <div class="tourney-card">
@@ -1080,11 +1077,14 @@ function renderTourneys(){
     </div>
   `).join('');
 }
-
-function joinTourney(name){notify(`Inscription à "${name}" confirmée 🏆`,'🏆')}
+function joinTourney(name){notify(`Rappel activé pour "${name}" 🔔`,'🔔')}
 
 // ─── INIT ───
-renderLiveMatchesPreview();
+showPage('matches');
+
+} catch(e){ console.error("XENOVRA init error:", e); }
+});
 </script>
+
 </body>
 </html>
