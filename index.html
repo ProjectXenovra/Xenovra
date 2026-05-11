@@ -121,7 +121,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .btn-create{display:flex;align-items:center;gap:7px;padding:9px 20px;border-radius:8px;border:none;background:linear-gradient(135deg,var(--gold),#d97706);color:#000;font-family:'Exo 2',sans-serif;font-size:.8rem;font-weight:800;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .btn-create:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(245,158,11,.3)}
 
-/* Filter bar */
 .filter-bar{display:flex;align-items:center;gap:10px;margin-bottom:22px;flex-wrap:wrap}
 .filter-tabs{display:flex;gap:0;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:8px;overflow:hidden}
 .filter-tab{padding:7px 18px;font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;color:var(--muted2);cursor:pointer;transition:all .25s;border:none;background:transparent;letter-spacing:.3px;position:relative}
@@ -145,18 +144,14 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .dropdown-opt:hover{color:#fff;background:rgba(59,130,246,.1)}
 .dropdown-opt.selected{color:var(--blue2);background:rgba(59,130,246,.08)}
 .dropdown-opt .opt-dot{width:7px;height:7px;border-radius:50%}
-
-/* Dropdown category header */
 .dropdown-cat-header{padding:6px 14px 4px;font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-family:'Share Tech Mono',monospace;border-top:1px solid rgba(255,255,255,.06);margin-top:2px}
 .dropdown-cat-header:first-child{border-top:none;margin-top:0}
 
-/* Empty state */
 .empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;text-align:center;gap:16px}
 .empty-icon{font-size:3rem;opacity:.4}
 .empty-title{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:700;color:var(--muted2);letter-spacing:1px}
 .empty-sub{font-size:.82rem;color:var(--muted);max-width:320px;line-height:1.7}
 
-/* Match cards */
 .matches-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
 .match-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px;transition:all .35s;cursor:default;position:relative;overflow:hidden}
 .match-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,.04),transparent 60%);opacity:0;transition:opacity .3s}
@@ -236,7 +231,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .shop-item-name{font-family:'Orbitron',sans-serif;font-size:.78rem;font-weight:700;color:#fff;margin-bottom:3px}
 .shop-item-desc{font-size:.72rem;color:var(--muted2);margin-bottom:12px;line-height:1.5}
 .shop-item-footer{display:flex;align-items:center;justify-content:space-between}
-.shop-price{display:flex;align-items:center;gap:3px;font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--violet3);font-weight:700}
+.shop-price{display:flex;align-items:center;gap:3px;font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--gold);font-weight:700}
 .shop-buy-btn{padding:6px 12px;border:none;border-radius:5px;background:linear-gradient(135deg,var(--violet),var(--blue));color:#fff;font-family:'Exo 2',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .shop-buy-btn:hover{transform:scale(1.05);box-shadow:var(--glow-v)}
 
@@ -373,7 +368,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 <div id="cursor-ring"></div>
 <canvas id="bg"></canvas>
 
-<!-- LOADER -->
 <div id="loader">
   <svg class="loader-x" viewBox="0 0 80 80" fill="none">
     <path d="M10 10 L38 38 L10 70" stroke="url(#lb1)" stroke-width="6" stroke-linecap="round"/>
@@ -391,10 +385,8 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   <div class="loader-code" id="loaderCode">INITIALIZING SYSTEMS...</div>
 </div>
 
-<!-- NOTIF -->
 <div class="notif" id="notif"><span id="notifIcon">✅</span><span class="notif-text" id="notifText">Action effectuée !</span></div>
 
-<!-- AUTH MODAL -->
 <div class="modal-overlay" id="authModal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
@@ -421,7 +413,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   </div>
 </div>
 
-<!-- SIDEBAR -->
 <aside id="sidebar">
   <div class="sb-logo" onclick="showPage('home')">
     <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
@@ -506,7 +497,8 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   </div>
   <div class="tb-center">
     <div class="tb-currency">🪙 <span id="tokenDisplay">0.00</span></div>
-    <div class="tb-xp">⚡ <span id="navXP">0</span> XP</div>
+    <!-- 🎯 replaces ⚡, "XP" label removed -->
+    <div class="tb-xp">🎯 <span id="navXP">0</span></div>
   </div>
   <div class="tb-right">
     <div class="tb-rank-badge">⭐ NIVEAU 1</div>
@@ -518,7 +510,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   </div>
 </header>
 
-<!-- MAIN -->
 <main id="main">
 
   <!-- HOME -->
@@ -565,8 +556,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
         </button>
       </div>
       <div class="filter-dropdowns" id="filterDropdowns">
-
-        <!-- Region -->
         <div class="fdd" id="fdd-region" onclick="toggleDrop(event,'region')">
           <span class="fdd-dot eu"></span>
           <span id="fdd-region-label">Toutes régions</span>
@@ -577,8 +566,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
             <div class="dropdown-opt" data-val="NA" onclick="selectFilter(event,'region','NA','NA')"><span class="opt-dot" style="background:#10b981"></span> NA</div>
           </div>
         </div>
-
-        <!-- Platform — UPDATED -->
         <div class="fdd" id="fdd-platform" onclick="toggleDrop(event,'platform')">
           <span class="fdd-dot pc"></span>
           <span id="fdd-platform-label">Toutes plateformes</span>
@@ -590,14 +577,11 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
             <div class="dropdown-opt" data-val="ALL" onclick="selectFilter(event,'platform','ALL','ALL')"><span class="opt-dot" style="background:#22d3ee"></span> ALL</div>
           </div>
         </div>
-
-        <!-- Gamemode — UPDATED with categories -->
         <div class="fdd" id="fdd-gamemode" onclick="toggleDrop(event,'gamemode')">
           <span id="fdd-gamemode-label">Tous les modes</span>
           <span class="fdd-arrow">▼</span>
           <div class="dropdown-menu" id="drop-gamemode">
             <div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,'gamemode','all','Tous les modes')">Tous les modes</div>
-
             <div class="dropdown-cat-header">CLASSIC</div>
             <div class="dropdown-opt" data-val="CLASSIC - Realistic" onclick="selectFilter(event,'gamemode','CLASSIC - Realistic','Realistic')">Realistic</div>
             <div class="dropdown-opt" data-val="CLASSIC - Boxfight" onclick="selectFilter(event,'gamemode','CLASSIC - Boxfight','Boxfight')">Boxfight</div>
@@ -605,23 +589,18 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
             <div class="dropdown-opt" data-val="CLASSIC - Build Fight" onclick="selectFilter(event,'gamemode','CLASSIC - Build Fight','Build Fight')">Build Fight</div>
             <div class="dropdown-opt" data-val="CLASSIC - Speed Realistic" onclick="selectFilter(event,'gamemode','CLASSIC - Speed Realistic','Speed Realistic')">Speed Realistic</div>
             <div class="dropdown-opt" data-val="CLASSIC - Piece Control" onclick="selectFilter(event,'gamemode','CLASSIC - Piece Control','Piece Control')">Piece Control</div>
-
             <div class="dropdown-cat-header">ESL</div>
             <div class="dropdown-opt" data-val="ESL - Hardpoint" onclick="selectFilter(event,'gamemode','ESL - Hardpoint','Hardpoint')">Hardpoint</div>
             <div class="dropdown-opt" data-val="ESL - CTF" onclick="selectFilter(event,'gamemode','ESL - CTF','CTF')">CTF</div>
-
             <div class="dropdown-cat-header">ZERO BUILD</div>
             <div class="dropdown-opt" data-val="ZB - Realistic" onclick="selectFilter(event,'gamemode','ZB - Realistic','ZB Realistic')">Realistic</div>
             <div class="dropdown-opt" data-val="ZB - Boxfight" onclick="selectFilter(event,'gamemode','ZB - Boxfight','ZB Boxfight')">Boxfight</div>
-
             <div class="dropdown-cat-header">KILL RACE</div>
             <div class="dropdown-opt" data-val="KILL RACE - Standard" onclick="selectFilter(event,'gamemode','KILL RACE - Standard','KR Standard')">Standard</div>
             <div class="dropdown-opt" data-val="KILL RACE - Reload" onclick="selectFilter(event,'gamemode','KILL RACE - Reload','KR Reload')">Reload</div>
             <div class="dropdown-opt" data-val="KILL RACE - Zero Build" onclick="selectFilter(event,'gamemode','KILL RACE - Zero Build','KR Zero Build')">Zero Build</div>
           </div>
         </div>
-
-        <!-- Entry fee sort -->
         <div class="fdd active-filter" id="fdd-fee" onclick="toggleDrop(event,'fee')">
           <span id="fdd-fee-label">Entry Fee</span>
           <span class="fdd-arrow">▼</span>
@@ -631,7 +610,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
             <div class="dropdown-opt" data-val="prize" onclick="selectFilter(event,'fee','prize','Prize')">Plus gros prize</div>
           </div>
         </div>
-
       </div>
     </div>
     <div class="matches-grid" id="matchesGrid"></div>
@@ -661,8 +639,8 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   <div class="page" id="page-shop">
     <div class="page-header">
       <div class="page-tag">Boutique</div>
-      <h2 class="page-title">Boutique <span>XP</span></h2>
-      <p class="page-sub">Dépense tes XP pour personnaliser ton profil</p>
+      <h2 class="page-title">Boutique <span>Coins</span></h2>
+      <p class="page-sub">Dépense tes coins pour personnaliser ton profil</p>
     </div>
     <div class="shop-cats">
       <button class="shop-cat active" onclick="filterShop('all',this)">Tout</button>
@@ -680,7 +658,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
     <div class="page-header">
       <div class="page-tag">Tournois</div>
       <h2 class="page-title">Tournois <span>Officiels</span></h2>
-      <p class="page-sub">Inscris-toi et bats-toi pour la gloire et les XP</p>
+      <p class="page-sub">Inscris-toi et bats-toi pour la gloire et les coins</p>
     </div>
     <div class="empty-state">
       <div class="empty-icon">🏆</div>
@@ -710,7 +688,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
             <div class="profile-bio">Nouveau joueur XENOVRA. Prêt à tout donner</div>
           </div>
           <div>
-            <div class="xp-big">⚡ 0 <span style="font-size:.85rem;color:var(--muted2)">XP</span></div>
+            <div class="xp-big">🪙 0 <span style="font-size:.85rem;color:var(--muted2)">coins</span></div>
             <div class="profile-level">Niveau 1 · Rang Débutant</div>
           </div>
         </div>
@@ -718,7 +696,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
           <div class="pstat"><div class="pstat-val" style="color:var(--green)">0</div><div class="pstat-key">Victoires</div></div>
           <div class="pstat"><div class="pstat-val" style="color:#ef4444">0</div><div class="pstat-key">Défaites</div></div>
           <div class="pstat"><div class="pstat-val" style="color:var(--blue2)">—</div><div class="pstat-key">Win Rate</div></div>
-          <div class="pstat"><div class="pstat-val" style="color:var(--violet3)">0</div><div class="pstat-key">XP gagnés</div></div>
+          <div class="pstat"><div class="pstat-val" style="color:var(--violet3)">0</div><div class="pstat-key">Coins gagnés</div></div>
         </div>
         <div class="profile-badges">
           <span class="badge-item badge-fn">Nouveau joueur</span>
@@ -730,7 +708,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 </main>
 
 <script>
-// ─── STATE ───
 var currentGame = 'fn';
 var gameDropOpen = false;
 var matchTab = 'available';
@@ -738,7 +715,6 @@ var activeFilters = {region:'all', platform:'all', gamemode:'all', fee:'asc'};
 var timers = {};
 var currentAuthTab = 'login';
 
-// ─── NOTIFY ───
 function notify(msg, icon) {
   icon = icon || '✅';
   document.getElementById('notifText').textContent = msg;
@@ -749,7 +725,6 @@ function notify(msg, icon) {
   setTimeout(function(){ n.classList.remove('show'); }, 3200);
 }
 
-// ─── PAGE SYSTEM ───
 function showPage(id) {
   document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
   var page = document.getElementById('page-'+id);
@@ -764,7 +739,6 @@ function showPage(id) {
   if (id==='tournaments') renderTourneys();
 }
 
-// ─── MODAL ───
 function openModal(tab) {
   tab = tab || 'login';
   document.getElementById('authModal').classList.add('open');
@@ -789,7 +763,6 @@ function handleEmailAuth() {
   notify(currentAuthTab==='register' ? 'Compte créé ! Bienvenue' : 'Connexion réussie ! Bienvenue');
 }
 
-// ─── GAME SELECTOR ───
 function toggleGameDrop() {
   gameDropOpen = !gameDropOpen;
   document.getElementById('gameDrop').classList.toggle('open', gameDropOpen);
@@ -817,14 +790,11 @@ function selectGame(g) {
   if (document.getElementById('page-matches').classList.contains('active')) renderMatches();
 }
 
-// ─── GAMEMODE OPTIONS (updated per game) ───
 function updateGamemodeOptions() {
   var menu = document.getElementById('drop-gamemode');
   activeFilters.gamemode = 'all';
   document.getElementById('fdd-gamemode-label').textContent = 'Tous les modes';
-
   if (currentGame === 'fn') {
-    // FN: Classic / ESL / Zero Build / Kill Race
     menu.innerHTML =
       '<div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,\'gamemode\',\'all\',\'Tous les modes\')">Tous les modes</div>' +
       '<div class="dropdown-cat-header">CLASSIC</div>' +
@@ -845,7 +815,6 @@ function updateGamemodeOptions() {
       '<div class="dropdown-opt" data-val="KILL RACE - Reload" onclick="selectFilter(event,\'gamemode\',\'KILL RACE - Reload\',\'KR Reload\')">Reload</div>' +
       '<div class="dropdown-opt" data-val="KILL RACE - Zero Build" onclick="selectFilter(event,\'gamemode\',\'KILL RACE - Zero Build\',\'KR Zero Build\')">Zero Build</div>';
   } else {
-    // CR modes
     menu.innerHTML =
       '<div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,\'gamemode\',\'all\',\'Tous les modes\')">Tous les modes</div>' +
       '<div class="dropdown-opt" data-val="1V1 DRAFT" onclick="selectFilter(event,\'gamemode\',\'1V1 DRAFT\',\'Draft\')">Draft</div>' +
@@ -857,7 +826,6 @@ function updateGamemodeOptions() {
   }
 }
 
-// ─── DROPDOWN FILTERS ───
 function toggleDrop(e, id) {
   e.stopPropagation();
   var keys = ['region','platform','gamemode','fee'];
@@ -901,7 +869,6 @@ document.addEventListener('click', function(e){
   }
 });
 
-// ─── MATCH DATA ───
 var fnMatches = [];
 var crMatches = [];
 
@@ -975,7 +942,6 @@ function joinMatch(id, locked) {
   else notify('Match #'+id+' rejoint ! Bon courage');
 }
 
-// ─── LEADERBOARD ───
 function renderLb(period) {
   document.getElementById('lbRows').innerHTML =
     '<div class="empty-state">' +
@@ -990,7 +956,6 @@ function switchLb(p, btn) {
   renderLb(p);
 }
 
-// ─── SHOP ───
 var shopItems = [
   {cat:'avatar',icon:'🦊',name:'Fox Elite Avatar',desc:'Avatar renard futuriste exclusif',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
   {cat:'titre',icon:'⚡',name:'Thunder God',desc:'Affiche ton titre légendaire en jeu',price:8,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
@@ -1022,43 +987,44 @@ function renderShop(f) {
       '<div class="shop-item-name">'+i.name+'</div>' +
       '<div class="shop-item-desc">'+i.desc+'</div>' +
       '<div class="shop-item-footer">' +
-      '<div class="shop-price">⚡ '+i.price.toLocaleString('fr-FR')+' XP</div>' +
-      '<button class="shop-buy-btn" onclick="buyItem(\''+i.name+'\','+i.price+')">Acheter</button>' +
+      '<div class="shop-price">🪙 '+i.price.toLocaleString('fr-FR')+' coins</div>' +
+      '<button class="shop-buy-btn" onclick="buyItem(\''+i.name.replace(/'/g,"\\'")+'\','+i.price+')">Acheter</button>' +
       '</div></div></div>';
   }).join('');
 }
 function buyItem(name, price) {
   var el = document.getElementById('navXP');
-  var xp = parseInt(el.textContent.replace(/[\s\u00a0]/g,'')) || 0;
-  if (xp >= price) {
-    el.textContent = (xp-price).toLocaleString('fr-FR');
+  var coins = parseInt(el.textContent.replace(/[\s\u00a0]/g,'')) || 0;
+  if (coins >= price) {
+    el.textContent = (coins - price).toLocaleString('fr-FR');
     notify('"'+name+'" acheté !');
   } else {
-    notify('XP insuffisants ! Il manque '+(price-xp).toLocaleString('fr-FR')+' XP','❌');
+    notify('Coins insuffisants ! Il manque '+(price-coins).toLocaleString('fr-FR')+' coins','❌');
   }
 }
 
-// ─── TOURNAMENTS ───
 var tourneyData = [
-  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTOT',name:'XENOVRA Fortnite Cup #1',mode:'Boxfight',prize:'10 000 XP',players:'0/64',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
-  {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTOT',name:'Clash Royale Grand Prix #1',mode:'Draft',prize:'8 000 XP',players:'0/32',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
-  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTOT',name:'Fortnite Zero Build Cup',mode:'ZB Realistic',prize:'15 000 XP',players:'0/128',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
-  {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTOT',name:'CR Mega Draft Masters #1',mode:'Mega Draft',prize:'12 000 XP',players:'0/32',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
+  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTOT',name:'XENOVRA Fortnite Cup #1',mode:'Boxfight',prize:'10 000 coins',players:'0/64',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
+  {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTOT',name:'Clash Royale Grand Prix #1',mode:'Draft',prize:'8 000 coins',players:'0/32',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
+  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTOT',name:'Fortnite Zero Build Cup',mode:'ZB Realistic',prize:'15 000 coins',players:'0/128',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
+  {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTOT',name:'CR Mega Draft Masters #1',mode:'Mega Draft',prize:'12 000 coins',players:'0/32',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
 ];
 function renderTourneys() {
-  document.getElementById('tourneyGrid').innerHTML = tourneyData.map(function(t){
+  var grid = document.getElementById('tourneyGrid');
+  if (!grid) return;
+  grid.innerHTML = tourneyData.map(function(t){
     return '<div class="tourney-card">' +
       '<div class="tc-banner '+t.banner+'"><div class="tc-banner-emoji">'+t.emoji+'</div><span class="tc-status-badge '+t.statusClass+'">'+t.statusText+'</span></div>' +
       '<div class="tc-body">' +
       '<div class="tc-game">'+(t.game==='fn'?'Fortnite':'Clash Royale')+' · '+t.mode+'</div>' +
       '<div class="tc-name">'+t.name+'</div>' +
       '<div class="tc-info">' +
-      '<div class="tc-info-item"><div class="tc-info-label">Prize Pool</div><div class="tc-info-val tc-prize">⚡ '+t.prize+'</div></div>' +
+      '<div class="tc-info-item"><div class="tc-info-label">Prize Pool</div><div class="tc-info-val tc-prize">🪙 '+t.prize+'</div></div>' +
       '<div class="tc-info-item"><div class="tc-info-label">Joueurs</div><div class="tc-info-val">'+t.players+'</div></div>' +
       '<div class="tc-info-item"><div class="tc-info-label">Date</div><div class="tc-info-val">'+t.date+'</div></div>' +
       '<div class="tc-info-item"><div class="tc-info-label">Format</div><div class="tc-info-val">Bracket</div></div>' +
       '</div>' +
-      '<button class="tc-join-btn '+t.btnClass+'" onclick="joinTourney(\''+t.name.replace(/'/g,"\\'")+'\')" >'+t.btnText+'</button>' +
+      '<button class="tc-join-btn '+t.btnClass+'" onclick="joinTourney(\''+t.name.replace(/'/g,"\\'")+'\')">'+t.btnText+'</button>' +
       '</div></div>';
   }).join('');
 }
@@ -1066,7 +1032,6 @@ function joinTourney(name) {
   notify('Rappel activé pour "'+name+'"');
 }
 
-// ─── CURSOR ───
 var cur = null, ring = null, mx = 0, my = 0, rx = 0, ry = 0;
 function initCursor() {
   cur = document.getElementById('cursor');
@@ -1079,7 +1044,6 @@ function initCursor() {
   })();
 }
 
-// ─── CANVAS ───
 function initCanvas() {
   var canvas = document.getElementById('bg');
   var ctx = canvas.getContext('2d');
@@ -1111,7 +1075,6 @@ function initCanvas() {
   window.addEventListener('resize', function(){ resize(); makePts(); });
 }
 
-// ─── LOADER ───
 function initLoader() {
   var msgs = ['INITIALIZING SYSTEMS...','LOADING GAME DATA...','CONNECTING TO SERVERS...','CALIBRATING ANTI-CHEAT...','ENTERING THE ARENA...'];
   var mi = 0;
