@@ -234,6 +234,24 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .shop-price{display:flex;align-items:center;gap:3px;font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--gold);font-weight:700}
 .shop-buy-btn{padding:6px 12px;border:none;border-radius:5px;background:linear-gradient(135deg,var(--violet),var(--blue));color:#fff;font-family:'Exo 2',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .shop-buy-btn:hover{transform:scale(1.05);box-shadow:var(--glow-v)}
+.shop-buy-btn:disabled{opacity:.5;cursor:default;transform:none}
+
+/* INVENTORY */
+.inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+.inv-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:12px;overflow:hidden;transition:all .3s;position:relative}
+.inv-card.equipped{border-color:rgba(16,185,129,.4);box-shadow:0 0 16px rgba(16,185,129,.12)}
+.inv-card:hover{transform:translateY(-4px);border-color:rgba(124,58,237,.3)}
+.inv-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;position:relative}
+.inv-equipped-badge{position:absolute;top:8px;right:8px;padding:2px 8px;border-radius:3px;font-size:.58rem;font-weight:700;letter-spacing:1px;background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.4);color:var(--green);font-family:'Share Tech Mono',monospace}
+.inv-body{padding:12px}
+.inv-name{font-family:'Orbitron',sans-serif;font-size:.75rem;font-weight:700;color:#fff;margin-bottom:8px}
+.inv-equip-btn{width:100%;padding:7px;border-radius:5px;font-family:'Exo 2',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.inv-equip-btn.equip{background:linear-gradient(135deg,var(--violet),var(--blue));border:none;color:#fff}
+.inv-equip-btn.unequip{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:var(--green)}
+.inv-equip-btn:hover{transform:scale(1.03)}
+.inv-tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.inv-tab{padding:7px 16px;border-radius:6px;border:1px solid rgba(255,255,255,.08);background:transparent;color:var(--muted2);font-family:'Exo 2',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.inv-tab.active,.inv-tab:hover{border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.08);color:var(--green)}
 
 /* TOURNAMENTS */
 .tourney-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
@@ -291,6 +309,49 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .page-title{font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:#fff;letter-spacing:1px}
 .page-title span{background:linear-gradient(135deg,var(--blue2),var(--violet3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .page-sub{color:var(--muted2);font-size:.88rem;margin-top:6px}
+
+/* SETTINGS */
+.settings-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;max-width:900px}
+.settings-nav{display:flex;flex-direction:column;gap:4px}
+.sn-item{display:flex;align-items:center;gap:9px;padding:10px 14px;border-radius:8px;color:var(--muted2);font-size:.82rem;font-weight:600;cursor:pointer;transition:all .25s;border:1px solid transparent}
+.sn-item:hover{color:#fff;background:rgba(255,255,255,.03)}
+.sn-item.active{color:#fff;background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.2)}
+.sn-icon{font-size:1rem;width:18px;text-align:center;flex-shrink:0}
+.settings-panel{display:none}
+.settings-panel.active{display:block}
+.settings-section{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:22px;margin-bottom:16px}
+.ss-title{font-family:'Orbitron',sans-serif;font-size:.88rem;font-weight:700;color:#fff;letter-spacing:.5px;margin-bottom:4px}
+.ss-sub{font-size:.78rem;color:var(--muted2);margin-bottom:18px;line-height:1.6}
+.ss-rule-box{background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:14px 16px;margin-bottom:16px}
+.ss-rule-title{font-size:.72rem;font-weight:700;color:var(--red);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;font-family:'Share Tech Mono',monospace}
+.ss-rule-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.ss-rule-list li{display:flex;align-items:flex-start;gap:8px;font-size:.8rem;color:var(--muted2);line-height:1.5}
+.ss-rule-list li::before{content:'▸';color:var(--red);font-size:.7rem;margin-top:2px;flex-shrink:0}
+.pseudo-input-row{display:flex;gap:10px;align-items:flex-end}
+.pseudo-input-wrap{flex:1}
+.pseudo-label{font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted2);margin-bottom:6px;font-family:'Share Tech Mono',monospace;display:block}
+.pseudo-input{width:100%;padding:11px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-family:'Exo 2',sans-serif;font-size:.88rem;outline:none;transition:all .3s}
+.pseudo-input:focus{border-color:rgba(59,130,246,.5);background:rgba(59,130,246,.04)}
+.pseudo-input::placeholder{color:var(--muted)}
+.pseudo-cost{display:flex;align-items:center;gap:5px;font-size:.75rem;color:var(--gold);font-family:'Share Tech Mono',monospace;margin-top:6px}
+.pseudo-btn{padding:11px 22px;border:none;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff;font-family:'Exo 2',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s;white-space:nowrap}
+.pseudo-btn:hover{transform:translateY(-2px);box-shadow:var(--glow-v)}
+.pseudo-current{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:8px;margin-bottom:14px}
+.pseudo-current-label{font-size:.7rem;color:var(--muted2);font-family:'Share Tech Mono',monospace;letter-spacing:1px}
+.pseudo-current-val{font-family:'Orbitron',sans-serif;font-size:.9rem;font-weight:700;color:var(--cyan2);margin-left:8px}
+.ss-toggle-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.ss-toggle-row:last-child{border-bottom:none}
+.ss-toggle-label{font-size:.85rem;color:var(--text);font-weight:500}
+.ss-toggle-desc{font-size:.72rem;color:var(--muted2);margin-top:2px}
+.toggle{position:relative;width:40px;height:22px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:rgba(255,255,255,.1);border-radius:11px;cursor:pointer;transition:.3s}
+.toggle-slider::before{content:'';position:absolute;height:16px;width:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}
+.toggle input:checked + .toggle-slider{background:var(--blue)}
+.toggle input:checked + .toggle-slider::before{transform:translateX(18px)}
+.danger-zone{border-color:rgba(239,68,68,.2) !important}
+.danger-btn{padding:10px 20px;border-radius:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);color:var(--red);font-family:'Exo 2',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
+.danger-btn:hover{background:rgba(239,68,68,.15);box-shadow:0 0 20px rgba(239,68,68,.2)}
 
 /* AUTH MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s;backdrop-filter:blur(8px)}
@@ -359,6 +420,8 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   .lb-row>:nth-child(4),.lb-row>:nth-child(5),.lb-header-row>:nth-child(4),.lb-header-row>:nth-child(5){display:none}
   #cursor,#cursor-ring{display:none}
   body{cursor:auto}
+  .settings-layout{grid-template-columns:1fr}
+  .settings-nav{flex-direction:row;flex-wrap:wrap}
 }
 </style>
 </head>
@@ -457,6 +520,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
       <span class="sb-icon">🛍️</span> Boutique
       <span style="margin-left:auto;padding:1px 6px;background:rgba(124,58,237,.3);border-radius:3px;font-size:.6rem;color:var(--violet3);font-family:'Share Tech Mono',monospace">NEW</span>
     </div>
+    <div class="sb-nav-item" id="nav-inventory" onclick="showPage('inventory')"><span class="sb-icon">🎒</span> Inventaire</div>
   </div>
 
   <div class="sb-section">
@@ -469,7 +533,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   <div class="sb-section">
     <div class="sb-section-label">Profile</div>
     <div class="sb-nav-item" id="nav-profile" onclick="showPage('profile')"><span class="sb-icon">👤</span> Profil</div>
-    <div class="sb-nav-item" onclick="notify('Paramètres bientôt disponibles !','⚙️')"><span class="sb-icon">⚙️</span> Paramètres</div>
+    <div class="sb-nav-item" id="nav-settings" onclick="showPage('settings')"><span class="sb-icon">⚙️</span> Paramètres</div>
   </div>
 
   <div class="sb-spacer"></div>
@@ -489,7 +553,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   <button class="sb-buy-btn" onclick="openModal('register')">🪙 Acheter des Coins</button>
 </aside>
 
-<!-- TOPBAR -->
 <header id="topbar">
   <div class="tb-search">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -497,7 +560,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   </div>
   <div class="tb-center">
     <div class="tb-currency">🪙 <span id="tokenDisplay">0.00</span></div>
-    <!-- 🎯 replaces ⚡, "XP" label removed -->
     <div class="tb-xp">🎯 <span id="navXP">0</span></div>
   </div>
   <div class="tb-right">
@@ -522,7 +584,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
           <span class="t1">L'Arène Compétitive</span>
           <span class="t2">Du Gaming Futur</span>
         </h1>
-        <p class="hero-desc">Affronte les meilleurs joueurs Fortnite & Clash Royale. Gagne des XP, participe aux tournois, grimpe dans les classements.</p>
+        <p class="hero-desc">Affronte les meilleurs joueurs Fortnite &amp; Clash Royale. Gagne des XP, participe aux tournois, grimpe dans les classements.</p>
         <div class="hero-btns">
           <button class="btn-hero-main" onclick="showPage('matches')">⚔️ Trouver un match</button>
           <button class="btn-hero-sec" onclick="showPage('tournaments')">🏆 Voir les tournois</button>
@@ -640,7 +702,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
     <div class="page-header">
       <div class="page-tag">Boutique</div>
       <h2 class="page-title">Boutique <span>Coins</span></h2>
-      <p class="page-sub">Dépense tes coins pour personnaliser ton profil</p>
+      <p class="page-sub">Dépense tes coins pour personnaliser ton profil — les items achetés vont dans ton inventaire</p>
     </div>
     <div class="shop-cats">
       <button class="shop-cat active" onclick="filterShop('all',this)">Tout</button>
@@ -651,6 +713,24 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
       <button class="shop-cat" onclick="filterShop('cadre',this)">Cadres</button>
     </div>
     <div class="shop-grid" id="shopGrid"></div>
+  </div>
+
+  <!-- INVENTORY -->
+  <div class="page" id="page-inventory">
+    <div class="page-header">
+      <div class="page-tag">Inventaire</div>
+      <h2 class="page-title">Mon <span>Inventaire</span></h2>
+      <p class="page-sub">Équipe tes items achetés pour personnaliser ton profil</p>
+    </div>
+    <div class="inv-tabs">
+      <button class="inv-tab active" onclick="filterInv('all',this)">Tout</button>
+      <button class="inv-tab" onclick="filterInv('avatar',this)">Avatars</button>
+      <button class="inv-tab" onclick="filterInv('titre',this)">Titres</button>
+      <button class="inv-tab" onclick="filterInv('badge',this)">Badges</button>
+      <button class="inv-tab" onclick="filterInv('effet',this)">Effets</button>
+      <button class="inv-tab" onclick="filterInv('cadre',this)">Cadres</button>
+    </div>
+    <div class="inv-grid" id="invGrid"></div>
   </div>
 
   <!-- TOURNAMENTS -->
@@ -677,18 +757,18 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
       <div class="profile-banner">
         <div class="profile-banner-glow"></div>
         <div class="profile-avatar-wrap">
-          <div class="profile-avatar">X</div>
+          <div class="profile-avatar" id="profileAvatarIcon">X</div>
         </div>
       </div>
       <div class="profile-body">
         <div class="profile-top">
           <div>
-            <div class="profile-name">XenoPlayer_01</div>
-            <div class="profile-tag">@xenoplayer · Membre depuis Jan 2025</div>
+            <div class="profile-name" id="profileDisplayName">XenoPlayer_01</div>
+            <div class="profile-tag" id="profileTag">@xenoplayer · Membre depuis Jan 2025</div>
             <div class="profile-bio">Nouveau joueur XENOVRA. Prêt à tout donner</div>
           </div>
           <div>
-            <div class="xp-big">🪙 0 <span style="font-size:.85rem;color:var(--muted2)">coins</span></div>
+            <div class="xp-big">🪙 <span id="profileCoins">0</span> <span style="font-size:.85rem;color:var(--muted2)">coins</span></div>
             <div class="profile-level">Niveau 1 · Rang Débutant</div>
           </div>
         </div>
@@ -705,6 +785,146 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
     </div>
   </div>
 
+  <!-- SETTINGS -->
+  <div class="page" id="page-settings">
+    <div class="page-header">
+      <div class="page-tag">Compte</div>
+      <h2 class="page-title">Para<span>mètres</span></h2>
+      <p class="page-sub">Gère ton compte, ton pseudo et tes préférences</p>
+    </div>
+    <div class="settings-layout">
+      <nav class="settings-nav">
+        <div class="sn-item active" onclick="switchSettingsPanel('pseudo',this)"><span class="sn-icon">✏️</span> Pseudo</div>
+        <div class="sn-item" onclick="switchSettingsPanel('notifs',this)"><span class="sn-icon">🔔</span> Notifications</div>
+        <div class="sn-item" onclick="switchSettingsPanel('securite',this)"><span class="sn-icon">🔒</span> Sécurité</div>
+        <div class="sn-item" onclick="switchSettingsPanel('danger',this)"><span class="sn-icon">⚠️</span> Zone Danger</div>
+      </nav>
+
+      <div>
+        <!-- PSEUDO PANEL -->
+        <div class="settings-panel active" id="sp-pseudo">
+          <div class="settings-section">
+            <div class="ss-title">✏️ Changer de pseudo</div>
+            <div class="ss-sub">Tu peux modifier ton pseudo à tout moment. Chaque changement coûte <strong style="color:var(--gold)">0.5 coins</strong>.</div>
+
+            <div class="pseudo-current">
+              <span class="pseudo-current-label">PSEUDO ACTUEL</span>
+              <span class="pseudo-current-val" id="currentPseudoDisplay">XenoPlayer_01</span>
+            </div>
+
+            <div class="ss-rule-box">
+              <div class="ss-rule-title">⛔ Règles obligatoires</div>
+              <ul class="ss-rule-list">
+                <li>Interdit d'utiliser des termes racistes, haineux ou discriminatoires</li>
+                <li>Pas de pseudo imitant l'équipe XENOVRA (ex: "Admin", "Moderator", "Staff")</li>
+                <li>Pas de contenu sexuellement explicite ou choquant</li>
+                <li>Pas de liens URL, d'adresses ou de numéros de téléphone</li>
+                <li>Minimum 3 caractères, maximum 20 caractères</li>
+                <li>Uniquement lettres, chiffres, underscore (_) et tiret (-)</li>
+                <li>Tout pseudo enfreignant ces règles entraîne une suspension du compte</li>
+              </ul>
+            </div>
+
+            <div class="pseudo-input-row">
+              <div class="pseudo-input-wrap">
+                <label class="pseudo-label">Nouveau pseudo</label>
+                <input class="pseudo-input" type="text" id="newPseudoInput" placeholder="MonNouveauPseudo" maxlength="20">
+                <div class="pseudo-cost">🪙 Coût : 0.5 coins — Solde actuel : <span id="pseudoCoinBalance">0</span> coins</div>
+              </div>
+              <button class="pseudo-btn" onclick="changePseudo()">Confirmer →</button>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <div class="ss-title">📋 Historique des pseudos</div>
+            <div class="ss-sub">Tes anciens pseudos sont listés ici.</div>
+            <div id="pseudoHistory" style="display:flex;flex-direction:column;gap:6px">
+              <div style="padding:10px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:7px;font-size:.8rem;color:var(--muted2);font-family:'Share Tech Mono',monospace">
+                Aucun changement effectué pour l'instant
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NOTIFS PANEL -->
+        <div class="settings-panel" id="sp-notifs">
+          <div class="settings-section">
+            <div class="ss-title">🔔 Notifications</div>
+            <div class="ss-sub">Choisis quelles alertes tu veux recevoir.</div>
+            <div class="ss-toggle-row">
+              <div><div class="ss-toggle-label">Nouveaux matchs disponibles</div><div class="ss-toggle-desc">Alerte quand un match est créé dans ta région</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div class="ss-toggle-row">
+              <div><div class="ss-toggle-label">Début de tournoi</div><div class="ss-toggle-desc">Rappel 10 min avant le début d'un tournoi inscrit</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+            <div class="ss-toggle-row">
+              <div><div class="ss-toggle-label">Résultats de matchs</div><div class="ss-toggle-desc">Notification après chaque fin de partie</div></div>
+              <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="ss-toggle-row">
+              <div><div class="ss-toggle-label">Promotions Boutique</div><div class="ss-toggle-desc">Offres spéciales et nouveaux items</div></div>
+              <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="ss-toggle-row">
+              <div><div class="ss-toggle-label">Classement modifié</div><div class="ss-toggle-desc">Quand tu montes ou descends dans le leaderboard</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECURITE PANEL -->
+        <div class="settings-panel" id="sp-securite">
+          <div class="settings-section">
+            <div class="ss-title">🔒 Sécurité du compte</div>
+            <div class="ss-sub">Protège ton compte XENOVRA.</div>
+            <div class="ss-toggle-row">
+              <div><div class="ss-toggle-label">Authentification à deux facteurs</div><div class="ss-toggle-desc">Sécurité renforcée à chaque connexion</div></div>
+              <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span></label>
+            </div>
+            <div class="ss-toggle-row">
+              <div><div class="ss-toggle-label">Alertes de connexion suspecte</div><div class="ss-toggle-desc">Email si connexion depuis un nouvel appareil</div></div>
+              <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+            </div>
+          </div>
+          <div class="settings-section">
+            <div class="ss-title">🔑 Changer le mot de passe</div>
+            <div class="ss-sub">Pour ta sécurité, utilise un mot de passe unique.</div>
+            <div class="form-group"><label class="form-label">Mot de passe actuel</label><input class="form-input" type="password" placeholder="••••••••"></div>
+            <div class="form-group"><label class="form-label">Nouveau mot de passe</label><input class="form-input" type="password" placeholder="••••••••"></div>
+            <div class="form-group"><label class="form-label">Confirmer</label><input class="form-input" type="password" placeholder="••••••••"></div>
+            <button class="pseudo-btn" onclick="notify('Mot de passe mis à jour !','🔑')" style="margin-top:4px">Mettre à jour →</button>
+          </div>
+        </div>
+
+        <!-- DANGER PANEL -->
+        <div class="settings-panel" id="sp-danger">
+          <div class="settings-section danger-zone">
+            <div class="ss-title" style="color:var(--red)">⚠️ Zone Danger</div>
+            <div class="ss-sub">Ces actions sont irréversibles. Réfléchis bien avant de continuer.</div>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:14px;background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.1);border-radius:8px;gap:16px">
+                <div>
+                  <div style="font-size:.85rem;font-weight:600;color:var(--text)">Réinitialiser les statistiques</div>
+                  <div style="font-size:.75rem;color:var(--muted2);margin-top:3px">Remet à zéro tes victoires, défaites et ratio</div>
+                </div>
+                <button class="danger-btn" onclick="notify('Stats réinitialisées !','⚠️')">Réinitialiser</button>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:space-between;padding:14px;background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.1);border-radius:8px;gap:16px">
+                <div>
+                  <div style="font-size:.85rem;font-weight:600;color:var(--text)">Supprimer le compte</div>
+                  <div style="font-size:.75rem;color:var(--muted2);margin-top:3px">Supprime définitivement ton compte et toutes tes données</div>
+                </div>
+                <button class="danger-btn" onclick="notify('Contacte le support pour supprimer ton compte','⚠️')">Supprimer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <script>
@@ -714,6 +934,23 @@ var matchTab = 'available';
 var activeFilters = {region:'all', platform:'all', gamemode:'all', fee:'asc'};
 var timers = {};
 var currentAuthTab = 'login';
+var playerPseudo = 'XenoPlayer_01';
+var playerCoins = 0;
+var inventory = [];
+var equippedItems = {};
+var pseudoHistory = [];
+
+var FORBIDDEN_WORDS = ['nigger','nigga','negro','raciste','nazisme','nazi','hitler','juif','fuck','bitch','pute','salope','admin','moderator','staff','xenovra_admin','xenovra_mod'];
+
+function getCoins(){
+  return parseFloat(document.getElementById('navXP').textContent.replace(/[\s\u00a0]/g,''))||0;
+}
+function setCoins(n){
+  var v = Math.max(0,n);
+  document.getElementById('navXP').textContent = v.toLocaleString('fr-FR');
+  document.getElementById('pseudoCoinBalance').textContent = v.toFixed(2);
+  document.getElementById('profileCoins').textContent = v.toLocaleString('fr-FR');
+}
 
 function notify(msg, icon) {
   icon = icon || '✅';
@@ -737,6 +974,18 @@ function showPage(id) {
   if (id==='leaderboard') renderLb('day');
   if (id==='shop') renderShop('all');
   if (id==='tournaments') renderTourneys();
+  if (id==='inventory') renderInventory('all');
+  if (id==='settings') {
+    document.getElementById('pseudoCoinBalance').textContent = getCoins().toFixed(2);
+    document.getElementById('currentPseudoDisplay').textContent = playerPseudo;
+  }
+}
+
+function switchSettingsPanel(id, btn) {
+  document.querySelectorAll('.settings-panel').forEach(function(p){ p.classList.remove('active'); });
+  document.querySelectorAll('.sn-item').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('sp-'+id).classList.add('active');
+  if (btn) btn.classList.add('active');
 }
 
 function openModal(tab) {
@@ -761,6 +1010,51 @@ function handleEmailAuth() {
   if (!email || !pass) { notify('Remplis tous les champs !','⚠️'); return; }
   closeModal();
   notify(currentAuthTab==='register' ? 'Compte créé ! Bienvenue' : 'Connexion réussie ! Bienvenue');
+}
+
+/* PSEUDO CHANGE */
+function validatePseudo(p) {
+  if (!p) return 'Le pseudo ne peut pas être vide.';
+  if (p.length < 3) return 'Minimum 3 caractères.';
+  if (p.length > 20) return 'Maximum 20 caractères.';
+  if (!/^[a-zA-Z0-9_\-]+$/.test(p)) return 'Uniquement lettres, chiffres, _ et -.';
+  var low = p.toLowerCase();
+  for (var i=0; i<FORBIDDEN_WORDS.length; i++) {
+    if (low.includes(FORBIDDEN_WORDS[i])) return 'Pseudo interdit — contenu inapproprié ou réservé.';
+  }
+  return null;
+}
+function changePseudo() {
+  var newP = document.getElementById('newPseudoInput').value.trim();
+  var err = validatePseudo(newP);
+  if (err) { notify(err, '❌'); return; }
+  if (newP === playerPseudo) { notify('C\'est déjà ton pseudo actuel !','⚠️'); return; }
+  var coins = getCoins();
+  if (coins < 0.5) { notify('Coins insuffisants ! Il te faut 0.5 coins','❌'); return; }
+  pseudoHistory.unshift({old: playerPseudo, newP: newP, date: new Date().toLocaleDateString('fr-FR')});
+  playerPseudo = newP;
+  setCoins(coins - 0.5);
+  document.getElementById('currentPseudoDisplay').textContent = playerPseudo;
+  document.getElementById('profileDisplayName').textContent = playerPseudo;
+  document.getElementById('profileTag').textContent = '@'+playerPseudo.toLowerCase().replace(/[^a-z0-9]/g,'') + ' · Membre depuis Jan 2025';
+  document.getElementById('profileAvatarIcon').textContent = playerPseudo.charAt(0).toUpperCase();
+  document.getElementById('newPseudoInput').value = '';
+  document.getElementById('pseudoCoinBalance').textContent = getCoins().toFixed(2);
+  renderPseudoHistory();
+  notify('Pseudo changé en "'+playerPseudo+'" ! (-0.5 coins)','✅');
+}
+function renderPseudoHistory() {
+  var el = document.getElementById('pseudoHistory');
+  if (pseudoHistory.length === 0) {
+    el.innerHTML = '<div style="padding:10px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:7px;font-size:.8rem;color:var(--muted2);font-family:\'Share Tech Mono\',monospace">Aucun changement effectué pour l\'instant</div>';
+    return;
+  }
+  el.innerHTML = pseudoHistory.map(function(h){
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:7px;">' +
+      '<div style="font-size:.8rem;color:var(--muted2);font-family:\'Share Tech Mono\',monospace"><span style="color:var(--red)">'+h.old+'</span> → <span style="color:var(--green)">'+h.newP+'</span></div>' +
+      '<div style="font-size:.72rem;color:var(--muted);font-family:\'Share Tech Mono\',monospace">'+h.date+' · -0.5 🪙</div>' +
+      '</div>';
+  }).join('');
 }
 
 function toggleGameDrop() {
@@ -795,34 +1089,9 @@ function updateGamemodeOptions() {
   activeFilters.gamemode = 'all';
   document.getElementById('fdd-gamemode-label').textContent = 'Tous les modes';
   if (currentGame === 'fn') {
-    menu.innerHTML =
-      '<div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,\'gamemode\',\'all\',\'Tous les modes\')">Tous les modes</div>' +
-      '<div class="dropdown-cat-header">CLASSIC</div>' +
-      '<div class="dropdown-opt" data-val="CLASSIC - Realistic" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Realistic\',\'Realistic\')">Realistic</div>' +
-      '<div class="dropdown-opt" data-val="CLASSIC - Boxfight" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Boxfight\',\'Boxfight\')">Boxfight</div>' +
-      '<div class="dropdown-opt" data-val="CLASSIC - Zone Wars" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Zone Wars\',\'Zone Wars\')">Zone Wars</div>' +
-      '<div class="dropdown-opt" data-val="CLASSIC - Build Fight" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Build Fight\',\'Build Fight\')">Build Fight</div>' +
-      '<div class="dropdown-opt" data-val="CLASSIC - Speed Realistic" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Speed Realistic\',\'Speed Realistic\')">Speed Realistic</div>' +
-      '<div class="dropdown-opt" data-val="CLASSIC - Piece Control" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Piece Control\',\'Piece Control\')">Piece Control</div>' +
-      '<div class="dropdown-cat-header">ESL</div>' +
-      '<div class="dropdown-opt" data-val="ESL - Hardpoint" onclick="selectFilter(event,\'gamemode\',\'ESL - Hardpoint\',\'Hardpoint\')">Hardpoint</div>' +
-      '<div class="dropdown-opt" data-val="ESL - CTF" onclick="selectFilter(event,\'gamemode\',\'ESL - CTF\',\'CTF\')">CTF</div>' +
-      '<div class="dropdown-cat-header">ZERO BUILD</div>' +
-      '<div class="dropdown-opt" data-val="ZB - Realistic" onclick="selectFilter(event,\'gamemode\',\'ZB - Realistic\',\'ZB Realistic\')">Realistic</div>' +
-      '<div class="dropdown-opt" data-val="ZB - Boxfight" onclick="selectFilter(event,\'gamemode\',\'ZB - Boxfight\',\'ZB Boxfight\')">Boxfight</div>' +
-      '<div class="dropdown-cat-header">KILL RACE</div>' +
-      '<div class="dropdown-opt" data-val="KILL RACE - Standard" onclick="selectFilter(event,\'gamemode\',\'KILL RACE - Standard\',\'KR Standard\')">Standard</div>' +
-      '<div class="dropdown-opt" data-val="KILL RACE - Reload" onclick="selectFilter(event,\'gamemode\',\'KILL RACE - Reload\',\'KR Reload\')">Reload</div>' +
-      '<div class="dropdown-opt" data-val="KILL RACE - Zero Build" onclick="selectFilter(event,\'gamemode\',\'KILL RACE - Zero Build\',\'KR Zero Build\')">Zero Build</div>';
+    menu.innerHTML = '<div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,\'gamemode\',\'all\',\'Tous les modes\')">Tous les modes</div><div class="dropdown-cat-header">CLASSIC</div><div class="dropdown-opt" data-val="CLASSIC - Realistic" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Realistic\',\'Realistic\')">Realistic</div><div class="dropdown-opt" data-val="CLASSIC - Boxfight" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Boxfight\',\'Boxfight\')">Boxfight</div><div class="dropdown-opt" data-val="CLASSIC - Zone Wars" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Zone Wars\',\'Zone Wars\')">Zone Wars</div><div class="dropdown-opt" data-val="CLASSIC - Build Fight" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Build Fight\',\'Build Fight\')">Build Fight</div><div class="dropdown-opt" data-val="CLASSIC - Speed Realistic" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Speed Realistic\',\'Speed Realistic\')">Speed Realistic</div><div class="dropdown-opt" data-val="CLASSIC - Piece Control" onclick="selectFilter(event,\'gamemode\',\'CLASSIC - Piece Control\',\'Piece Control\')">Piece Control</div><div class="dropdown-cat-header">ESL</div><div class="dropdown-opt" data-val="ESL - Hardpoint" onclick="selectFilter(event,\'gamemode\',\'ESL - Hardpoint\',\'Hardpoint\')">Hardpoint</div><div class="dropdown-opt" data-val="ESL - CTF" onclick="selectFilter(event,\'gamemode\',\'ESL - CTF\',\'CTF\')">CTF</div><div class="dropdown-cat-header">ZERO BUILD</div><div class="dropdown-opt" data-val="ZB - Realistic" onclick="selectFilter(event,\'gamemode\',\'ZB - Realistic\',\'ZB Realistic\')">Realistic</div><div class="dropdown-opt" data-val="ZB - Boxfight" onclick="selectFilter(event,\'gamemode\',\'ZB - Boxfight\',\'ZB Boxfight\')">Boxfight</div><div class="dropdown-cat-header">KILL RACE</div><div class="dropdown-opt" data-val="KILL RACE - Standard" onclick="selectFilter(event,\'gamemode\',\'KILL RACE - Standard\',\'KR Standard\')">Standard</div><div class="dropdown-opt" data-val="KILL RACE - Reload" onclick="selectFilter(event,\'gamemode\',\'KILL RACE - Reload\',\'KR Reload\')">Reload</div><div class="dropdown-opt" data-val="KILL RACE - Zero Build" onclick="selectFilter(event,\'gamemode\',\'KILL RACE - Zero Build\',\'KR Zero Build\')">Zero Build</div>';
   } else {
-    menu.innerHTML =
-      '<div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,\'gamemode\',\'all\',\'Tous les modes\')">Tous les modes</div>' +
-      '<div class="dropdown-opt" data-val="1V1 DRAFT" onclick="selectFilter(event,\'gamemode\',\'1V1 DRAFT\',\'Draft\')">Draft</div>' +
-      '<div class="dropdown-opt" data-val="1V1 MEGA DRAFT" onclick="selectFilter(event,\'gamemode\',\'1V1 MEGA DRAFT\',\'Mega Draft\')">Mega Draft</div>' +
-      '<div class="dropdown-opt" data-val="1V1 MIRROR" onclick="selectFilter(event,\'gamemode\',\'1V1 MIRROR\',\'Mirror\')">Mirror</div>' +
-      '<div class="dropdown-opt" data-val="1V1 TOUCHDOWN" onclick="selectFilter(event,\'gamemode\',\'1V1 TOUCHDOWN\',\'Touchdown\')">Touchdown</div>' +
-      '<div class="dropdown-opt" data-val="2V2 TOUCHDOWN" onclick="selectFilter(event,\'gamemode\',\'2V2 TOUCHDOWN\',\'2V2 Touchdown\')">2V2 Touchdown</div>' +
-      '<div class="dropdown-opt" data-val="1V1 BATTLE" onclick="selectFilter(event,\'gamemode\',\'1V1 BATTLE\',\'Battle\')">Battle</div>';
+    menu.innerHTML = '<div class="dropdown-opt selected" data-val="all" onclick="selectFilter(event,\'gamemode\',\'all\',\'Tous les modes\')">Tous les modes</div><div class="dropdown-opt" data-val="1V1 DRAFT" onclick="selectFilter(event,\'gamemode\',\'1V1 DRAFT\',\'Draft\')">Draft</div><div class="dropdown-opt" data-val="1V1 MEGA DRAFT" onclick="selectFilter(event,\'gamemode\',\'1V1 MEGA DRAFT\',\'Mega Draft\')">Mega Draft</div><div class="dropdown-opt" data-val="1V1 MIRROR" onclick="selectFilter(event,\'gamemode\',\'1V1 MIRROR\',\'Mirror\')">Mirror</div><div class="dropdown-opt" data-val="1V1 TOUCHDOWN" onclick="selectFilter(event,\'gamemode\',\'1V1 TOUCHDOWN\',\'Touchdown\')">Touchdown</div><div class="dropdown-opt" data-val="2V2 TOUCHDOWN" onclick="selectFilter(event,\'gamemode\',\'2V2 TOUCHDOWN\',\'2V2 Touchdown\')">2V2 Touchdown</div><div class="dropdown-opt" data-val="1V1 BATTLE" onclick="selectFilter(event,\'gamemode\',\'1V1 BATTLE\',\'Battle\')">Battle</div>';
   }
 }
 
@@ -893,31 +1162,12 @@ function renderMatches() {
   document.getElementById('count-ongoing').textContent = data.filter(function(m){ return m.status==='ongoing'; }).length;
 
   if (filtered.length === 0) {
-    document.getElementById('matchesGrid').innerHTML =
-      '<div class="empty-state" style="grid-column:1/-1">' +
-      '<div class="empty-icon">⚔️</div>' +
-      '<div class="empty-title">Aucun match disponible</div>' +
-      '<div class="empty-sub">Aucun match n\'est disponible pour le moment. Sois le premier à en créer un ou reviens plus tard !</div>' +
-      '</div>';
+    document.getElementById('matchesGrid').innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">⚔️</div><div class="empty-title">Aucun match disponible</div><div class="empty-sub">Aucun match n\'est disponible pour le moment. Sois le premier à en créer un ou reviens plus tard !</div></div>';
     return;
   }
-
   document.getElementById('matchesGrid').innerHTML = filtered.map(function(m){
-    return '<div class="match-card" id="mc-'+m.id+'">' +
-      '<div class="mc-top"><div>' +
-      '<div class="mc-mode-title">'+m.mode+(m.noEdit?'<span class="mc-tag tag-noedit" style="font-size:.58rem;vertical-align:middle;margin-left:6px">NO SIMPLE EDIT</span>':'')+'</div>' +
-      '<div class="mc-tags"><span class="mc-tag tag-region">'+m.region+'</span><span class="mc-tag tag-loadout">'+m.loadout+'</span></div>' +
-      '</div><div class="mc-icons"><div class="mc-game-dot '+(currentGame==='fn'?'fn-bg':'cr-bg')+'">'+(currentGame==='fn'?'⚡':'👑')+'</div></div></div>' +
-      '<div class="mc-info-row"><div class="mc-info-item"><div class="mc-info-label">First To</div><div class="mc-info-val"><span class="mc-flag">🏁</span> '+m.firstTo+'</div></div>' +
-      '<div class="mc-info-item"><div class="mc-info-label">Expires In</div><div class="mc-info-val"><span class="mc-timer-val" id="timer-'+m.id+'">'+formatTime(m.expiresIn)+'</span></div>' +
-      '<div class="mc-timer-bar"><div class="mc-timer-fill" id="tbar-'+m.id+'" style="width:'+Math.min(100,(m.expiresIn/3600)*100)+'%"></div></div></div></div>' +
-      '<div class="mc-fee-row"><div class="mc-fee-item"><div class="mc-fee-label">Entry Fee</div><div class="mc-fee-amount"><span class="fee-coin">🪙</span> <span style="color:#fff">'+m.entryFee.toFixed(2)+'</span></div></div>' +
-      '<div class="mc-arrow">→</div>' +
-      '<div class="mc-fee-item" style="text-align:right"><div class="mc-fee-label">Prize</div><div class="mc-fee-amount" style="justify-content:flex-end"><span class="prize-amount">'+m.prize.toFixed(2)+'</span></div></div></div>' +
-      '<button class="mc-join-btn '+(m.status==='ongoing'?'spectate':'')+'" onclick="joinMatch('+m.id+','+(m.locked||false)+')">' +
-      (m.locked?'<span>Prive</span> ':'')+( m.status==='ongoing'?'Spectateur':'JOIN MATCH')+'</button></div>';
+    return '<div class="match-card" id="mc-'+m.id+'"><div class="mc-top"><div><div class="mc-mode-title">'+m.mode+(m.noEdit?'<span class="mc-tag tag-noedit" style="font-size:.58rem;vertical-align:middle;margin-left:6px">NO SIMPLE EDIT</span>':'')+'</div><div class="mc-tags"><span class="mc-tag tag-region">'+m.region+'</span><span class="mc-tag tag-loadout">'+m.loadout+'</span></div></div><div class="mc-icons"><div class="mc-game-dot '+(currentGame==='fn'?'fn-bg':'cr-bg')+'">'+(currentGame==='fn'?'⚡':'👑')+'</div></div></div><div class="mc-info-row"><div class="mc-info-item"><div class="mc-info-label">First To</div><div class="mc-info-val"><span class="mc-flag">🏁</span> '+m.firstTo+'</div></div><div class="mc-info-item"><div class="mc-info-label">Expires In</div><div class="mc-info-val"><span class="mc-timer-val" id="timer-'+m.id+'">'+formatTime(m.expiresIn)+'</span></div><div class="mc-timer-bar"><div class="mc-timer-fill" id="tbar-'+m.id+'" style="width:'+Math.min(100,(m.expiresIn/3600)*100)+'%"></div></div></div></div><div class="mc-fee-row"><div class="mc-fee-item"><div class="mc-fee-label">Entry Fee</div><div class="mc-fee-amount"><span class="fee-coin">🪙</span> <span style="color:#fff">'+m.entryFee.toFixed(2)+'</span></div></div><div class="mc-arrow">→</div><div class="mc-fee-item" style="text-align:right"><div class="mc-fee-label">Prize</div><div class="mc-fee-amount" style="justify-content:flex-end"><span class="prize-amount">'+m.prize.toFixed(2)+'</span></div></div></div><button class="mc-join-btn '+(m.status==='ongoing'?'spectate':'')+'" onclick="joinMatch('+m.id+','+(m.locked||false)+')">'+(m.locked?'<span>Privé</span> ':'')+( m.status==='ongoing'?'Spectateur':'JOIN MATCH')+'</button></div>';
   }).join('');
-
   filtered.forEach(function(m){ startTimer(m); });
 }
 
@@ -943,12 +1193,7 @@ function joinMatch(id, locked) {
 }
 
 function renderLb(period) {
-  document.getElementById('lbRows').innerHTML =
-    '<div class="empty-state">' +
-    '<div class="empty-icon">📊</div>' +
-    '<div class="empty-title">Classement vide</div>' +
-    '<div class="empty-sub">Aucune partie jouée pour l\'instant. Le classement se remplira au fur et à mesure des matchs !</div>' +
-    '</div>';
+  document.getElementById('lbRows').innerHTML = '<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-title">Classement vide</div><div class="empty-sub">Aucune partie jouée pour l\'instant. Le classement se remplira au fur et à mesure des matchs !</div></div>';
 }
 function switchLb(p, btn) {
   document.querySelectorAll('.lb-tab').forEach(function(t){ t.classList.remove('active'); });
@@ -957,19 +1202,23 @@ function switchLb(p, btn) {
 }
 
 var shopItems = [
-  {cat:'avatar',icon:'🦊',name:'Fox Elite Avatar',desc:'Avatar renard futuriste exclusif',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
-  {cat:'titre',icon:'⚡',name:'Thunder God',desc:'Affiche ton titre légendaire en jeu',price:8,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
-  {cat:'badge',icon:'🏅',name:'Badge Fortnite Pro',desc:'Badge exclusif joueurs Fortnite vétérans',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {cat:'effet',icon:'✨',name:'Particules Neon',desc:'Aura de particules violettes sur ton profil',price:8,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
-  {cat:'cadre',icon:'🖼',name:'Cadre Cyber Blue',desc:'Cadre de profil holographique bleu',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {cat:'avatar',icon:'🐺',name:'Wolf Alpha Avatar',desc:'Avatar loup alpha dominateur',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {cat:'titre',icon:'👑',name:'Clash King',desc:'Titre prestige pour les maîtres CR',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
-  {cat:'badge',icon:'🛡️',name:'Badge Fair Play',desc:'Récompense les joueurs respectueux',price:1,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
-  {cat:'effet',icon:'🌊',name:'Vague Cyan',desc:'Ondulation cyan autour de ton avatar',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
-  {cat:'cadre',icon:'🔥',name:'Cadre Inferno',desc:'Cadre enflammé pour les warriors',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
-  {cat:'avatar',icon:'🤖',name:'Xeno Bot Avatar',desc:'Avatar robot exclusif XENOVRA',price:1,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
-  {cat:'badge',icon:'⭐',name:'Badge Top 100',desc:'Pour les joueurs classés Top 100',price:8,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
+  {id:'fox_avatar',cat:'avatar',icon:'🦊',name:'Fox Elite Avatar',desc:'Avatar renard futuriste exclusif',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {id:'thunder_titre',cat:'titre',icon:'⚡',name:'Thunder God',desc:'Affiche ton titre légendaire en jeu',price:8,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
+  {id:'fn_badge',cat:'badge',icon:'🏅',name:'Badge Fortnite Pro',desc:'Badge exclusif joueurs Fortnite vétérans',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
+  {id:'neon_effet',cat:'effet',icon:'✨',name:'Particules Neon',desc:'Aura de particules violettes sur ton profil',price:8,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
+  {id:'cyber_cadre',cat:'cadre',icon:'🖼️',name:'Cadre Cyber Blue',desc:'Cadre de profil holographique bleu',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
+  {id:'wolf_avatar',cat:'avatar',icon:'🐺',name:'Wolf Alpha Avatar',desc:'Avatar loup alpha dominateur',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
+  {id:'king_titre',cat:'titre',icon:'👑',name:'Clash King',desc:'Titre prestige pour les maîtres CR',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {id:'fair_badge',cat:'badge',icon:'🛡️',name:'Badge Fair Play',desc:'Récompense les joueurs respectueux',price:1,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
+  {id:'cyan_effet',cat:'effet',icon:'🌊',name:'Vague Cyan',desc:'Ondulation cyan autour de ton avatar',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {id:'inferno_cadre',cat:'cadre',icon:'🔥',name:'Cadre Inferno',desc:'Cadre enflammé pour les warriors',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {id:'bot_avatar',cat:'avatar',icon:'🤖',name:'Xeno Bot Avatar',desc:'Avatar robot exclusif XENOVRA',price:1,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
+  {id:'top100_badge',cat:'badge',icon:'⭐',name:'Badge Top 100',desc:'Pour les joueurs classés Top 100',price:8,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
 ];
+
+function isOwned(itemId) {
+  return inventory.some(function(i){ return i.id === itemId; });
+}
 
 function filterShop(f, btn) {
   document.querySelectorAll('.shop-cat').forEach(function(b){ b.classList.remove('active'); });
@@ -979,28 +1228,60 @@ function filterShop(f, btn) {
 function renderShop(f) {
   var items = f==='all' ? shopItems : shopItems.filter(function(i){ return i.cat===f; });
   document.getElementById('shopGrid').innerHTML = items.map(function(i){
-    return '<div class="shop-item">' +
-      '<div class="shop-item-img '+i.rarityClass+'">' +
-      '<span class="shop-rarity '+i.rarityLabel+'">'+i.rarityText+'</span>' +
-      '<span style="position:relative;z-index:1">'+i.icon+'</span></div>' +
-      '<div class="shop-item-body">' +
-      '<div class="shop-item-name">'+i.name+'</div>' +
-      '<div class="shop-item-desc">'+i.desc+'</div>' +
-      '<div class="shop-item-footer">' +
-      '<div class="shop-price">🪙 '+i.price.toLocaleString('fr-FR')+' coins</div>' +
-      '<button class="shop-buy-btn" onclick="buyItem(\''+i.name.replace(/'/g,"\\'")+'\','+i.price+')">Acheter</button>' +
+    var owned = isOwned(i.id);
+    return '<div class="shop-item"><div class="shop-item-img '+i.rarityClass+'"><span class="shop-rarity '+i.rarityLabel+'">'+i.rarityText+'</span><span style="position:relative;z-index:1">'+i.icon+'</span></div><div class="shop-item-body"><div class="shop-item-name">'+i.name+'</div><div class="shop-item-desc">'+i.desc+'</div><div class="shop-item-footer"><div class="shop-price">🪙 '+i.price.toLocaleString('fr-FR')+' coins</div>'+
+      (owned
+        ? '<button class="shop-buy-btn" disabled style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#10b981">✅ Possédé</button>'
+        : '<button class="shop-buy-btn" onclick="buyItem(\''+i.id+'\')">Acheter</button>')+
       '</div></div></div>';
   }).join('');
 }
-function buyItem(name, price) {
-  var el = document.getElementById('navXP');
-  var coins = parseInt(el.textContent.replace(/[\s\u00a0]/g,'')) || 0;
-  if (coins >= price) {
-    el.textContent = (coins - price).toLocaleString('fr-FR');
-    notify('"'+name+'" acheté !');
-  } else {
-    notify('Coins insuffisants ! Il manque '+(price-coins).toLocaleString('fr-FR')+' coins','❌');
+
+function buyItem(itemId) {
+  var item = shopItems.find(function(i){ return i.id===itemId; });
+  if (!item) return;
+  if (isOwned(itemId)) { notify('Tu possèdes déjà cet item !','⚠️'); return; }
+  var coins = getCoins();
+  if (coins < item.price) {
+    notify('Coins insuffisants ! Il manque '+(item.price-coins).toLocaleString('fr-FR')+' coins','❌');
+    return;
   }
+  setCoins(coins - item.price);
+  inventory.push({id:item.id,cat:item.cat,icon:item.icon,name:item.name,rarityClass:item.rarityClass,rarityLabel:item.rarityLabel});
+  renderShop(document.querySelector('.shop-cat.active') ? (document.querySelector('.shop-cat.active').textContent.trim().toLowerCase() === 'tout' ? 'all' : document.querySelector('.shop-cat.active').dataset && document.querySelector('.shop-cat.active').getAttribute('onclick').match(/filterShop\('(\w+)'/)[1]) : 'all');
+  notify('"'+item.name+'" ajouté à ton inventaire ! 🎒');
+}
+
+/* INVENTORY */
+var invFilter = 'all';
+function filterInv(f, btn) {
+  invFilter = f;
+  document.querySelectorAll('.inv-tab').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderInventory(f);
+}
+function renderInventory(f) {
+  var items = f==='all' ? inventory : inventory.filter(function(i){ return i.cat===f; });
+  var grid = document.getElementById('invGrid');
+  if (items.length === 0) {
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🎒</div><div class="empty-title">Inventaire vide</div><div class="empty-sub">Achète des items dans la Boutique pour les retrouver ici et les équiper !</div></div>';
+    return;
+  }
+  grid.innerHTML = items.map(function(i){
+    var eq = equippedItems[i.cat] === i.id;
+    return '<div class="inv-card '+(eq?'equipped':'')+'" id="icard-'+i.id+'"><div class="inv-img '+i.rarityClass+'">'+(eq?'<span class="inv-equipped-badge">ÉQUIPÉ</span>':'')+'<span style="position:relative;z-index:1">'+i.icon+'</span></div><div class="inv-body"><div class="inv-name">'+i.name+'</div><button class="inv-equip-btn '+(eq?'unequip':'equip')+'" onclick="toggleEquip(\''+i.id+'\',\''+i.cat+'\')">'+(eq?'✅ Déséquiper':'Équiper')+'</button></div></div>';
+  }).join('');
+}
+function toggleEquip(itemId, cat) {
+  if (equippedItems[cat] === itemId) {
+    delete equippedItems[cat];
+    notify('Item déséquipé');
+  } else {
+    equippedItems[cat] = itemId;
+    var item = inventory.find(function(i){ return i.id===itemId; });
+    notify('"'+(item?item.name:itemId)+'" équipé sur ton profil !','✅');
+  }
+  renderInventory(invFilter);
 }
 
 var tourneyData = [
@@ -1012,21 +1293,6 @@ var tourneyData = [
 function renderTourneys() {
   var grid = document.getElementById('tourneyGrid');
   if (!grid) return;
-  grid.innerHTML = tourneyData.map(function(t){
-    return '<div class="tourney-card">' +
-      '<div class="tc-banner '+t.banner+'"><div class="tc-banner-emoji">'+t.emoji+'</div><span class="tc-status-badge '+t.statusClass+'">'+t.statusText+'</span></div>' +
-      '<div class="tc-body">' +
-      '<div class="tc-game">'+(t.game==='fn'?'Fortnite':'Clash Royale')+' · '+t.mode+'</div>' +
-      '<div class="tc-name">'+t.name+'</div>' +
-      '<div class="tc-info">' +
-      '<div class="tc-info-item"><div class="tc-info-label">Prize Pool</div><div class="tc-info-val tc-prize">🪙 '+t.prize+'</div></div>' +
-      '<div class="tc-info-item"><div class="tc-info-label">Joueurs</div><div class="tc-info-val">'+t.players+'</div></div>' +
-      '<div class="tc-info-item"><div class="tc-info-label">Date</div><div class="tc-info-val">'+t.date+'</div></div>' +
-      '<div class="tc-info-item"><div class="tc-info-label">Format</div><div class="tc-info-val">Bracket</div></div>' +
-      '</div>' +
-      '<button class="tc-join-btn '+t.btnClass+'" onclick="joinTourney(\''+t.name.replace(/'/g,"\\'")+'\')">'+t.btnText+'</button>' +
-      '</div></div>';
-  }).join('');
 }
 function joinTourney(name) {
   notify('Rappel activé pour "'+name+'"');
@@ -1092,7 +1358,7 @@ document.addEventListener('DOMContentLoaded', function(){
   initLoader();
   renderMatches();
   renderShop('all');
-  renderTourneys();
+  renderInventory('all');
   renderLb('day');
 });
 </script>
