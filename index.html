@@ -92,15 +92,16 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .tb-search input::placeholder{color:var(--muted2)}
 .tb-search svg{color:var(--muted2);flex-shrink:0;width:14px;height:14px}
 .tb-center{display:flex;align-items:center;gap:12px}
-.tb-currency{display:flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.18);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--gold)}
-.tb-xp{display:flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(124,58,237,.07);border:1px solid rgba(124,58,237,.18);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--violet3)}
+.tb-currency{display:flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.18);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--gold);cursor:pointer;transition:all .3s}
+.tb-currency:hover{background:rgba(245,158,11,.14);border-color:rgba(245,158,11,.35)}
+.tb-xp{display:flex;align-items:center;gap:6px;padding:5px 12px;background:rgba(124,58,237,.07);border:1px solid rgba(124,58,237,.18);border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--violet3);cursor:pointer;transition:all .3s}
+.tb-xp:hover{background:rgba(124,58,237,.14);border-color:rgba(124,58,237,.35)}
 .tb-right{display:flex;align-items:center;gap:10px}
 .tb-rank-badge{display:flex;align-items:center;gap:5px;padding:5px 10px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);border-radius:6px;font-size:.7rem;font-weight:700;color:var(--blue2);font-family:'Share Tech Mono',monospace;letter-spacing:1px}
 .tb-icon-btn{width:32px;height:32px;border-radius:7px;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;transition:all .3s;color:var(--muted2)}
 .tb-icon-btn:hover{border-color:rgba(88,101,242,.5);background:rgba(88,101,242,.1);color:#fff}
 .tb-notif{position:relative}
 .tb-notif-dot{position:absolute;top:-2px;right:-2px;width:8px;height:8px;background:var(--red);border-radius:50%;border:1px solid var(--void)}
-.tb-avatar{width:32px;height:32px;border-radius:7px;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:.75rem;font-weight:700;color:#fff;cursor:pointer;border:1px solid rgba(124,58,237,.3)}
 .tb-btn{padding:7px 16px;border-radius:7px;font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .tb-login{background:transparent;border:1px solid rgba(59,130,246,.3);color:var(--blue2)}
 .tb-login:hover{background:rgba(59,130,246,.1)}
@@ -108,18 +109,58 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .tb-register:hover{box-shadow:var(--glow-v);transform:translateY(-1px)}
 
 /* User profile pill in topbar */
-.tb-user-pill{display:none;align-items:center;gap:8px;padding:4px 12px 4px 4px;border-radius:8px;border:1px solid rgba(124,58,237,.3);background:rgba(124,58,237,.08);cursor:pointer;transition:all .3s}
+.tb-user-pill{display:none;align-items:center;gap:8px;padding:4px 12px 4px 4px;border-radius:8px;border:1px solid rgba(124,58,237,.3);background:rgba(124,58,237,.08);cursor:pointer;transition:all .3s;position:relative}
 .tb-user-pill:hover{border-color:rgba(124,58,237,.5);background:rgba(124,58,237,.14)}
 .tb-user-pill.visible{display:flex}
 .tb-user-avatar{width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:.65rem;font-weight:700;color:#fff;flex-shrink:0}
 .tb-user-name{font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;color:#fff;max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.tb-logout-btn{padding:5px 10px;border-radius:6px;border:1px solid rgba(239,68,68,.3);background:rgba(239,68,68,.06);color:var(--red);font-family:'Exo 2',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.5px;cursor:pointer;transition:all .3s}
-.tb-logout-btn:hover{background:rgba(239,68,68,.15)}
+
+/* USER DROPDOWN MENU */
+.user-dropdown{position:absolute;top:calc(100% + 8px);right:0;min-width:200px;background:var(--card2);border:1px solid rgba(124,58,237,.25);border-radius:10px;z-index:500;box-shadow:0 12px 40px rgba(0,0,0,.7);overflow:hidden;display:none}
+.user-dropdown.open{display:block}
+.udrop-header{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px}
+.udrop-avatar{width:36px;height:36px;border-radius:8px;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:.8rem;font-weight:700;color:#fff;flex-shrink:0}
+.udrop-name{font-family:'Orbitron',sans-serif;font-size:.78rem;font-weight:700;color:#fff}
+.udrop-sub{font-size:.62rem;color:var(--muted2);font-family:'Share Tech Mono',monospace}
+.udrop-item{display:flex;align-items:center;gap:9px;padding:10px 14px;font-size:.8rem;font-weight:600;color:var(--muted2);cursor:pointer;transition:all .2s;font-family:'Exo 2',sans-serif}
+.udrop-item:hover{color:#fff;background:rgba(255,255,255,.04)}
+.udrop-item.active{color:var(--blue2)}
+.udrop-icon{font-size:1rem;width:16px;text-align:center;flex-shrink:0}
+.udrop-sep{height:1px;background:rgba(255,255,255,.06);margin:4px 0}
+.udrop-item.danger{color:rgba(239,68,68,.7)}
+.udrop-item.danger:hover{color:var(--red);background:rgba(239,68,68,.06)}
 
 /* MAIN */
 #main{margin-left:var(--sidebar);margin-top:58px;min-height:calc(100vh - 58px);position:relative;z-index:1;flex:1}
 .page{display:none;padding:28px 24px}
 .page.active{display:block}
+
+/* SHOP PANEL / COINS PANEL */
+.floating-panel{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1500;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all .3s;backdrop-filter:blur(10px)}
+.floating-panel.open{opacity:1;visibility:visible}
+.fp-box{background:var(--card2);border:1px solid rgba(59,130,246,.2);border-radius:16px;padding:28px;width:460px;max-width:94vw;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.8)}
+.fp-close{position:absolute;top:12px;right:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted2);font-size:.8rem;transition:all .3s}
+.fp-close:hover{color:#fff}
+.fp-title{font-family:'Orbitron',sans-serif;font-size:1.1rem;font-weight:900;color:#fff;letter-spacing:2px;margin-bottom:6px}
+.fp-sub{font-size:.78rem;color:var(--muted2);margin-bottom:22px}
+.fp-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fp-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px;display:flex;align-items:center;justify-content:space-between;transition:all .3s;cursor:pointer}
+.fp-item:hover{border-color:rgba(245,158,11,.4);background:rgba(245,158,11,.06);transform:translateY(-2px)}
+.fp-item-left{display:flex;align-items:center;gap:10px}
+.fp-item-icon{font-size:1.4rem}
+.fp-item-amount{font-family:'Orbitron',sans-serif;font-size:.9rem;font-weight:700;color:#fff}
+.fp-item-label{font-size:.65rem;color:var(--muted2);font-family:'Share Tech Mono',monospace}
+.fp-item-price{display:flex;align-items:center;gap:4px;font-family:'Share Tech Mono',monospace;font-size:.88rem;font-weight:700;color:var(--gold)}
+.fp-item-price .euro{font-size:.75rem;color:var(--muted2)}
+.fp-badge{display:inline-block;padding:2px 7px;border-radius:3px;font-size:.58rem;font-weight:700;letter-spacing:1px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:var(--green);font-family:'Share Tech Mono',monospace;margin-top:4px}
+.fp-snipe-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px;display:flex;align-items:center;justify-content:space-between;transition:all .3s;cursor:pointer;margin-bottom:10px}
+.fp-snipe-item:hover{border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.06);transform:translateY(-2px)}
+.fp-snipe-item:last-child{margin-bottom:0}
+.fp-snipe-amount{font-family:'Orbitron',sans-serif;font-size:.95rem;font-weight:700;color:#fff}
+.fp-snipe-label{font-size:.65rem;color:var(--muted2);font-family:'Share Tech Mono',monospace;margin-top:2px}
+.fp-snipe-price{font-family:'Share Tech Mono',monospace;font-size:.9rem;font-weight:700;color:var(--violet3)}
+.fp-snipe-price span{font-size:.7rem;color:var(--muted2)}
+.fp-sep{border:none;border-top:1px solid rgba(255,255,255,.06);margin:16px 0}
 
 /* MATCHES */
 .matches-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:14px}
@@ -155,12 +196,10 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .dropdown-opt .opt-dot{width:7px;height:7px;border-radius:50%}
 .dropdown-cat-header{padding:6px 14px 4px;font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-family:'Share Tech Mono',monospace;border-top:1px solid rgba(255,255,255,.06);margin-top:2px}
 .dropdown-cat-header:first-child{border-top:none;margin-top:0}
-
 .empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;text-align:center;gap:16px}
 .empty-icon{font-size:3rem;opacity:.4}
 .empty-title{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:700;color:var(--muted2);letter-spacing:1px}
 .empty-sub{font-size:.82rem;color:var(--muted);max-width:320px;line-height:1.7}
-
 .matches-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
 .match-card{background:var(--card);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px;transition:all .35s;cursor:default;position:relative;overflow:hidden}
 .match-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,.04),transparent 60%);opacity:0;transition:opacity .3s}
@@ -218,7 +257,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .lb-wins{font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--green)}
 .lb-ratio{font-family:'Share Tech Mono',monospace;font-size:.82rem;color:var(--blue2)}
 
-/* SHOP — sans rareté, fonds colorés */
+/* SHOP */
 .shop-cats{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
 .shop-cat{padding:7px 16px;border-radius:6px;border:1px solid rgba(255,255,255,.08);background:transparent;color:var(--muted2);font-family:'Exo 2',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .shop-cat.active,.shop-cat:hover{border-color:rgba(124,58,237,.4);background:rgba(124,58,237,.08);color:var(--violet3)}
@@ -226,7 +265,16 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .shop-item{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;transition:all .4s}
 .shop-item:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
 .shop-item-img{height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-/* Fonds colorés distincts par item */
+
+/* Avatar backgrounds */
+.bg-ninja{background:linear-gradient(135deg,#0a0010,#1a0030,#2d0060)}
+.bg-samurai{background:linear-gradient(135deg,#1a0000,#3d0000,#700000)}
+.bg-cyborg{background:linear-gradient(135deg,#001520,#003040,#005060)}
+.bg-phantom{background:linear-gradient(135deg,#0a0a0a,#141428,#1e1e40)}
+.bg-beast{background:linear-gradient(135deg,#0a1500,#1a3000,#2d5000)}
+.bg-void{background:linear-gradient(135deg,#000010,#050020,#0a0040)}
+.bg-fire{background:linear-gradient(135deg,#1a0500,#3d1000,#701500)}
+.bg-ice{background:linear-gradient(135deg,#00101a,#002035,#003555)}
 .bg-dino{background:linear-gradient(135deg,#052010,#0f5020,#1a8030)}
 .bg-robot{background:linear-gradient(135deg,#020c20,#0a254a,#123a70)}
 .bg-alien{background:linear-gradient(135deg,#150520,#36085a,#5c10a0)}
@@ -238,6 +286,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .bg-titre-monstre{background:linear-gradient(135deg,#0d001a,#2a0045,#500080)}
 .bg-titre-slasher{background:linear-gradient(135deg,#1a0000,#440000,#800010)}
 .bg-titre-only{background:linear-gradient(135deg,#0a0a0a,#1c1a00,#3a3600)}
+
 .shop-item-body{padding:14px}
 .shop-item-name{font-family:'Orbitron',sans-serif;font-size:.78rem;font-weight:700;color:#fff;margin-bottom:3px}
 .shop-item-desc{font-size:.72rem;color:var(--muted2);margin-bottom:12px;line-height:1.5}
@@ -246,9 +295,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .shop-buy-btn{padding:6px 12px;border:none;border-radius:5px;background:linear-gradient(135deg,var(--violet),var(--blue));color:#fff;font-family:'Exo 2',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .shop-buy-btn:hover{transform:scale(1.05);box-shadow:var(--glow-v)}
 .shop-buy-btn:disabled{opacity:.5;cursor:default;transform:none}
-
-/* CARICATURE SVG */
-.caricature-svg{width:100px;height:100px;position:relative;z-index:1}
+.free-badge{padding:2px 7px;border-radius:3px;font-size:.58rem;font-weight:700;letter-spacing:1px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:var(--green);font-family:'Share Tech Mono',monospace}
 
 /* INVENTORY */
 .inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
@@ -269,29 +316,9 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 
 /* TOURNAMENTS */
 .tourney-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
-.tourney-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;transition:all .4s}
-.tourney-card:hover{transform:translateY(-5px);border-color:rgba(59,130,246,.25);box-shadow:0 16px 40px rgba(0,0,0,.4)}
-.tc-banner{height:110px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.tc-banner-fn{background:linear-gradient(135deg,#020818,#041840,#082880)}
-.tc-banner-cr{background:linear-gradient(135deg,#08020e,#200450,#400880)}
-.tc-banner-emoji{font-size:2.6rem;filter:drop-shadow(0 0 16px rgba(255,255,255,.25))}
 .tc-status-badge{position:absolute;top:10px;right:10px;padding:3px 9px;border-radius:3px;font-size:.62rem;font-weight:700;letter-spacing:1.5px;font-family:'Share Tech Mono',monospace}
 .tc-open{background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4);color:var(--green)}
 .tc-soon{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);color:var(--gold)}
-.tc-ended{background:rgba(107,114,128,.1);border:1px solid rgba(107,114,128,.3);color:var(--muted2)}
-.tc-body{padding:16px}
-.tc-game{font-size:.65rem;color:var(--muted2);letter-spacing:2px;text-transform:uppercase;font-family:'Share Tech Mono',monospace;margin-bottom:5px}
-.tc-name{font-family:'Orbitron',sans-serif;font-size:.9rem;font-weight:700;color:#fff;margin-bottom:10px}
-.tc-info{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
-.tc-info-item{padding:7px 10px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:5px}
-.tc-info-label{font-size:.6rem;color:var(--muted2);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
-.tc-info-val{font-family:'Share Tech Mono',monospace;font-size:.78rem;color:#fff}
-.tc-prize{color:var(--violet3)}
-.tc-join-btn{width:100%;padding:9px;border:none;border-radius:7px;font-family:'Exo 2',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .3s}
-.tc-join-open{background:linear-gradient(135deg,var(--blue),var(--violet));color:#fff}
-.tc-join-soon{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);color:var(--gold)}
-.tc-join-ended{background:rgba(107,114,128,.08);border:1px solid rgba(107,114,128,.2);color:var(--muted2);cursor:default}
-.tc-join-btn:hover:not(.tc-join-ended){transform:translateY(-2px);box-shadow:var(--glow-v)}
 
 /* PROFILE */
 .profile-card{max-width:860px;background:var(--card);border:1px solid rgba(59,130,246,.15);border-radius:16px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.4)}
@@ -506,6 +533,103 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   </div>
 </div>
 
+<!-- COINS PANEL -->
+<div class="floating-panel" id="coinsPanel">
+  <div class="fp-box">
+    <button class="fp-close" onclick="closePanel('coinsPanel')">✕</button>
+    <div class="fp-title">🪙 ACHETER DES COINS</div>
+    <div class="fp-sub">Recharge ton solde pour rejoindre des matchs et acheter des items</div>
+    <div class="fp-grid">
+      <div class="fp-item" onclick="notify('Paiement bientôt disponible ! (5 coins)','💳')">
+        <div class="fp-item-left">
+          <div class="fp-item-icon">🪙</div>
+          <div>
+            <div class="fp-item-amount">5 Coins</div>
+            <div class="fp-item-label">Pack Starter</div>
+          </div>
+        </div>
+        <div>
+          <div class="fp-item-price">5.00 <span class="euro">€</span></div>
+        </div>
+      </div>
+      <div class="fp-item" onclick="notify('Paiement bientôt disponible ! (10 coins)','💳')">
+        <div class="fp-item-left">
+          <div class="fp-item-icon">🪙</div>
+          <div>
+            <div class="fp-item-amount">10 Coins</div>
+            <div class="fp-item-label">Pack Joueur</div>
+          </div>
+        </div>
+        <div>
+          <div class="fp-item-price">10.00 <span class="euro">€</span></div>
+        </div>
+      </div>
+      <div class="fp-item" onclick="notify('Paiement bientôt disponible ! (20 coins)','💳')">
+        <div class="fp-item-left">
+          <div class="fp-item-icon">🪙</div>
+          <div>
+            <div class="fp-item-amount">20 Coins</div>
+            <div class="fp-item-label">Pack Pro</div>
+            <div class="fp-badge">POPULAIRE</div>
+          </div>
+        </div>
+        <div>
+          <div class="fp-item-price">20.00 <span class="euro">€</span></div>
+        </div>
+      </div>
+      <div class="fp-item" onclick="notify('Paiement bientôt disponible ! (50 coins)','💳')">
+        <div class="fp-item-left">
+          <div class="fp-item-icon">🪙</div>
+          <div>
+            <div class="fp-item-amount">50 Coins</div>
+            <div class="fp-item-label">Pack Elite</div>
+          </div>
+        </div>
+        <div>
+          <div class="fp-item-price">50.00 <span class="euro">€</span></div>
+        </div>
+      </div>
+      <div class="fp-item" onclick="notify('Paiement bientôt disponible ! (100 coins)','💳')" style="grid-column:1/-1">
+        <div class="fp-item-left">
+          <div class="fp-item-icon">🪙</div>
+          <div>
+            <div class="fp-item-amount">100 Coins</div>
+            <div class="fp-item-label">Pack Champion</div>
+            <div class="fp-badge">MEILLEURE VALEUR</div>
+          </div>
+        </div>
+        <div>
+          <div class="fp-item-price">100.00 <span class="euro">€</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SNIPES PANEL -->
+<div class="floating-panel" id="snipesPanel">
+  <div class="fp-box">
+    <button class="fp-close" onclick="closePanel('snipesPanel')">✕</button>
+    <div class="fp-title">🎯 ACHETER DES SNIPES</div>
+    <div class="fp-sub">Utilise tes coins pour acheter des Snipes et améliorer ton arsenal</div>
+    <div class="fp-snipe-item" onclick="notify('10 Snipes achetés ! (-2 coins)','🎯')">
+      <div>
+        <div class="fp-snipe-amount">10 Snipes</div>
+        <div class="fp-snipe-label">Pack Sniper Rookie</div>
+      </div>
+      <div class="fp-snipe-price">2.00 <span>coins</span></div>
+    </div>
+    <div class="fp-snipe-item" onclick="notify('50 Snipes achetés ! (-10 coins)','🎯')">
+      <div>
+        <div class="fp-snipe-amount">50 Snipes</div>
+        <div class="fp-snipe-label">Pack Sniper Elite</div>
+        <div class="fp-badge" style="margin-top:4px">MEILLEURE VALEUR</div>
+      </div>
+      <div class="fp-snipe-price">10.00 <span>coins</span></div>
+    </div>
+  </div>
+</div>
+
 <aside id="sidebar">
   <div class="sb-logo" onclick="showPage('home')">
     <svg width="32" height="32" viewBox="0 0 80 80" fill="none">
@@ -563,6 +687,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   <div class="sb-section">
     <div class="sb-section-label">Profile</div>
     <div class="sb-nav-item" id="nav-profile" onclick="showPage('profile')"><span class="sb-icon">👤</span> Profil</div>
+    <div class="sb-nav-item" id="nav-inventory2" onclick="showPage('inventory')"><span class="sb-icon">🎒</span> Inventaire</div>
     <div class="sb-nav-item" id="nav-settings" onclick="showPage('settings')"><span class="sb-icon">⚙️</span> Paramètres</div>
   </div>
 
@@ -580,7 +705,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
     <div class="sb-pass-bar"><div class="sb-pass-fill"></div></div>
   </div>
 
-  <button class="sb-buy-btn" onclick="openModal('register')">🪙 Acheter des Coins</button>
+  <button class="sb-buy-btn" onclick="openPanel('coinsPanel')">🪙 Acheter des Coins</button>
 </aside>
 
 <header id="topbar">
@@ -589,27 +714,39 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
     <input type="text" placeholder="Rechercher un joueur...">
   </div>
   <div class="tb-center">
-    <div class="tb-currency">🪙 <span id="tokenDisplay">0.00</span></div>
-    <div class="tb-xp">🎯 <span id="navXP">0</span></div>
+    <div class="tb-currency" onclick="openPanel('coinsPanel')">🪙 <span id="tokenDisplay">0.00</span></div>
+    <div class="tb-xp" onclick="openPanel('snipesPanel')">🎯 <span id="navXP">0</span></div>
   </div>
   <div class="tb-right">
     <div class="tb-rank-badge">⭐ NIVEAU 1</div>
-    <!-- Discord icon — corrected SVG -->
     <a href="https://discord.gg/5MsUJttkT" target="_blank" rel="noopener" class="tb-icon-btn" title="Rejoindre le Discord XENOVRA" style="text-decoration:none;color:inherit;">
       <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M15.247 1.16A14.863 14.863 0 0 0 11.575.06a.055.055 0 0 0-.059.028 10.35 10.35 0 0 0-.456.937 13.718 13.718 0 0 0-4.117 0 9.525 9.525 0 0 0-.463-.937.058.058 0 0 0-.059-.028A14.822 14.822 0 0 0 2.75 1.16a.053.053 0 0 0-.024.02C.4 4.787-.24 8.29.075 11.747a.062.062 0 0 0 .025.042 14.927 14.927 0 0 0 4.494 2.272.058.058 0 0 0 .063-.021c.346-.473.655-.97.919-1.495a.057.057 0 0 0-.031-.079 9.827 9.827 0 0 1-1.403-.669.058.058 0 0 1-.006-.096c.094-.07.189-.144.279-.219a.056.056 0 0 1 .058-.008c2.944 1.344 6.133 1.344 9.042 0a.055.055 0 0 1 .059.007c.09.075.185.15.28.22a.058.058 0 0 1-.005.095 9.217 9.217 0 0 1-1.404.668.057.057 0 0 0-.03.08c.27.524.58 1.021.918 1.494a.057.057 0 0 0 .063.022 14.884 14.884 0 0 0 4.503-2.272.058.058 0 0 0 .024-.041c.375-3.882-.628-7.254-2.658-10.247a.046.046 0 0 0-.023-.02ZM6.013 9.718c-.887 0-1.617-.814-1.617-1.813s.716-1.814 1.617-1.814c.908 0 1.631.821 1.617 1.814 0 .999-.716 1.813-1.617 1.813Zm5.981 0c-.887 0-1.617-.814-1.617-1.813s.715-1.814 1.617-1.814c.908 0 1.631.821 1.617 1.814 0 .999-.71 1.813-1.617 1.813Z" fill="#5865F2"/>
       </svg>
     </a>
     <div class="tb-icon-btn tb-notif" onclick="notify('Pas de nouvelles notifications')">🔔<span class="tb-notif-dot"></span></div>
-    <!-- Boutons login/register (cachés quand connecté) -->
     <button class="tb-btn tb-login" id="btnLogin" onclick="openModal('login')">Connexion</button>
     <button class="tb-btn tb-register" id="btnRegister" onclick="openModal('register')">S'inscrire</button>
-    <!-- Profil user (visible quand connecté) -->
-    <div class="tb-user-pill" id="userPill" onclick="showPage('profile')">
+    <!-- User pill with dropdown -->
+    <div class="tb-user-pill" id="userPill" onclick="toggleUserDropdown()">
       <div class="tb-user-avatar" id="userPillAvatar">?</div>
       <span class="tb-user-name" id="userPillName">Player</span>
+      <span style="font-size:.6rem;color:var(--muted2);margin-left:2px">▼</span>
+      <div class="user-dropdown" id="userDropdown">
+        <div class="udrop-header">
+          <div class="udrop-avatar" id="udropAvatar">?</div>
+          <div>
+            <div class="udrop-name" id="udropName">Player</div>
+            <div class="udrop-sub">Membre XENOVRA</div>
+          </div>
+        </div>
+        <div class="udrop-item" onclick="navFromDrop('profile')"><span class="udrop-icon">👤</span> Profil</div>
+        <div class="udrop-item" onclick="navFromDrop('stats')"><span class="udrop-icon">📊</span> Statistiques</div>
+        <div class="udrop-item" onclick="navFromDrop('teams')"><span class="udrop-icon">🤝</span> Teams</div>
+        <div class="udrop-sep"></div>
+        <div class="udrop-item danger" onclick="logoutUser()"><span class="udrop-icon">🚪</span> Déconnexion</div>
+      </div>
     </div>
-    <button class="tb-logout-btn" id="btnLogout" style="display:none" onclick="logoutUser()">Déconnexion</button>
   </div>
 </header>
 
@@ -704,7 +841,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
             <div class="dropdown-opt" data-val="KILL RACE - Zero Build" onclick="selectFilter(event,'gamemode','KILL RACE - Zero Build','KR Zero Build')">Zero Build</div>
           </div>
         </div>
-        <!-- Entry Fee dropdown — "Plus gros prize" option removed -->
         <div class="fdd active-filter" id="fdd-fee" onclick="toggleDrop(event,'fee')">
           <span id="fdd-fee-label">Entry Fee</span>
           <span class="fdd-arrow">▼</span>
@@ -743,11 +879,11 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
     <div class="page-header">
       <div class="page-tag">Boutique</div>
       <h2 class="page-title">Boutique <span>Coins</span></h2>
-      <p class="page-sub">Personnalise ton personnage avec des caricatures et des titres exclusifs</p>
+      <p class="page-sub">Personnalise ton profil avec des avatars et des titres exclusifs</p>
     </div>
     <div class="shop-cats">
       <button class="shop-cat active" onclick="filterShop('all',this)">Tout</button>
-      <button class="shop-cat" onclick="filterShop('caricature',this)">Caricatures</button>
+      <button class="shop-cat" onclick="filterShop('avatar',this)">Avatars</button>
       <button class="shop-cat" onclick="filterShop('titre',this)">Titres</button>
     </div>
     <div class="shop-grid" id="shopGrid"></div>
@@ -758,11 +894,11 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
     <div class="page-header">
       <div class="page-tag">Inventaire</div>
       <h2 class="page-title">Mon <span>Inventaire</span></h2>
-      <p class="page-sub">Équipe tes items achetés pour personnaliser ton profil</p>
+      <p class="page-sub">Équipe tes items pour personnaliser ton profil</p>
     </div>
     <div class="inv-tabs">
       <button class="inv-tab active" onclick="filterInv('all',this)">Tout</button>
-      <button class="inv-tab" onclick="filterInv('caricature',this)">Caricatures</button>
+      <button class="inv-tab" onclick="filterInv('avatar',this)">Avatars</button>
       <button class="inv-tab" onclick="filterInv('titre',this)">Titres</button>
     </div>
     <div class="inv-grid" id="invGrid"></div>
@@ -779,6 +915,20 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
       <div class="empty-icon">🏆</div>
       <div class="empty-title">Tournois en attente</div>
       <div class="empty-sub">Les tournois officiels XENOVRA arrivent bientôt. Reste connecté pour ne pas rater le lancement !</div>
+    </div>
+  </div>
+
+  <!-- TEAMS (placeholder) -->
+  <div class="page" id="page-teams">
+    <div class="page-header">
+      <div class="page-tag">Équipes</div>
+      <h2 class="page-title">Mes <span>Teams</span></h2>
+      <p class="page-sub">Crée ou rejoins une équipe pour participer aux tournois</p>
+    </div>
+    <div class="empty-state">
+      <div class="empty-icon">🤝</div>
+      <div class="empty-title">Aucune team</div>
+      <div class="empty-sub">La fonctionnalité Teams arrive bientôt. Tu pourras créer ou rejoindre une équipe ici !</div>
     </div>
   </div>
 
@@ -966,202 +1116,268 @@ var equippedItems = {};
 var pseudoHistory = [];
 var isLoggedIn = false;
 var invFilter = 'all';
-
-// Simple in-memory user store (simulates a database for demo)
-var registeredUsers = {}; // email -> {password, pseudo}
+var userDropOpen = false;
+var registeredUsers = {};
 
 var FORBIDDEN_WORDS = ['nigger','nigga','negro','raciste','nazisme','nazi','hitler','juif','fuck','bitch','pute','salope','admin','moderator','staff','xenovra_admin','xenovra_mod'];
 
 // ─────────────────────────────────────────────
-// CARICATURES SVG
+// FREE STARTER AVATARS (5 avatars gratuits)
 // ─────────────────────────────────────────────
-var caricatures = {
-  default: function(skinColor, eyeColor) {
-    var sc = skinColor || '#f5c5a3';
-    var ec = eyeColor || '#3b82f6';
-    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
-      '<ellipse cx="48" cy="82" rx="22" ry="14" fill="#1e3a5f"/>' +
-      '<rect x="42" y="62" width="12" height="10" rx="4" fill="' + sc + '"/>' +
-      '<ellipse cx="48" cy="46" rx="24" ry="26" fill="' + sc + '"/>' +
-      '<ellipse cx="24" cy="48" rx="5" ry="7" fill="' + sc + '"/>' +
-      '<ellipse cx="72" cy="48" rx="5" ry="7" fill="' + sc + '"/>' +
-      '<ellipse cx="48" cy="24" rx="24" ry="12" fill="#2c1810"/>' +
-      '<rect x="24" y="20" width="48" height="10" rx="5" fill="#2c1810"/>' +
-      '<ellipse cx="38" cy="46" rx="7" ry="8" fill="white"/>' +
-      '<ellipse cx="58" cy="46" rx="7" ry="8" fill="white"/>' +
-      '<circle cx="39" cy="47" r="4" fill="' + ec + '"/>' +
-      '<circle cx="59" cy="47" r="4" fill="' + ec + '"/>' +
-      '<circle cx="40" cy="46" r="1.5" fill="white"/>' +
-      '<circle cx="60" cy="46" r="1.5" fill="white"/>' +
-      '<path d="M31 38 Q38 35 44 38" stroke="#2c1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>' +
-      '<path d="M52 38 Q58 35 65 38" stroke="#2c1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>' +
-      '<ellipse cx="48" cy="54" rx="4" ry="3" fill="#d9956e"/>' +
-      '<path d="M38 62 Q48 70 58 62" stroke="#c47a5a" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+var freeStarterAvatarIds = ['av_ninja','av_samurai','av_cyborg','av_phantom','av_beast'];
+
+// ─────────────────────────────────────────────
+// AVATARS SVG — premium + free
+// ─────────────────────────────────────────────
+var avatarSVGs = {
+  // FREE STARTER AVATARS
+  av_ninja: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">' +
+      '<ellipse cx="48" cy="82" rx="22" ry="13" fill="#1a0030"/>' +
+      '<rect x="43" y="63" width="10" height="9" rx="4" fill="#111"/>' +
+      '<ellipse cx="48" cy="44" rx="24" ry="26" fill="#111"/>' +
+      '<ellipse cx="48" cy="44" rx="24" ry="26" fill="#111"/>' +
+      '<rect x="24" y="48" width="48" height="14" rx="5" fill="#0a0a0a"/>' +
+      '<rect x="24" y="32" width="48" height="18" rx="8" fill="#1a1a1a"/>' +
+      '<ellipse cx="37" cy="42" rx="8" ry="6" fill="#111"/>' +
+      '<ellipse cx="59" cy="42" rx="8" ry="6" fill="#111"/>' +
+      '<ellipse cx="37" cy="42" rx="5" ry="4" fill="#7c3aed"/>' +
+      '<ellipse cx="59" cy="42" rx="5" ry="4" fill="#7c3aed"/>' +
+      '<circle cx="37" cy="42" r="2.5" fill="#a78bfa"/>' +
+      '<circle cx="59" cy="42" r="2.5" fill="#a78bfa"/>' +
+      '<circle cx="38" cy="41" r="1" fill="white"/>' +
+      '<circle cx="60" cy="41" r="1" fill="white"/>' +
+      '<rect x="26" y="20" width="44" height="16" rx="7" fill="#2a0050"/>' +
+      '<rect x="28" y="16" width="40" height="8" rx="4" fill="#1a0030"/>' +
+      '<line x1="38" y1="18" x2="58" y2="18" stroke="#7c3aed" stroke-width="1.5"/>' +
       '</svg>';
   },
-  dino: function() {
-    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
-      '<ellipse cx="48" cy="82" rx="22" ry="13" fill="#15803d"/>' +
-      '<path d="M70 76 Q85 80 82 88 Q75 86 70 80" fill="#16a34a"/>' +
-      '<ellipse cx="48" cy="44" rx="26" ry="28" fill="#22c55e"/>' +
-      '<ellipse cx="48" cy="62" rx="14" ry="10" fill="#16a34a"/>' +
-      '<circle cx="44" cy="62" r="2.5" fill="#15803d"/>' +
-      '<circle cx="52" cy="62" r="2.5" fill="#15803d"/>' +
-      '<polygon points="32,22 36,8 40,22" fill="#16a34a"/>' +
-      '<polygon points="44,18 48,4 52,18" fill="#16a34a"/>' +
-      '<polygon points="56,22 60,8 64,22" fill="#16a34a"/>' +
-      '<circle cx="36" cy="38" r="10" fill="white"/>' +
-      '<circle cx="60" cy="38" r="10" fill="white"/>' +
-      '<circle cx="37" cy="39" r="6" fill="#ef4444"/>' +
-      '<circle cx="61" cy="39" r="6" fill="#ef4444"/>' +
-      '<circle cx="38" cy="38" r="2.5" fill="black"/>' +
-      '<circle cx="62" cy="38" r="2.5" fill="black"/>' +
-      '<circle cx="39" cy="37" r="1" fill="white"/>' +
-      '<circle cx="63" cy="37" r="1" fill="white"/>' +
-      '<path d="M34 68 Q48 78 62 68" fill="#15803d"/>' +
-      '<rect x="38" y="66" width="6" height="5" rx="1" fill="white"/>' +
-      '<rect x="46" y="66" width="6" height="5" rx="1" fill="white"/>' +
-      '<rect x="54" y="66" width="6" height="5" rx="1" fill="white"/>' +
+  av_samurai: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">' +
+      '<ellipse cx="48" cy="82" rx="24" ry="13" fill="#1a0000"/>' +
+      '<rect x="42" y="62" width="12" height="10" rx="4" fill="#c0845a"/>' +
+      '<ellipse cx="48" cy="44" rx="24" ry="26" fill="#c0845a"/>' +
+      '<ellipse cx="25" cy="46" rx="6" ry="8" fill="#c0845a"/>' +
+      '<ellipse cx="71" cy="46" rx="6" ry="8" fill="#c0845a"/>' +
+      '<path d="M24 28 Q48 14 72 28 L68 44 Q48 36 28 44 Z" fill="#8b0000"/>' +
+      '<path d="M28 28 Q48 20 68 28" fill="#6b0000"/>' +
+      '<circle cx="48" cy="28" r="5" fill="#ffd700"/>' +
+      '<ellipse cx="37" cy="46" rx="8" ry="9" fill="white"/>' +
+      '<ellipse cx="59" cy="46" rx="8" ry="9" fill="white"/>' +
+      '<circle cx="37" cy="47" r="5" fill="#1a0000"/>' +
+      '<circle cx="59" cy="47" r="5" fill="#1a0000"/>' +
+      '<circle cx="37" cy="47" r="2.5" fill="#ef4444"/>' +
+      '<circle cx="59" cy="47" r="2.5" fill="#ef4444"/>' +
+      '<circle cx="38" cy="46" r="1" fill="white"/>' +
+      '<circle cx="60" cy="46" r="1" fill="white"/>' +
+      '<ellipse cx="48" cy="56" rx="4" ry="3" fill="#a06040"/>' +
+      '<path d="M38 62 Q48 68 58 62" stroke="#804030" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+      '<line x1="72" y1="50" x2="90" y2="20" stroke="#c0c0c0" stroke-width="2.5" stroke-linecap="round"/>' +
+      '<line x1="70" y1="52" x2="88" y2="22" stroke="#e8e8e8" stroke-width="1" stroke-linecap="round"/>' +
       '</svg>';
   },
-  robot: function() {
-    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
-      '<rect x="24" y="68" width="48" height="22" rx="4" fill="#1e40af"/>' +
-      '<circle cx="48" cy="78" r="4" fill="#60a5fa"/>' +
-      '<circle cx="36" cy="78" r="2.5" fill="#22d3ee"/>' +
-      '<circle cx="60" cy="78" r="2.5" fill="#f59e0b"/>' +
-      '<rect x="42" y="62" width="12" height="8" rx="2" fill="#6b7280"/>' +
-      '<rect x="46" y="6" width="4" height="14" rx="2" fill="#9ca3af"/>' +
-      '<circle cx="48" cy="5" r="5" fill="#22d3ee"/>' +
-      '<rect x="18" y="18" width="60" height="48" rx="10" fill="#374151"/>' +
-      '<rect x="22" y="24" width="52" height="28" rx="6" fill="#0f172a"/>' +
-      '<rect x="28" y="30" width="16" height="12" rx="3" fill="#22d3ee"/>' +
-      '<rect x="52" y="30" width="16" height="12" rx="3" fill="#22d3ee"/>' +
-      '<rect x="31" y="33" width="10" height="6" rx="2" fill="white"/>' +
-      '<rect x="55" y="33" width="10" height="6" rx="2" fill="white"/>' +
-      '<rect x="30" y="48" width="36" height="6" rx="3" fill="#1f2937"/>' +
-      '<rect x="32" y="50" width="8" height="2" rx="1" fill="#10b981"/>' +
-      '<rect x="44" y="50" width="8" height="2" rx="1" fill="#10b981"/>' +
-      '<rect x="56" y="50" width="8" height="2" rx="1" fill="#10b981"/>' +
-      '<circle cx="18" cy="38" r="5" fill="#4b5563"/>' +
-      '<circle cx="78" cy="38" r="5" fill="#4b5563"/>' +
+  av_cyborg: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">' +
+      '<ellipse cx="48" cy="82" rx="22" ry="13" fill="#0a2040"/>' +
+      '<rect x="42" y="63" width="12" height="9" rx="3" fill="#8090a0"/>' +
+      '<rect x="20" y="18" width="56" height="52" rx="10" fill="#2a3a4a"/>' +
+      '<rect x="20" y="18" width="56" height="26" rx="10" fill="#1a2a3a"/>' +
+      '<circle cx="48" cy="12" r="6" fill="#22d3ee"/>' +
+      '<rect x="45" y="6" width="6" height="10" rx="3" fill="#4a5a6a"/>' +
+      '<ellipse cx="35" cy="44" rx="11" ry="10" fill="#0a1520"/>' +
+      '<ellipse cx="61" cy="44" rx="11" ry="10" fill="#0a1520"/>' +
+      '<circle cx="35" cy="44" r="7" fill="#22d3ee" opacity="0.3"/>' +
+      '<circle cx="61" cy="44" r="7" fill="#22d3ee" opacity="0.3"/>' +
+      '<circle cx="35" cy="44" r="4" fill="#22d3ee"/>' +
+      '<circle cx="61" cy="44" r="4" fill="#22d3ee"/>' +
+      '<circle cx="36" cy="43" r="1.5" fill="white"/>' +
+      '<circle cx="62" cy="43" r="1.5" fill="white"/>' +
+      '<rect x="42" y="56" width="12" height="4" rx="2" fill="#1a2a3a"/>' +
+      '<rect x="44" y="57" width="8" height="2" rx="1" fill="#22d3ee" opacity="0.6"/>' +
+      '<rect x="14" y="36" width="8" height="16" rx="4" fill="#3a4a5a"/>' +
+      '<rect x="74" y="36" width="8" height="16" rx="4" fill="#3a4a5a"/>' +
+      '<rect x="16" y="40" width="4" height="3" rx="1" fill="#22d3ee" opacity="0.7"/>' +
+      '<rect x="76" y="40" width="4" height="3" rx="1" fill="#22d3ee" opacity="0.7"/>' +
+      '<path d="M34 64 Q48 70 62 64" stroke="#2a3a4a" stroke-width="3" fill="none" stroke-linecap="round"/>' +
       '</svg>';
   },
-  alien: function() {
-    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
-      '<ellipse cx="48" cy="82" rx="20" ry="13" fill="#4c1d95"/>' +
-      '<rect x="44" y="66" width="8" height="10" rx="4" fill="#7c3aed"/>' +
-      '<ellipse cx="48" cy="42" rx="30" ry="36" fill="#a78bfa"/>' +
-      '<ellipse cx="48" cy="20" rx="18" ry="16" fill="#8b5cf6"/>' +
-      '<ellipse cx="36" cy="46" rx="12" ry="14" fill="#0f0f1a"/>' +
-      '<ellipse cx="60" cy="46" rx="12" ry="14" fill="#0f0f1a"/>' +
-      '<ellipse cx="32" cy="42" rx="4" ry="5" fill="#7c3aed" opacity="0.7"/>' +
-      '<ellipse cx="56" cy="42" rx="4" ry="5" fill="#7c3aed" opacity="0.7"/>' +
-      '<circle cx="33" cy="41" r="2" fill="white" opacity="0.8"/>' +
-      '<circle cx="57" cy="41" r="2" fill="white" opacity="0.8"/>' +
-      '<path d="M40 66 Q48 70 56 66" stroke="#6d28d9" stroke-width="2" fill="none" stroke-linecap="round"/>' +
-      '<line x1="45" y1="60" x2="44" y2="63" stroke="#6d28d9" stroke-width="1.5" stroke-linecap="round"/>' +
-      '<line x1="51" y1="60" x2="52" y2="63" stroke="#6d28d9" stroke-width="1.5" stroke-linecap="round"/>' +
+  av_phantom: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">' +
+      '<ellipse cx="48" cy="84" rx="22" ry="12" fill="#0a0a20" opacity="0.6"/>' +
+      '<path d="M26 70 Q20 82 28 90 Q48 82 68 90 Q76 82 70 70 Q62 80 48 78 Q34 80 26 70 Z" fill="#1a1a35"/>' +
+      '<ellipse cx="48" cy="44" rx="28" ry="32" fill="#1e1e40"/>' +
+      '<ellipse cx="48" cy="44" rx="28" ry="32" fill="url(#phantomGrad)" opacity="0.5"/>' +
+      '<defs><radialGradient id="phantomGrad" cx="50%" cy="30%"><stop offset="0%" stop-color="#4040a0"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>' +
+      '<ellipse cx="36" cy="42" rx="10" ry="12" fill="#0a0a20"/>' +
+      '<ellipse cx="60" cy="42" rx="10" ry="12" fill="#0a0a20"/>' +
+      '<ellipse cx="36" cy="42" rx="6" ry="7" fill="#6060ff" opacity="0.8"/>' +
+      '<ellipse cx="60" cy="42" rx="6" ry="7" fill="#6060ff" opacity="0.8"/>' +
+      '<circle cx="36" cy="43" r="3" fill="white" opacity="0.9"/>' +
+      '<circle cx="60" cy="43" r="3" fill="white" opacity="0.9"/>' +
+      '<circle cx="37" cy="42" r="1.2" fill="#a0a0ff"/>' +
+      '<circle cx="61" cy="42" r="1.2" fill="#a0a0ff"/>' +
+      '<path d="M40 60 Q48 55 56 60" stroke="#3030a0" stroke-width="2.5" fill="none" stroke-linecap="round"/>' +
+      '<path d="M32 32 Q48 22 64 32" stroke="#4040a0" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.6"/>' +
       '</svg>';
   },
-  clown: function() {
-    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
-      '<ellipse cx="48" cy="82" rx="22" ry="13" fill="#dc2626"/>' +
-      '<ellipse cx="48" cy="70" rx="26" ry="8" fill="#fbbf24"/>' +
-      '<ellipse cx="35" cy="69" rx="10" ry="6" fill="#ef4444"/>' +
-      '<ellipse cx="61" cy="69" rx="10" ry="6" fill="#3b82f6"/>' +
-      '<rect x="43" y="62" width="10" height="8" rx="3" fill="#fde68a"/>' +
-      '<ellipse cx="48" cy="44" rx="26" ry="28" fill="#fef3c7"/>' +
-      '<ellipse cx="48" cy="18" rx="26" ry="6" fill="#7c3aed"/>' +
-      '<path d="M36 18 L48 -4 L60 18 Z" fill="#7c3aed"/>' +
-      '<circle cx="48" cy="-4" r="5" fill="#f59e0b"/>' +
-      '<ellipse cx="20" cy="44" rx="10" ry="14" fill="#f97316"/>' +
-      '<ellipse cx="76" cy="44" rx="10" ry="14" fill="#f97316"/>' +
-      '<circle cx="37" cy="44" r="10" fill="white"/>' +
-      '<circle cx="59" cy="44" r="10" fill="white"/>' +
-      '<circle cx="37" cy="45" r="6" fill="#3b82f6"/>' +
-      '<circle cx="59" cy="45" r="6" fill="#3b82f6"/>' +
-      '<circle cx="37" cy="45" r="3" fill="black"/>' +
-      '<circle cx="59" cy="45" r="3" fill="black"/>' +
-      '<circle cx="38" cy="44" r="1.2" fill="white"/>' +
-      '<circle cx="60" cy="44" r="1.2" fill="white"/>' +
-      '<circle cx="48" cy="58" r="8" fill="#ef4444"/>' +
-      '<circle cx="45" cy="56" r="2.5" fill="#fca5a5" opacity="0.6"/>' +
-      '<path d="M30 66 Q48 82 66 66" fill="#dc2626"/>' +
-      '<rect x="38" y="64" width="8" height="5" rx="1" fill="white"/>' +
-      '<rect x="50" y="64" width="8" height="5" rx="1" fill="white"/>' +
+  av_beast: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">' +
+      '<ellipse cx="48" cy="82" rx="22" ry="13" fill="#1a2a00"/>' +
+      '<rect x="43" y="63" width="10" height="9" rx="4" fill="#5a7a30"/>' +
+      '<ellipse cx="48" cy="44" rx="26" ry="28" fill="#6a8a3a"/>' +
+      '<ellipse cx="20" cy="40" rx="10" ry="14" fill="#5a7a30"/>' +
+      '<ellipse cx="76" cy="40" rx="10" ry="14" fill="#5a7a30"/>' +
+      '<polygon points="22,18 28,6 34,20" fill="#4a6a20"/>' +
+      '<polygon points="62,20 68,6 74,18" fill="#4a6a20"/>' +
+      '<ellipse cx="48" cy="30" rx="22" ry="14" fill="#5a7a30"/>' +
+      '<circle cx="36" cy="42" r="10" fill="#1a0f00"/>' +
+      '<circle cx="60" cy="42" r="10" fill="#1a0f00"/>' +
+      '<circle cx="36" cy="43" r="6" fill="#ff8800"/>' +
+      '<circle cx="60" cy="43" r="6" fill="#ff8800"/>' +
+      '<ellipse cx="36" cy="44" rx="2.5" ry="5" fill="black"/>' +
+      '<ellipse cx="60" cy="44" rx="2.5" ry="5" fill="black"/>' +
+      '<circle cx="37" cy="42" r="1.5" fill="white" opacity="0.7"/>' +
+      '<circle cx="61" cy="42" r="1.5" fill="white" opacity="0.7"/>' +
+      '<ellipse cx="48" cy="57" rx="6" ry="4" fill="#4a5a20"/>' +
+      '<path d="M34 64 Q48 74 62 64" fill="#3a4a10"/>' +
+      '<path d="M38 62 Q42 60 44 62" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+      '<path d="M52 62 Q54 60 58 62" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>' +
       '</svg>';
   },
-  wizard: function() {
-    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
-      '<path d="M20 96 L30 70 L66 70 L76 96 Z" fill="#1e1b4b"/>' +
-      '<circle cx="40" cy="80" r="2" fill="#fbbf24"/>' +
-      '<circle cx="55" cy="84" r="1.5" fill="#a78bfa"/>' +
-      '<circle cx="48" cy="76" r="1.5" fill="#60a5fa"/>' +
-      '<ellipse cx="48" cy="52" rx="22" ry="22" fill="#fde68a"/>' +
-      '<path d="M32 64 Q28 80 38 90 Q48 86 58 90 Q68 80 64 64" fill="#e5e7eb"/>' +
-      '<path d="M26 36 L48 -6 L70 36 Z" fill="#312e81"/>' +
-      '<ellipse cx="48" cy="36" rx="28" ry="7" fill="#3730a3"/>' +
-      '<circle cx="42" cy="20" r="3" fill="#fbbf24"/>' +
-      '<circle cx="54" cy="12" r="2" fill="#a78bfa"/>' +
-      '<circle cx="38" cy="52" r="8" fill="white"/>' +
-      '<circle cx="58" cy="52" r="8" fill="white"/>' +
-      '<circle cx="38" cy="53" r="5" fill="#7c3aed"/>' +
-      '<circle cx="58" cy="53" r="5" fill="#7c3aed"/>' +
-      '<circle cx="38" cy="53" r="2.5" fill="black"/>' +
-      '<circle cx="58" cy="53" r="2.5" fill="black"/>' +
-      '<circle cx="39" cy="52" r="1" fill="white"/>' +
-      '<circle cx="59" cy="52" r="1" fill="white"/>' +
-      '<path d="M30 44 Q38 40 46 44" stroke="#6b7280" stroke-width="3.5" fill="none" stroke-linecap="round"/>' +
-      '<path d="M50 44 Q58 40 66 44" stroke="#6b7280" stroke-width="3.5" fill="none" stroke-linecap="round"/>' +
-      '<path d="M38 62 Q43 58 48 62 Q53 58 58 62" fill="#9ca3af"/>' +
-      '<line x1="72" y1="60" x2="88" y2="30" stroke="#78350f" stroke-width="3" stroke-linecap="round"/>' +
-      '<circle cx="88" cy="28" r="5" fill="#fbbf24"/>' +
+  // PREMIUM AVATARS (boutique)
+  av_void_king: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">' +
+      '<ellipse cx="48" cy="83" rx="22" ry="12" fill="#000010"/>' +
+      '<rect x="43" y="64" width="10" height="9" rx="4" fill="#0a0020"/>' +
+      '<ellipse cx="48" cy="44" rx="26" ry="28" fill="#0d0025"/>' +
+      '<ellipse cx="48" cy="44" rx="26" ry="28" fill="#0d0025"/>' +
+      '<path d="M22 28 L30 10 L38 22 L48 6 L58 22 L66 10 L74 28 Z" fill="#1a0040"/>' +
+      '<path d="M22 28 L74 28 L70 36 Q48 30 26 36 Z" fill="#0f0030"/>' +
+      '<circle cx="36" cy="46" r="10" fill="#030010"/>' +
+      '<circle cx="60" cy="46" r="10" fill="#030010"/>' +
+      '<circle cx="36" cy="46" r="6" fill="#5500ff" opacity="0.8"/>' +
+      '<circle cx="60" cy="46" r="6" fill="#5500ff" opacity="0.8"/>' +
+      '<circle cx="36" cy="46" r="3" fill="#aa88ff"/>' +
+      '<circle cx="60" cy="46" r="3" fill="#aa88ff"/>' +
+      '<circle cx="37" cy="45" r="1.2" fill="white"/>' +
+      '<circle cx="61" cy="45" r="1.2" fill="white"/>' +
+      '<circle cx="48" cy="28" r="4" fill="#7700ff"/>' +
+      '<circle cx="48" cy="28" r="2" fill="#ccaaff"/>' +
+      '<path d="M36 60 Q48 66 60 60" stroke="#330088" stroke-width="2.5" fill="none" stroke-linecap="round"/>' +
       '</svg>';
   },
-  panda: function() {
-    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
-      '<ellipse cx="48" cy="82" rx="24" ry="14" fill="white"/>' +
-      '<circle cx="22" cy="72" r="10" fill="black"/>' +
-      '<circle cx="74" cy="72" r="10" fill="black"/>' +
-      '<circle cx="48" cy="46" r="28" fill="white"/>' +
-      '<circle cx="24" cy="22" r="12" fill="black"/>' +
-      '<circle cx="72" cy="22" r="12" fill="black"/>' +
-      '<circle cx="24" cy="22" r="7" fill="#374151"/>' +
-      '<circle cx="72" cy="22" r="7" fill="#374151"/>' +
-      '<ellipse cx="36" cy="46" rx="12" ry="11" fill="black"/>' +
-      '<ellipse cx="60" cy="46" rx="12" ry="11" fill="black"/>' +
-      '<circle cx="36" cy="47" r="7" fill="white"/>' +
-      '<circle cx="60" cy="47" r="7" fill="white"/>' +
-      '<circle cx="36" cy="48" r="4" fill="black"/>' +
-      '<circle cx="60" cy="48" r="4" fill="black"/>' +
-      '<circle cx="37" cy="47" r="1.5" fill="white"/>' +
-      '<circle cx="61" cy="47" r="1.5" fill="white"/>' +
-      '<ellipse cx="48" cy="58" rx="5" ry="4" fill="#1f2937"/>' +
-      '<path d="M40 64 Q48 70 56 64" stroke="#6b7280" stroke-width="2" fill="none" stroke-linecap="round"/>' +
-      '<circle cx="28" cy="58" r="7" fill="#fca5a5" opacity="0.5"/>' +
-      '<circle cx="68" cy="58" r="7" fill="#fca5a5" opacity="0.5"/>' +
+  av_fire_lord: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">' +
+      '<ellipse cx="48" cy="82" rx="22" ry="13" fill="#300000"/>' +
+      '<rect x="43" y="63" width="10" height="9" rx="4" fill="#803020"/>' +
+      '<ellipse cx="48" cy="44" rx="24" ry="26" fill="#903020"/>' +
+      '<ellipse cx="24" cy="46" rx="7" ry="9" fill="#803020"/>' +
+      '<ellipse cx="72" cy="46" rx="7" ry="9" fill="#803020"/>' +
+      '<path d="M30 30 Q35 10 48 20 Q52 8 58 18 Q65 10 62 30 Q56 22 48 28 Q40 22 30 30 Z" fill="#ff4400"/>' +
+      '<path d="M34 28 Q40 16 48 22 Q50 14 55 22 Q60 16 58 28" fill="#ff8800" opacity="0.8"/>' +
+      '<path d="M40 26 Q44 20 48 24 Q50 18 52 24" fill="#ffcc00" opacity="0.6"/>' +
+      '<circle cx="36" cy="46" r="10" fill="#1a0500"/>' +
+      '<circle cx="60" cy="46" r="10" fill="#1a0500"/>' +
+      '<circle cx="36" cy="46" r="6" fill="#ff4400"/>' +
+      '<circle cx="60" cy="46" r="6" fill="#ff4400"/>' +
+      '<circle cx="36" cy="46" r="3" fill="#ffcc00"/>' +
+      '<circle cx="60" cy="46" r="3" fill="#ffcc00"/>' +
+      '<circle cx="37" cy="45" r="1.2" fill="white"/>' +
+      '<circle cx="61" cy="45" r="1.2" fill="white"/>' +
+      '<path d="M36 62 Q48 70 60 62" fill="#700000"/>' +
+      '<rect x="40" y="60" width="6" height="4" rx="1" fill="white" opacity="0.8"/>' +
+      '<rect x="50" y="60" width="6" height="4" rx="1" fill="white" opacity="0.8"/>' +
+      '</svg>';
+  },
+  av_ice_queen: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">' +
+      '<ellipse cx="48" cy="82" rx="22" ry="13" fill="#001030"/>' +
+      '<rect x="43" y="63" width="10" height="9" rx="4" fill="#c0d8f0"/>' +
+      '<ellipse cx="48" cy="44" rx="24" ry="26" fill="#d0e8f8"/>' +
+      '<ellipse cx="24" cy="46" rx="6" ry="8" fill="#b0d0e8"/>' +
+      '<ellipse cx="72" cy="46" rx="6" ry="8" fill="#b0d0e8"/>' +
+      '<path d="M26 26 L32 14 L40 24 L48 10 L56 24 L64 14 L70 26 L58 30 L48 22 L38 30 Z" fill="#80c0e8"/>' +
+      '<path d="M34 26 L62 26 L58 34 Q48 28 38 34 Z" fill="#60a8d0"/>' +
+      '<circle cx="36" cy="46" r="10" fill="#001830"/>' +
+      '<circle cx="60" cy="46" r="10" fill="#001830"/>' +
+      '<circle cx="36" cy="46" r="6" fill="#22d3ee" opacity="0.9"/>' +
+      '<circle cx="60" cy="46" r="6" fill="#22d3ee" opacity="0.9"/>' +
+      '<circle cx="36" cy="46" r="3" fill="#e0f8ff"/>' +
+      '<circle cx="60" cy="46" r="3" fill="#e0f8ff"/>' +
+      '<circle cx="37" cy="45" r="1.2" fill="white"/>' +
+      '<circle cx="61" cy="45" r="1.2" fill="white"/>' +
+      '<ellipse cx="48" cy="56" rx="4" ry="3" fill="#a0c8e0"/>' +
+      '<path d="M36 62 Q48 66 60 62" stroke="#6090b0" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+      '<path d="M44 10 L48 2 L52 10 M48 2 L46 8 M48 2 L50 8" stroke="#22d3ee" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.8"/>' +
+      '</svg>';
+  },
+  av_dark_knight: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">' +
+      '<ellipse cx="48" cy="82" rx="22" ry="13" fill="#0a0a0a"/>' +
+      '<rect x="43" y="63" width="10" height="9" rx="3" fill="#1a1a1a"/>' +
+      '<rect x="20" y="20" width="56" height="50" rx="8" fill="#1a1a1a"/>' +
+      '<rect x="24" y="20" width="48" height="18" rx="6" fill="#0f0f0f"/>' +
+      '<path d="M36 20 L30 6 L44 16 L48 2 L52 16 L66 6 L60 20 Z" fill="#1a1a1a"/>' +
+      '<path d="M38 20 L34 10 L44 17 L48 6 L52 17 L62 10 L58 20 Z" fill="#2a2a2a"/>' +
+      '<ellipse cx="36" cy="42" rx="10" ry="10" fill="#0f0f0f"/>' +
+      '<ellipse cx="60" cy="42" rx="10" ry="10" fill="#0f0f0f"/>' +
+      '<ellipse cx="36" cy="42" rx="6" ry="6" fill="#3b82f6" opacity="0.8"/>' +
+      '<ellipse cx="60" cy="42" rx="6" ry="6" fill="#3b82f6" opacity="0.8"/>' +
+      '<circle cx="36" cy="42" r="3" fill="#60a5fa"/>' +
+      '<circle cx="60" cy="42" r="3" fill="#60a5fa"/>' +
+      '<circle cx="37" cy="41" r="1.2" fill="white"/>' +
+      '<circle cx="61" cy="41" r="1.2" fill="white"/>' +
+      '<rect x="38" y="56" width="20" height="5" rx="2.5" fill="#0f0f0f"/>' +
+      '<rect x="40" y="57" width="6" height="3" rx="1" fill="#3b82f6" opacity="0.6"/>' +
+      '<rect x="50" y="57" width="6" height="3" rx="1" fill="#3b82f6" opacity="0.6"/>' +
+      '<rect x="14" y="34" width="8" height="18" rx="4" fill="#1a1a1a"/>' +
+      '<rect x="74" y="34" width="8" height="18" rx="4" fill="#1a1a1a"/>' +
       '</svg>';
   }
 };
 
-function getDefaultCaricature() { return caricatures.default(); }
+// DEFAULT CARICATURE (fallback)
+function getDefaultAvatarSVG() {
+  return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">' +
+    '<ellipse cx="48" cy="82" rx="22" ry="14" fill="#1e3a5f"/>' +
+    '<rect x="42" y="62" width="12" height="10" rx="4" fill="#f5c5a3"/>' +
+    '<ellipse cx="48" cy="46" rx="24" ry="26" fill="#f5c5a3"/>' +
+    '<ellipse cx="24" cy="48" rx="5" ry="7" fill="#f5c5a3"/>' +
+    '<ellipse cx="72" cy="48" rx="5" ry="7" fill="#f5c5a3"/>' +
+    '<ellipse cx="48" cy="24" rx="24" ry="12" fill="#2c1810"/>' +
+    '<rect x="24" y="20" width="48" height="10" rx="5" fill="#2c1810"/>' +
+    '<ellipse cx="38" cy="46" rx="7" ry="8" fill="white"/>' +
+    '<ellipse cx="58" cy="46" rx="7" ry="8" fill="white"/>' +
+    '<circle cx="39" cy="47" r="4" fill="#3b82f6"/>' +
+    '<circle cx="59" cy="47" r="4" fill="#3b82f6"/>' +
+    '<circle cx="40" cy="46" r="1.5" fill="white"/>' +
+    '<circle cx="60" cy="46" r="1.5" fill="white"/>' +
+    '<path d="M31 38 Q38 35 44 38" stroke="#2c1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>' +
+    '<path d="M52 38 Q58 35 65 38" stroke="#2c1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>' +
+    '<ellipse cx="48" cy="54" rx="4" ry="3" fill="#d9956e"/>' +
+    '<path d="M38 62 Q48 70 58 62" stroke="#c47a5a" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+    '</svg>';
+}
 
-function getEquippedCaricatureSVG() {
-  var eq = equippedItems['caricature'];
-  if (!eq) return getDefaultCaricature();
-  if (eq==='car_dino') return caricatures.dino();
-  if (eq==='car_robot') return caricatures.robot();
-  if (eq==='car_alien') return caricatures.alien();
-  if (eq==='car_clown') return caricatures.clown();
-  if (eq==='car_wizard') return caricatures.wizard();
-  if (eq==='car_panda') return caricatures.panda();
-  return getDefaultCaricature();
+function getAvatarSVGById(id) {
+  if (avatarSVGs[id]) return avatarSVGs[id]();
+  return getDefaultAvatarSVG();
+}
+
+function getEquippedAvatarSVG() {
+  var eq = equippedItems['avatar'];
+  if (!eq) return getDefaultAvatarSVG();
+  return getAvatarSVGById(eq);
 }
 
 function updateProfileAvatar() {
   var box = document.getElementById('profileAvatarBox');
-  if (box) box.innerHTML = getEquippedCaricatureSVG();
+  if (box) box.innerHTML = getEquippedAvatarSVG();
+  // Also update user dropdown avatar if logged in
+  var udrop = document.getElementById('udropAvatar');
+  if (udrop && isLoggedIn) {
+    udrop.innerHTML = playerPseudo.charAt(0).toUpperCase();
+  }
 }
 
 function getEquippedTitre() {
@@ -1185,6 +1401,7 @@ function updateProfileTitre() {
 function getCoins() { return playerCoins; }
 function setCoins(n) {
   playerCoins = Math.max(0, n);
+  document.getElementById('tokenDisplay').textContent = playerCoins.toFixed(2);
   document.getElementById('navXP').textContent = playerCoins.toLocaleString('fr-FR');
   document.getElementById('pseudoCoinBalance').textContent = playerCoins.toFixed(2);
   document.getElementById('profileCoins').textContent = playerCoins.toLocaleString('fr-FR');
@@ -1204,7 +1421,49 @@ function notify(msg, icon) {
 }
 
 // ─────────────────────────────────────────────
-// AUTH — connexion/inscription fonctionnelles
+// FLOATING PANELS
+// ─────────────────────────────────────────────
+function openPanel(id) {
+  document.getElementById(id).classList.add('open');
+}
+function closePanel(id) {
+  document.getElementById(id).classList.remove('open');
+}
+document.addEventListener('click', function(e) {
+  ['coinsPanel','snipesPanel'].forEach(function(pid) {
+    var panel = document.getElementById(pid);
+    if (panel && panel.classList.contains('open')) {
+      if (e.target === panel) closePanel(pid);
+    }
+  });
+});
+
+// ─────────────────────────────────────────────
+// USER DROPDOWN
+// ─────────────────────────────────────────────
+function toggleUserDropdown() {
+  userDropOpen = !userDropOpen;
+  document.getElementById('userDropdown').classList.toggle('open', userDropOpen);
+}
+function navFromDrop(page) {
+  userDropOpen = false;
+  document.getElementById('userDropdown').classList.remove('open');
+  if (page === 'stats' || page === 'teams') {
+    if (page === 'stats') showPage('leaderboard');
+    else showPage('teams');
+  } else {
+    showPage(page);
+  }
+}
+document.addEventListener('click', function(e) {
+  if (userDropOpen && !e.target.closest('#userPill')) {
+    userDropOpen = false;
+    document.getElementById('userDropdown').classList.remove('open');
+  }
+});
+
+// ─────────────────────────────────────────────
+// AUTH
 // ─────────────────────────────────────────────
 function openModal(tab) {
   tab = tab || 'login';
@@ -1269,12 +1528,13 @@ function handleEmailAuth() {
     if (registeredUsers[email]) {
       showAuthError('errGlobal','Un compte existe déjà avec cet email.'); return;
     }
-    // Register
     registeredUsers[email] = {password: pass, pseudo: pseudo};
     playerPseudo = pseudo;
+    // Give free starter avatars
+    giveStarterAvatars();
     loginUser(pseudo);
     closeModal();
-    notify('Compte créé ! Bienvenue sur XENOVRA, ' + pseudo + ' 🎮');
+    notify('Compte créé ! 5 avatars offerts 🎁 Bienvenue ' + pseudo + ' !');
   } else {
     if (!valid) return;
     var user = registeredUsers[email];
@@ -1291,18 +1551,36 @@ function handleEmailAuth() {
   }
 }
 
+function giveStarterAvatars() {
+  // Add 5 free starter avatars to inventory if not already present
+  var freeAvatars = [
+    {id:'av_ninja', cat:'avatar', svgKey:'av_ninja', name:'Ninja Ombre', bg:'bg-ninja', color:'#a78bfa'},
+    {id:'av_samurai', cat:'avatar', svgKey:'av_samurai', name:'Samurai Rouge', bg:'bg-samurai', color:'#ef4444'},
+    {id:'av_cyborg', cat:'avatar', svgKey:'av_cyborg', name:'Cyborg X', bg:'bg-cyborg', color:'#22d3ee'},
+    {id:'av_phantom', cat:'avatar', svgKey:'av_phantom', name:'Phantom', bg:'bg-phantom', color:'#818cf8'},
+    {id:'av_beast', cat:'avatar', svgKey:'av_beast', name:'Beast Mode', bg:'bg-beast', color:'#86efac'},
+  ];
+  freeAvatars.forEach(function(av) {
+    if (!inventory.some(function(i){ return i.id===av.id; })) {
+      inventory.push(av);
+    }
+  });
+  // Auto-equip the first one (Ninja)
+  equippedItems['avatar'] = 'av_ninja';
+  updateProfileAvatar();
+}
+
 function loginUser(pseudo) {
   isLoggedIn = true;
   playerPseudo = pseudo;
-  // Update topbar — hide login/register, show user pill
   document.getElementById('btnLogin').style.display='none';
   document.getElementById('btnRegister').style.display='none';
-  document.getElementById('btnLogout').style.display='flex';
   var pill = document.getElementById('userPill');
   pill.classList.add('visible');
   document.getElementById('userPillName').textContent = pseudo;
   document.getElementById('userPillAvatar').textContent = pseudo.charAt(0).toUpperCase();
-  // Update profile page
+  document.getElementById('udropAvatar').textContent = pseudo.charAt(0).toUpperCase();
+  document.getElementById('udropName').textContent = pseudo;
   document.getElementById('profileDisplayName').textContent = pseudo;
   document.getElementById('profileTag').textContent = '@'+pseudo.toLowerCase().replace(/[^a-z0-9]/g,'')+' · Membre depuis aujourd\'hui';
   document.getElementById('currentPseudoDisplay').textContent = pseudo;
@@ -1310,9 +1588,10 @@ function loginUser(pseudo) {
 
 function logoutUser() {
   isLoggedIn = false;
+  userDropOpen = false;
+  document.getElementById('userDropdown').classList.remove('open');
   document.getElementById('btnLogin').style.display='flex';
   document.getElementById('btnRegister').style.display='flex';
-  document.getElementById('btnLogout').style.display='none';
   document.getElementById('userPill').classList.remove('visible');
   notify('Déconnecté. À bientôt !','👋');
 }
@@ -1331,7 +1610,7 @@ function showPage(id) {
   if (id==='matches') renderMatches();
   if (id==='leaderboard') renderLb('day');
   if (id==='shop') renderShop('all');
-  if (id==='inventory') renderInventory('all');
+  if (id==='inventory') renderInventory(invFilter);
   if (id==='profile') { updateProfileAvatar(); updateProfileTitre(); }
   if (id==='settings') {
     document.getElementById('pseudoCoinBalance').textContent = getCoins().toFixed(2);
@@ -1366,6 +1645,8 @@ function changePseudo() {
   if (isLoggedIn) {
     document.getElementById('userPillName').textContent = playerPseudo;
     document.getElementById('userPillAvatar').textContent = playerPseudo.charAt(0).toUpperCase();
+    document.getElementById('udropName').textContent = playerPseudo;
+    document.getElementById('udropAvatar').textContent = playerPseudo.charAt(0).toUpperCase();
   }
   renderPseudoHistory();
   notify('Pseudo changé en "'+playerPseudo+'" ! (-0.5 coins)','✅');
@@ -1510,7 +1791,7 @@ function joinMatch(id,locked) {
 // ─────────────────────────────────────────────
 // LEADERBOARD
 // ─────────────────────────────────────────────
-function renderLb(period) {
+function renderLb() {
   document.getElementById('lbRows').innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><div class="empty-title">Classement vide</div><div class="empty-sub">Aucune partie jouée pour l\'instant. Le classement se remplira au fur et à mesure des matchs !</div></div>';
 }
 function switchLb(p,btn) {
@@ -1520,54 +1801,55 @@ function switchLb(p,btn) {
 }
 
 // ─────────────────────────────────────────────
-// SHOP — sans rareté, fonds colorés distincts
+// SHOP ITEMS
 // ─────────────────────────────────────────────
 var shopItems = [
-  {id:'car_dino',cat:'caricature',svgKey:'dino',name:'Dino Furieux',desc:'Un dino complètement cinglé avec des yeux rouges exorbités !',price:5,bg:'bg-dino',color:'#22c55e'},
-  {id:'car_robot',cat:'caricature',svgKey:'robot',name:'Xeno Bot 3000',desc:'Un robot futuriste avec écran de visage et antenne clignotante.',price:5,bg:'bg-robot',color:'#22d3ee'},
-  {id:'car_alien',cat:'caricature',svgKey:'alien',name:'Alien Psychique',desc:'Une créature extraterrestre avec d\'immenses yeux noirs hypnotiques.',price:5,bg:'bg-alien',color:'#a78bfa'},
-  {id:'car_clown',cat:'caricature',svgKey:'clown',name:'Clown du Chaos',desc:'Le clown le plus flippant du serveur, sourire XXL inclus !',price:5,bg:'bg-clown',color:'#f97316'},
-  {id:'car_wizard',cat:'caricature',svgKey:'wizard',name:'Mago Fou',desc:'Un vieux mago avec barbe interminable et baguette magique.',price:5,bg:'bg-wizard',color:'#818cf8'},
-  {id:'car_panda',cat:'caricature',svgKey:'panda',name:'Panda Chubby',desc:'Un panda adorable tout rond avec des joues roses trop mignonnes.',price:5,bg:'bg-panda',color:'#e5e7eb'},
-  {id:'titre_zonewars',cat:'titre',svgKey:null,name:'Zone Wars',desc:'Le titre des maîtres du Zone Wars Fortnite.',price:2,bg:'bg-titre-zone',color:'#60a5fa'},
-  {id:'titre_prime',cat:'titre',svgKey:null,name:'Prime',desc:'Tu es au sommet de ton art. Titre prestige.',price:2,bg:'bg-titre-prime',color:'#f97316'},
-  {id:'titre_monstre',cat:'titre',svgKey:null,name:'Monstre',desc:'Inarrêtable. Implacable. Monstre.',price:2,bg:'bg-titre-monstre',color:'#c084fc'},
-  {id:'titre_slasher',cat:'titre',svgKey:null,name:'Slasher',desc:'Tu élimines tout le monde sans hésitation.',price:2,bg:'bg-titre-slasher',color:'#f87171'},
-  {id:'titre_only200',cat:'titre',svgKey:null,name:'Only 200',desc:'Réservé à l\'élite — les 200 coins et plus.',price:2,bg:'bg-titre-only',color:'#fbbf24'},
+  // PREMIUM AVATARS
+  {id:'av_void_king', cat:'avatar', svgKey:'av_void_king', name:'Void King', desc:'Le souverain du néant. Yeux violets envoûtants, couronne de ténèbres absolues.', price:8, bg:'bg-void', color:'#a78bfa'},
+  {id:'av_fire_lord', cat:'avatar', svgKey:'av_fire_lord', name:'Fire Lord', desc:'Seigneur des flammes. Chevelure de feu vivante, regard incandescent.', price:8, bg:'bg-fire', color:'#f97316'},
+  {id:'av_ice_queen', cat:'avatar', svgKey:'av_ice_queen', name:'Ice Queen', desc:'Reine des glaces. Couronne cristalline, yeux cyan glacials.', price:8, bg:'bg-ice', color:'#22d3ee'},
+  {id:'av_dark_knight', cat:'avatar', svgKey:'av_dark_knight', name:'Dark Knight', desc:'Chevalier des ombres. Armure intégrale, visière tech bleue.', price:8, bg:'bg-phantom', color:'#60a5fa'},
+  // TITRES
+  {id:'titre_zonewars', cat:'titre', svgKey:null, name:'Zone Wars', desc:'Le titre des maîtres du Zone Wars Fortnite.', price:2, bg:'bg-titre-zone', color:'#60a5fa'},
+  {id:'titre_prime', cat:'titre', svgKey:null, name:'Prime', desc:'Tu es au sommet de ton art. Titre prestige.', price:2, bg:'bg-titre-prime', color:'#f97316'},
+  {id:'titre_monstre', cat:'titre', svgKey:null, name:'Monstre', desc:'Inarrêtable. Implacable. Monstre.', price:2, bg:'bg-titre-monstre', color:'#c084fc'},
+  {id:'titre_slasher', cat:'titre', svgKey:null, name:'Slasher', desc:'Tu élimines tout le monde sans hésitation.', price:2, bg:'bg-titre-slasher', color:'#f87171'},
+  {id:'titre_only200', cat:'titre', svgKey:null, name:'Only 200', desc:'Réservé à l\'élite — les 200 coins et plus.', price:2, bg:'bg-titre-only', color:'#fbbf24'},
 ];
 
-function getCaricatureSVGForItem(item) {
-  if(item.cat!=='caricature') return null;
-  if(item.svgKey==='dino') return caricatures.dino();
-  if(item.svgKey==='robot') return caricatures.robot();
-  if(item.svgKey==='alien') return caricatures.alien();
-  if(item.svgKey==='clown') return caricatures.clown();
-  if(item.svgKey==='wizard') return caricatures.wizard();
-  if(item.svgKey==='panda') return caricatures.panda();
-  return getDefaultCaricature();
+function isOwned(itemId) {
+  return inventory.some(function(i){ return i.id===itemId; });
 }
-function isOwned(itemId) { return inventory.some(function(i){ return i.id===itemId; }); }
+function isFreeStarter(itemId) {
+  return freeStarterAvatarIds.indexOf(itemId) !== -1;
+}
 
-function filterShop(f,btn) {
+function filterShop(f, btn) {
   document.querySelectorAll('.shop-cat').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
   renderShop(f);
 }
 function renderShop(f) {
-  var items=f==='all'?shopItems:shopItems.filter(function(i){ return i.cat===f; });
-  document.getElementById('shopGrid').innerHTML=items.map(function(i){
-    var owned=isOwned(i.id);
-    var preview='';
-    if(i.cat==='caricature'){
-      var svg=getCaricatureSVGForItem(i);
-      preview='<div style="position:relative;z-index:1;width:100px;height:100px;display:flex;align-items:center;justify-content:center">'+svg+'</div>';
+  var items = f==='all' ? shopItems : shopItems.filter(function(i){ return i.cat===f; });
+  document.getElementById('shopGrid').innerHTML = items.map(function(i){
+    var owned = isOwned(i.id);
+    var preview = '';
+    if (i.cat==='avatar') {
+      var svg = getAvatarSVGById(i.svgKey);
+      preview = '<div style="position:relative;z-index:1;width:100px;height:100px;display:flex;align-items:center;justify-content:center">' + svg + '</div>';
     } else {
-      preview='<div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px">' +
+      preview = '<div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px">' +
         '<div style="font-size:2.2rem">🏷️</div>' +
         '<div style="padding:5px 18px;border-radius:6px;font-family:\'Share Tech Mono\',monospace;font-size:.82rem;font-weight:700;letter-spacing:2px;background:rgba(0,0,0,.35);border:1px solid '+i.color+'44;color:'+i.color+'">'+i.name+'</div>' +
         '</div>';
     }
-    return '<div class="shop-item" style="'+(owned?'opacity:.75':'')+'"><div class="shop-item-img '+i.bg+'" style="height:160px">'+preview+'</div><div class="shop-item-body"><div class="shop-item-name">'+i.name+'</div><div class="shop-item-desc">'+i.desc+'</div><div class="shop-item-footer"><div class="shop-price">🪙 '+i.price.toLocaleString('fr-FR')+'</div>'+
+    return '<div class="shop-item" style="'+(owned?'opacity:.7':'')+'">'+
+      '<div class="shop-item-img '+i.bg+'" style="height:160px">'+preview+'</div>'+
+      '<div class="shop-item-body">'+
+      '<div class="shop-item-name">'+i.name+'</div>'+
+      '<div class="shop-item-desc">'+i.desc+'</div>'+
+      '<div class="shop-item-footer">'+
+      '<div class="shop-price">🪙 '+i.price.toLocaleString('fr-FR')+'</div>'+
       (owned
         ? '<button class="shop-buy-btn" disabled style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#10b981">✅ Possédé</button>'
         : '<button class="shop-buy-btn" onclick="buyItem(\''+i.id+'\')">Acheter</button>')+
@@ -1576,15 +1858,15 @@ function renderShop(f) {
 }
 
 function buyItem(itemId) {
-  var item=shopItems.find(function(i){ return i.id===itemId; });
-  if(!item) return;
-  if(isOwned(itemId)){ notify('Tu possèdes déjà cet item !','⚠️'); return; }
-  if(getCoins()<item.price){ notify('Coins insuffisants ! Il manque '+(item.price-getCoins()).toFixed(2)+' coins','❌'); return; }
-  setCoins(getCoins()-item.price);
-  inventory.push({id:item.id,cat:item.cat,svgKey:item.svgKey,name:item.name,bg:item.bg,color:item.color});
-  var activeShopCat=document.querySelector('.shop-cat.active');
-  var currentFilter='all';
-  if(activeShopCat){ var m=activeShopCat.getAttribute('onclick').match(/filterShop\('(\w+)'/); if(m) currentFilter=m[1]; }
+  var item = shopItems.find(function(i){ return i.id===itemId; });
+  if (!item) return;
+  if (isOwned(itemId)){ notify('Tu possèdes déjà cet item !','⚠️'); return; }
+  if (getCoins() < item.price){ notify('Coins insuffisants ! Il manque '+(item.price-getCoins()).toFixed(2)+' coins','❌'); return; }
+  setCoins(getCoins() - item.price);
+  inventory.push({id:item.id, cat:item.cat, svgKey:item.svgKey, name:item.name, bg:item.bg, color:item.color});
+  var activeShopCat = document.querySelector('.shop-cat.active');
+  var currentFilter = 'all';
+  if (activeShopCat){ var m=activeShopCat.getAttribute('onclick').match(/filterShop\('(\w+)'/); if(m) currentFilter=m[1]; }
   renderShop(currentFilter);
   notify('"'+item.name+'" ajouté à ton inventaire ! 🎒');
 }
@@ -1592,37 +1874,46 @@ function buyItem(itemId) {
 // ─────────────────────────────────────────────
 // INVENTORY
 // ─────────────────────────────────────────────
-function filterInv(f,btn) {
-  invFilter=f;
+function filterInv(f, btn) {
+  invFilter = f;
   document.querySelectorAll('.inv-tab').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
   renderInventory(f);
 }
 function renderInventory(f) {
-  var items=f==='all'?inventory:inventory.filter(function(i){ return i.cat===f; });
-  var grid=document.getElementById('invGrid');
-  if(items.length===0){
-    grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🎒</div><div class="empty-title">Inventaire vide</div><div class="empty-sub">Achète des caricatures et des titres dans la Boutique pour les retrouver ici et les équiper !</div></div>';
+  var items = f==='all' ? inventory : inventory.filter(function(i){ return i.cat===f; });
+  var grid = document.getElementById('invGrid');
+  if (items.length===0) {
+    grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🎒</div><div class="empty-title">Inventaire vide</div><div class="empty-sub">Achète des avatars et des titres dans la Boutique, ou inscris-toi pour recevoir 5 avatars offerts !</div></div>';
     return;
   }
-  grid.innerHTML=items.map(function(i){
-    var eq=equippedItems[i.cat]===i.id;
-    var preview='';
-    if(i.cat==='caricature'){
-      var svg=getCaricatureSVGForItem(i);
-      preview='<div style="width:80px;height:80px;display:flex;align-items:center;justify-content:center;transform:scale(0.8)">'+svg+'</div>';
+  grid.innerHTML = items.map(function(i){
+    var eq = equippedItems[i.cat]===i.id;
+    var isFree = freeStarterAvatarIds.indexOf(i.id) !== -1;
+    var preview = '';
+    if (i.cat==='avatar') {
+      var svg = getAvatarSVGById(i.svgKey || i.id);
+      preview = '<div style="width:80px;height:80px;display:flex;align-items:center;justify-content:center;transform:scale(0.8)">'+svg+'</div>';
     } else {
-      preview='<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="font-size:1.8rem">🏷️</div><div style="padding:3px 10px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;font-size:.65rem;font-weight:700;letter-spacing:1.5px;border:1px solid '+i.color+'44;color:'+i.color+';background:rgba(0,0,0,.3)">'+i.name+'</div></div>';
+      preview = '<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="font-size:1.8rem">🏷️</div><div style="padding:3px 10px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;font-size:.65rem;font-weight:700;letter-spacing:1.5px;border:1px solid '+i.color+'44;color:'+i.color+';background:rgba(0,0,0,.3)">'+i.name+'</div></div>';
     }
-    return '<div class="inv-card '+(eq?'equipped':'')+'" id="icard-'+i.id+'"><div class="inv-img '+(i.bg||'rarity-common')+'">'+(eq?'<span class="inv-equipped-badge">ÉQUIPÉ</span>':'')+preview+'</div><div class="inv-body"><div class="inv-name">'+i.name+'</div><button class="inv-equip-btn '+(eq?'unequip':'equip')+'" onclick="toggleEquip(\''+i.id+'\',\''+i.cat+'\')">'+(eq?'✅ Déséquiper':'Équiper')+'</button></div></div>';
+    return '<div class="inv-card '+(eq?'equipped':'')+'" id="icard-'+i.id+'">'+
+      '<div class="inv-img '+(i.bg||'')+'" style="height:110px">'+
+      (eq?'<span class="inv-equipped-badge">ÉQUIPÉ</span>':'')+
+      (isFree?'<span style="position:absolute;top:8px;left:8px;padding:2px 6px;border-radius:3px;font-size:.55rem;font-weight:700;letter-spacing:1px;background:rgba(16,185,129,.2);border:1px solid rgba(16,185,129,.4);color:#10b981;font-family:Share Tech Mono,monospace">GRATUIT</span>':'')+
+      preview+'</div>'+
+      '<div class="inv-body">'+
+      '<div class="inv-name">'+i.name+'</div>'+
+      '<button class="inv-equip-btn '+(eq?'unequip':'equip')+'" onclick="toggleEquip(\''+i.id+'\',\''+i.cat+'\')">'+(eq?'✅ Déséquiper':'Équiper')+'</button>'+
+      '</div></div>';
   }).join('');
 }
 
-function toggleEquip(itemId,cat) {
-  if(equippedItems[cat]===itemId){ delete equippedItems[cat]; notify('Item déséquipé'); }
+function toggleEquip(itemId, cat) {
+  if (equippedItems[cat]===itemId) { delete equippedItems[cat]; notify('Item déséquipé'); }
   else {
-    equippedItems[cat]=itemId;
-    var item=inventory.find(function(i){ return i.id===itemId; });
+    equippedItems[cat] = itemId;
+    var item = inventory.find(function(i){ return i.id===itemId; });
     notify('"'+(item?item.name:itemId)+'" équipé sur ton profil !','✅');
   }
   renderInventory(invFilter);
@@ -1634,7 +1925,7 @@ function toggleEquip(itemId,cat) {
 // RESET STATS
 // ─────────────────────────────────────────────
 function resetStats() {
-  if(getCoins()<2.5){ notify('Coins insuffisants ! Il te faut 2.5 coins pour réinitialiser','❌'); return; }
+  if (getCoins()<2.5){ notify('Coins insuffisants ! Il te faut 2.5 coins pour réinitialiser','❌'); return; }
   setCoins(getCoins()-2.5);
   notify('Statistiques réinitialisées ! (-2.5 coins)','⚠️');
 }
@@ -1694,14 +1985,10 @@ function initLoader() {
   setTimeout(function(){ clearInterval(iv); document.getElementById('loader').classList.add('hidden'); },2200);
 }
 
-// Modal close on backdrop click
 document.getElementById('authModal').addEventListener('click',function(e){
   if(e.target===document.getElementById('authModal')) closeModal();
 });
 
-// ─────────────────────────────────────────────
-// INIT
-// ─────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded',function(){
   initCursor();
   initCanvas();
