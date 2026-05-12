@@ -902,21 +902,15 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
         <div class="settings-panel" id="sp-danger">
           <div class="settings-section danger-zone">
             <div class="ss-title" style="color:var(--red)">⚠️ Zone Danger</div>
-            <div class="ss-sub">Ces actions sont irréversibles. Réfléchis bien avant de continuer.</div>
+            <div class="ss-sub">Cette action est irréversible. Réfléchis bien avant de continuer.</div>
             <div style="display:flex;flex-direction:column;gap:14px">
               <div style="display:flex;align-items:center;justify-content:space-between;padding:14px;background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.1);border-radius:8px;gap:16px">
                 <div>
                   <div style="font-size:.85rem;font-weight:600;color:var(--text)">Réinitialiser les statistiques</div>
                   <div style="font-size:.75rem;color:var(--muted2);margin-top:3px">Remet à zéro tes victoires, défaites et ratio</div>
+                  <div style="font-size:.72rem;color:var(--gold);margin-top:5px;font-family:'Share Tech Mono',monospace">🪙 Coût : 2.5 coins</div>
                 </div>
-                <button class="danger-btn" onclick="notify('Stats réinitialisées !','⚠️')">Réinitialiser</button>
-              </div>
-              <div style="display:flex;align-items:center;justify-content:space-between;padding:14px;background:rgba(239,68,68,.04);border:1px solid rgba(239,68,68,.1);border-radius:8px;gap:16px">
-                <div>
-                  <div style="font-size:.85rem;font-weight:600;color:var(--text)">Supprimer le compte</div>
-                  <div style="font-size:.75rem;color:var(--muted2);margin-top:3px">Supprime définitivement ton compte et toutes tes données</div>
-                </div>
-                <button class="danger-btn" onclick="notify('Contacte le support pour supprimer ton compte','⚠️')">Supprimer</button>
+                <button class="danger-btn" onclick="resetStats()">Réinitialiser</button>
               </div>
             </div>
           </div>
@@ -1010,6 +1004,17 @@ function handleEmailAuth() {
   if (!email || !pass) { notify('Remplis tous les champs !','⚠️'); return; }
   closeModal();
   notify(currentAuthTab==='register' ? 'Compte créé ! Bienvenue' : 'Connexion réussie ! Bienvenue');
+}
+
+/* RESET STATS */
+function resetStats() {
+  var coins = getCoins();
+  if (coins < 2.5) {
+    notify('Coins insuffisants ! Il te faut 2.5 coins pour réinitialiser','❌');
+    return;
+  }
+  setCoins(coins - 2.5);
+  notify('Statistiques réinitialisées ! (-2.5 coins)','⚠️');
 }
 
 /* PSEUDO CHANGE */
