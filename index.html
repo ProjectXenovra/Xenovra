@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>XENOVRA — Building The Future of Gaming</title>
+<title>XENOVRA — Bienvenue sur Xenovra</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' fill='none'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%233b82f6'/%3E%3Cstop offset='1' stop-color='%2360a5fa'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%237c3aed'/%3E%3Cstop offset='1' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='80' height='80' rx='16' fill='%23010205'/%3E%3Cpath d='M14 14 L38 38 L14 66' stroke='url(%23a)' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M66 14 L42 38 L66 66' stroke='url(%23b)' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap");</style>
 <style>
@@ -216,7 +216,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
 .shop-item{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;transition:all .4s}
 .shop-item:hover{transform:translateY(-6px);border-color:rgba(124,58,237,.3);box-shadow:0 16px 40px rgba(0,0,0,.4)}
-.shop-item-img{height:140px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
+.shop-item-img{height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .shop-item-img::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent,rgba(0,0,0,.3))}
 .rarity-common{background:linear-gradient(135deg,#1a2040,#2a3060)}
 .rarity-rare{background:linear-gradient(135deg,#0a2060,#1040a0)}
@@ -235,6 +235,9 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .shop-buy-btn{padding:6px 12px;border:none;border-radius:5px;background:linear-gradient(135deg,var(--violet),var(--blue));color:#fff;font-family:'Exo 2',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .3s}
 .shop-buy-btn:hover{transform:scale(1.05);box-shadow:var(--glow-v)}
 .shop-buy-btn:disabled{opacity:.5;cursor:default;transform:none}
+
+/* CARICATURE SVG */
+.caricature-svg{width:100px;height:100px;position:relative;z-index:1}
 
 /* INVENTORY */
 .inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
@@ -281,11 +284,11 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 
 /* PROFILE */
 .profile-card{max-width:860px;background:var(--card);border:1px solid rgba(59,130,246,.15);border-radius:16px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.4)}
-.profile-banner{height:140px;background:linear-gradient(135deg,#010818,#02204a,#030e2a);position:relative;overflow:hidden}
+.profile-banner{height:160px;background:linear-gradient(135deg,#010818,#02204a,#030e2a);position:relative;overflow:hidden}
 .profile-banner-glow{position:absolute;inset:0;background:radial-gradient(ellipse 80% 80% at 30% 50%,rgba(59,130,246,.12),transparent)}
-.profile-avatar-wrap{position:absolute;bottom:-36px;left:24px}
-.profile-avatar{width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,var(--blue),var(--violet));display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:700;font-family:'Orbitron',sans-serif;color:#fff;border:3px solid var(--card);box-shadow:0 0 18px rgba(124,58,237,.4)}
-.profile-body{padding:50px 24px 24px}
+.profile-avatar-wrap{position:absolute;bottom:-50px;left:24px}
+.profile-avatar-box{width:100px;height:100px;border-radius:14px;background:linear-gradient(135deg,var(--card2),#0a1830);display:flex;align-items:center;justify-content:center;border:3px solid var(--card);box-shadow:0 0 18px rgba(124,58,237,.4);overflow:hidden}
+.profile-body{padding:64px 24px 24px}
 .profile-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:16px}
 .profile-name{font-family:'Orbitron',sans-serif;font-size:1.3rem;font-weight:900;color:#fff;margin-bottom:3px}
 .profile-tag{font-size:.75rem;color:var(--cyan2);font-family:'Share Tech Mono',monospace;margin-bottom:7px}
@@ -302,6 +305,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
 .badge-cr{background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.3);color:var(--violet3)}
 .badge-gold{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3);color:var(--gold)}
 .badge-green{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);color:var(--green)}
+.titre-badge{display:inline-block;padding:3px 10px;border-radius:4px;font-size:.65rem;font-weight:700;letter-spacing:2px;font-family:'Share Tech Mono',monospace;background:linear-gradient(135deg,rgba(124,58,237,.3),rgba(59,130,246,.2));border:1px solid rgba(124,58,237,.5);color:var(--violet3);margin-bottom:6px}
 
 /* PAGE HEADER */
 .page-header{margin-bottom:24px}
@@ -443,7 +447,7 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
     </defs>
   </svg>
   <div class="loader-name">XENOVRA</div>
-  <div class="loader-sub">Building The Future of Gaming</div>
+  <div class="loader-sub">Bienvenue sur Xenovra</div>
   <div class="loader-bar"><div class="loader-fill"></div></div>
   <div class="loader-code" id="loaderCode">INITIALIZING SYSTEMS...</div>
 </div>
@@ -564,7 +568,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
   </div>
   <div class="tb-right">
     <div class="tb-rank-badge">⭐ NIVEAU 1</div>
-    <!-- Discord link — logo SVG officiel, ouvre le serveur dans un nouvel onglet -->
     <a href="https://discord.gg/5MsUJttkT" target="_blank" rel="noopener" class="tb-icon-btn" title="Rejoindre le Discord XENOVRA" style="text-decoration:none;">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="#5865F2">
         <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.034.055a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/>
@@ -706,15 +709,12 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
     <div class="page-header">
       <div class="page-tag">Boutique</div>
       <h2 class="page-title">Boutique <span>Coins</span></h2>
-      <p class="page-sub">Dépense tes coins pour personnaliser ton profil — les items achetés vont dans ton inventaire</p>
+      <p class="page-sub">Personnalise ton personnage avec des caricatures et des titres exclusifs</p>
     </div>
     <div class="shop-cats">
       <button class="shop-cat active" onclick="filterShop('all',this)">Tout</button>
-      <button class="shop-cat" onclick="filterShop('avatar',this)">Avatars</button>
+      <button class="shop-cat" onclick="filterShop('caricature',this)">Caricatures</button>
       <button class="shop-cat" onclick="filterShop('titre',this)">Titres</button>
-      <button class="shop-cat" onclick="filterShop('badge',this)">Badges</button>
-      <button class="shop-cat" onclick="filterShop('effet',this)">Effets</button>
-      <button class="shop-cat" onclick="filterShop('cadre',this)">Cadres</button>
     </div>
     <div class="shop-grid" id="shopGrid"></div>
   </div>
@@ -728,11 +728,8 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
     </div>
     <div class="inv-tabs">
       <button class="inv-tab active" onclick="filterInv('all',this)">Tout</button>
-      <button class="inv-tab" onclick="filterInv('avatar',this)">Avatars</button>
+      <button class="inv-tab" onclick="filterInv('caricature',this)">Caricatures</button>
       <button class="inv-tab" onclick="filterInv('titre',this)">Titres</button>
-      <button class="inv-tab" onclick="filterInv('badge',this)">Badges</button>
-      <button class="inv-tab" onclick="filterInv('effet',this)">Effets</button>
-      <button class="inv-tab" onclick="filterInv('cadre',this)">Cadres</button>
     </div>
     <div class="inv-grid" id="invGrid"></div>
   </div>
@@ -761,12 +758,15 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
       <div class="profile-banner">
         <div class="profile-banner-glow"></div>
         <div class="profile-avatar-wrap">
-          <div class="profile-avatar" id="profileAvatarIcon">X</div>
+          <div class="profile-avatar-box" id="profileAvatarBox">
+            <!-- caricature SVG rendered here -->
+          </div>
         </div>
       </div>
       <div class="profile-body">
         <div class="profile-top">
           <div>
+            <div id="profileTitreBadge" style="display:none" class="titre-badge"></div>
             <div class="profile-name" id="profileDisplayName">XenoPlayer_01</div>
             <div class="profile-tag" id="profileTag">@xenoplayer · Membre depuis Jan 2025</div>
             <div class="profile-bio">Nouveau joueur XENOVRA. Prêt à tout donner</div>
@@ -805,17 +805,14 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
       </nav>
 
       <div>
-        <!-- PSEUDO PANEL -->
         <div class="settings-panel active" id="sp-pseudo">
           <div class="settings-section">
             <div class="ss-title">✏️ Changer de pseudo</div>
             <div class="ss-sub">Tu peux modifier ton pseudo à tout moment. Chaque changement coûte <strong style="color:var(--gold)">0.5 coins</strong>.</div>
-
             <div class="pseudo-current">
               <span class="pseudo-current-label">PSEUDO ACTUEL</span>
               <span class="pseudo-current-val" id="currentPseudoDisplay">XenoPlayer_01</span>
             </div>
-
             <div class="ss-rule-box">
               <div class="ss-rule-title">⛔ Règles obligatoires</div>
               <ul class="ss-rule-list">
@@ -828,7 +825,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
                 <li>Tout pseudo enfreignant ces règles entraîne une suspension du compte</li>
               </ul>
             </div>
-
             <div class="pseudo-input-row">
               <div class="pseudo-input-wrap">
                 <label class="pseudo-label">Nouveau pseudo</label>
@@ -838,7 +834,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
               <button class="pseudo-btn" onclick="changePseudo()">Confirmer →</button>
             </div>
           </div>
-
           <div class="settings-section">
             <div class="ss-title">📋 Historique des pseudos</div>
             <div class="ss-sub">Tes anciens pseudos sont listés ici.</div>
@@ -850,7 +845,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
           </div>
         </div>
 
-        <!-- NOTIFS PANEL -->
         <div class="settings-panel" id="sp-notifs">
           <div class="settings-section">
             <div class="ss-title">🔔 Notifications</div>
@@ -878,7 +872,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
           </div>
         </div>
 
-        <!-- SECURITE PANEL -->
         <div class="settings-panel" id="sp-securite">
           <div class="settings-section">
             <div class="ss-title">🔒 Sécurité du compte</div>
@@ -902,7 +895,6 @@ body{background:var(--void);color:var(--text);font-family:'Exo 2',sans-serif;ove
           </div>
         </div>
 
-        <!-- DANGER PANEL -->
         <div class="settings-panel" id="sp-danger">
           <div class="settings-section danger-zone">
             <div class="ss-title" style="color:var(--red)">⚠️ Zone Danger</div>
@@ -940,6 +932,307 @@ var pseudoHistory = [];
 
 var FORBIDDEN_WORDS = ['nigger','nigga','negro','raciste','nazisme','nazi','hitler','juif','fuck','bitch','pute','salope','admin','moderator','staff','xenovra_admin','xenovra_mod'];
 
+/* ─── CARICATURES SVG ─── */
+var caricatures = {
+  default: function(skinColor, eyeColor, extraClass) {
+    // default basic caricature for new players
+    var sc = skinColor || '#f5c5a3';
+    var ec = eyeColor || '#3b82f6';
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
+      // body
+      '<ellipse cx="48" cy="82" rx="22" ry="14" fill="#1e3a5f"/>' +
+      // neck
+      '<rect x="42" y="62" width="12" height="10" rx="4" fill="' + sc + '"/>' +
+      // head
+      '<ellipse cx="48" cy="46" rx="24" ry="26" fill="' + sc + '"/>' +
+      // ears
+      '<ellipse cx="24" cy="48" rx="5" ry="7" fill="' + sc + '"/>' +
+      '<ellipse cx="72" cy="48" rx="5" ry="7" fill="' + sc + '"/>' +
+      // hair
+      '<ellipse cx="48" cy="24" rx="24" ry="12" fill="#2c1810"/>' +
+      '<rect x="24" y="20" width="48" height="10" rx="5" fill="#2c1810"/>' +
+      // eyes
+      '<ellipse cx="38" cy="46" rx="7" ry="8" fill="white"/>' +
+      '<ellipse cx="58" cy="46" rx="7" ry="8" fill="white"/>' +
+      '<circle cx="39" cy="47" r="4" fill="' + ec + '"/>' +
+      '<circle cx="59" cy="47" r="4" fill="' + ec + '"/>' +
+      '<circle cx="40" cy="46" r="1.5" fill="white"/>' +
+      '<circle cx="60" cy="46" r="1.5" fill="white"/>' +
+      // brows
+      '<path d="M31 38 Q38 35 44 38" stroke="#2c1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>' +
+      '<path d="M52 38 Q58 35 65 38" stroke="#2c1810" stroke-width="2.5" fill="none" stroke-linecap="round"/>' +
+      // nose
+      '<ellipse cx="48" cy="54" rx="4" ry="3" fill="' + adjustColor(sc, -15) + '"/>' +
+      // smile
+      '<path d="M38 62 Q48 70 58 62" stroke="#c47a5a" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+      '</svg>';
+  },
+
+  dino: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
+      // body
+      '<ellipse cx="48" cy="82" rx="22" ry="13" fill="#15803d"/>' +
+      // tail
+      '<path d="M70 76 Q85 80 82 88 Q75 86 70 80" fill="#16a34a"/>' +
+      // head big
+      '<ellipse cx="48" cy="44" rx="26" ry="28" fill="#22c55e"/>' +
+      // snout
+      '<ellipse cx="48" cy="62" rx="14" ry="10" fill="#16a34a"/>' +
+      // nostrils
+      '<circle cx="44" cy="62" r="2.5" fill="#15803d"/>' +
+      '<circle cx="52" cy="62" r="2.5" fill="#15803d"/>' +
+      // spikes top
+      '<polygon points="32,22 36,8 40,22" fill="#16a34a"/>' +
+      '<polygon points="44,18 48,4 52,18" fill="#16a34a"/>' +
+      '<polygon points="56,22 60,8 64,22" fill="#16a34a"/>' +
+      // eyes big bugged out
+      '<circle cx="36" cy="38" r="10" fill="white"/>' +
+      '<circle cx="60" cy="38" r="10" fill="white"/>' +
+      '<circle cx="37" cy="39" r="6" fill="#ef4444"/>' +
+      '<circle cx="61" cy="39" r="6" fill="#ef4444"/>' +
+      '<circle cx="38" cy="38" r="2.5" fill="black"/>' +
+      '<circle cx="62" cy="38" r="2.5" fill="black"/>' +
+      '<circle cx="39" cy="37" r="1" fill="white"/>' +
+      '<circle cx="63" cy="37" r="1" fill="white"/>' +
+      // mouth big smile teeth
+      '<path d="M34 68 Q48 78 62 68" fill="#15803d"/>' +
+      '<rect x="38" y="66" width="6" height="5" rx="1" fill="white"/>' +
+      '<rect x="46" y="66" width="6" height="5" rx="1" fill="white"/>' +
+      '<rect x="54" y="66" width="6" height="5" rx="1" fill="white"/>' +
+      '</svg>';
+  },
+
+  robot: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
+      // body box
+      '<rect x="24" y="68" width="48" height="22" rx="4" fill="#1e40af"/>' +
+      // chest button
+      '<circle cx="48" cy="78" r="4" fill="#60a5fa"/>' +
+      '<circle cx="36" cy="78" r="2.5" fill="#22d3ee"/>' +
+      '<circle cx="60" cy="78" r="2.5" fill="#f59e0b"/>' +
+      // neck
+      '<rect x="42" y="62" width="12" height="8" rx="2" fill="#6b7280"/>' +
+      // antenna
+      '<rect x="46" y="6" width="4" height="14" rx="2" fill="#9ca3af"/>' +
+      '<circle cx="48" cy="5" r="5" fill="#22d3ee"/>' +
+      // head box
+      '<rect x="18" y="18" width="60" height="48" rx="10" fill="#374151"/>' +
+      // screen visor
+      '<rect x="22" y="24" width="52" height="28" rx="6" fill="#0f172a"/>' +
+      // eyes digital
+      '<rect x="28" y="30" width="16" height="12" rx="3" fill="#22d3ee"/>' +
+      '<rect x="52" y="30" width="16" height="12" rx="3" fill="#22d3ee"/>' +
+      '<rect x="31" y="33" width="10" height="6" rx="2" fill="white"/>' +
+      '<rect x="55" y="33" width="10" height="6" rx="2" fill="white"/>' +
+      // mouth bar display
+      '<rect x="30" y="48" width="36" height="6" rx="3" fill="#1f2937"/>' +
+      '<rect x="32" y="50" width="8" height="2" rx="1" fill="#10b981"/>' +
+      '<rect x="44" y="50" width="8" height="2" rx="1" fill="#10b981"/>' +
+      '<rect x="56" y="50" width="8" height="2" rx="1" fill="#10b981"/>' +
+      // ear bolts
+      '<circle cx="18" cy="38" r="5" fill="#4b5563"/>' +
+      '<circle cx="78" cy="38" r="5" fill="#4b5563"/>' +
+      '</svg>';
+  },
+
+  alien: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
+      // body
+      '<ellipse cx="48" cy="82" rx="20" ry="13" fill="#4c1d95"/>' +
+      // neck thin
+      '<rect x="44" y="66" width="8" height="10" rx="4" fill="#7c3aed"/>' +
+      // big alien head egg shaped
+      '<ellipse cx="48" cy="42" rx="30" ry="36" fill="#a78bfa"/>' +
+      // top head narrower
+      '<ellipse cx="48" cy="20" rx="18" ry="16" fill="#8b5cf6"/>' +
+      // huge black eyes
+      '<ellipse cx="36" cy="46" rx="12" ry="14" fill="#0f0f1a"/>' +
+      '<ellipse cx="60" cy="46" rx="12" ry="14" fill="#0f0f1a"/>' +
+      // eye shine
+      '<ellipse cx="32" cy="42" rx="4" ry="5" fill="#7c3aed" opacity="0.7"/>' +
+      '<ellipse cx="56" cy="42" rx="4" ry="5" fill="#7c3aed" opacity="0.7"/>' +
+      '<circle cx="33" cy="41" r="2" fill="white" opacity="0.8"/>' +
+      '<circle cx="57" cy="41" r="2" fill="white" opacity="0.8"/>' +
+      // tiny mouth slit
+      '<path d="M40 66 Q48 70 56 66" stroke="#6d28d9" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+      // nose slits
+      '<line x1="45" y1="60" x2="44" y2="63" stroke="#6d28d9" stroke-width="1.5" stroke-linecap="round"/>' +
+      '<line x1="51" y1="60" x2="52" y2="63" stroke="#6d28d9" stroke-width="1.5" stroke-linecap="round"/>' +
+      '</svg>';
+  },
+
+  clown: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
+      // body
+      '<ellipse cx="48" cy="82" rx="22" ry="13" fill="#dc2626"/>' +
+      // collar ruffles
+      '<ellipse cx="48" cy="70" rx="26" ry="8" fill="#fbbf24"/>' +
+      '<ellipse cx="35" cy="69" rx="10" ry="6" fill="#ef4444"/>' +
+      '<ellipse cx="61" cy="69" rx="10" ry="6" fill="#3b82f6"/>' +
+      // neck
+      '<rect x="43" y="62" width="10" height="8" rx="3" fill="#fde68a"/>' +
+      // head
+      '<ellipse cx="48" cy="44" rx="26" ry="28" fill="#fef3c7"/>' +
+      // clown hat
+      '<ellipse cx="48" cy="18" rx="26" ry="6" fill="#7c3aed"/>' +
+      '<path d="M36 18 L48 -4 L60 18 Z" fill="#7c3aed"/>' +
+      '<circle cx="48" cy="-4" r="5" fill="#f59e0b"/>' +
+      // clown hair sides big
+      '<ellipse cx="20" cy="44" rx="10" ry="14" fill="#f97316"/>' +
+      '<ellipse cx="76" cy="44" rx="10" ry="14" fill="#f97316"/>' +
+      // big eyes with lashes
+      '<circle cx="37" cy="44" r="10" fill="white"/>' +
+      '<circle cx="59" cy="44" r="10" fill="white"/>' +
+      '<circle cx="37" cy="45" r="6" fill="#3b82f6"/>' +
+      '<circle cx="59" cy="45" r="6" fill="#3b82f6"/>' +
+      '<circle cx="37" cy="45" r="3" fill="black"/>' +
+      '<circle cx="59" cy="45" r="3" fill="black"/>' +
+      '<circle cx="38" cy="44" r="1.2" fill="white"/>' +
+      '<circle cx="60" cy="44" r="1.2" fill="white"/>' +
+      // star makeup
+      '<polygon points="37,31 38,35 42,35 39,37 40,41 37,39 34,41 35,37 32,35 36,35" fill="#fbbf24" opacity="0.8"/>' +
+      '<polygon points="59,31 60,35 64,35 61,37 62,41 59,39 56,41 57,37 54,35 58,35" fill="#fbbf24" opacity="0.8"/>' +
+      // big red nose
+      '<circle cx="48" cy="58" r="8" fill="#ef4444"/>' +
+      '<circle cx="45" cy="56" r="2.5" fill="#fca5a5" opacity="0.6"/>' +
+      // huge smile
+      '<path d="M30 66 Q48 82 66 66" fill="#dc2626"/>' +
+      '<path d="M30 66 Q48 82 66 66" stroke="#991b1b" stroke-width="1" fill="none"/>' +
+      '<rect x="38" y="64" width="8" height="5" rx="1" fill="white"/>' +
+      '<rect x="50" y="64" width="8" height="5" rx="1" fill="white"/>' +
+      '</svg>';
+  },
+
+  wizard: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
+      // robe body
+      '<path d="M20 96 L30 70 L66 70 L76 96 Z" fill="#1e1b4b"/>' +
+      // robe stars
+      '<circle cx="40" cy="80" r="2" fill="#fbbf24"/>' +
+      '<circle cx="55" cy="84" r="1.5" fill="#a78bfa"/>' +
+      '<circle cx="48" cy="76" r="1.5" fill="#60a5fa"/>' +
+      // head
+      '<ellipse cx="48" cy="52" rx="22" ry="22" fill="#fde68a"/>' +
+      // long beard
+      '<path d="M32 64 Q28 80 38 90 Q48 86 58 90 Q68 80 64 64" fill="#e5e7eb"/>' +
+      '<path d="M36 68 Q34 76 38 82" stroke="#d1d5db" stroke-width="1.5" fill="none"/>' +
+      '<path d="M48 70 Q47 78 48 84" stroke="#d1d5db" stroke-width="1.5" fill="none"/>' +
+      '<path d="M60 68 Q62 76 58 82" stroke="#d1d5db" stroke-width="1.5" fill="none"/>' +
+      // hat tall
+      '<path d="M26 36 L48 -6 L70 36 Z" fill="#312e81"/>' +
+      '<ellipse cx="48" cy="36" rx="28" ry="7" fill="#3730a3"/>' +
+      // hat stars
+      '<circle cx="42" cy="20" r="3" fill="#fbbf24"/>' +
+      '<circle cx="54" cy="12" r="2" fill="#a78bfa"/>' +
+      // eyes wise with monocle
+      '<circle cx="38" cy="52" r="8" fill="white"/>' +
+      '<circle cx="58" cy="52" r="8" fill="white"/>' +
+      '<circle cx="38" cy="53" r="5" fill="#7c3aed"/>' +
+      '<circle cx="58" cy="53" r="5" fill="#7c3aed"/>' +
+      '<circle cx="38" cy="53" r="2.5" fill="black"/>' +
+      '<circle cx="58" cy="53" r="2.5" fill="black"/>' +
+      '<circle cx="39" cy="52" r="1" fill="white"/>' +
+      '<circle cx="59" cy="52" r="1" fill="white"/>' +
+      // bushy brows
+      '<path d="M30 44 Q38 40 46 44" stroke="#6b7280" stroke-width="3.5" fill="none" stroke-linecap="round"/>' +
+      '<path d="M50 44 Q58 40 66 44" stroke="#6b7280" stroke-width="3.5" fill="none" stroke-linecap="round"/>' +
+      // mustache
+      '<path d="M38 62 Q43 58 48 62 Q53 58 58 62" fill="#9ca3af"/>' +
+      // wand
+      '<line x1="72" y1="60" x2="88" y2="30" stroke="#78350f" stroke-width="3" stroke-linecap="round"/>' +
+      '<circle cx="88" cy="28" r="5" fill="#fbbf24"/>' +
+      // sparkles
+      '<circle cx="82" cy="22" r="2" fill="#a78bfa"/>' +
+      '<circle cx="90" cy="20" r="1.5" fill="#60a5fa"/>' +
+      '</svg>';
+  },
+
+  panda: function() {
+    return '<svg width="96" height="96" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
+      // body
+      '<ellipse cx="48" cy="82" rx="24" ry="14" fill="white"/>' +
+      // arm tufts
+      '<circle cx="22" cy="72" r="10" fill="black"/>' +
+      '<circle cx="74" cy="72" r="10" fill="black"/>' +
+      // head
+      '<circle cx="48" cy="46" r="28" fill="white"/>' +
+      // panda ear patches
+      '<circle cx="24" cy="22" r="12" fill="black"/>' +
+      '<circle cx="72" cy="22" r="12" fill="black"/>' +
+      '<circle cx="24" cy="22" r="7" fill="#374151"/>' +
+      '<circle cx="72" cy="22" r="7" fill="#374151"/>' +
+      // eye patches black
+      '<ellipse cx="36" cy="46" rx="12" ry="11" fill="black"/>' +
+      '<ellipse cx="60" cy="46" rx="12" ry="11" fill="black"/>' +
+      // eyes
+      '<circle cx="36" cy="47" r="7" fill="white"/>' +
+      '<circle cx="60" cy="47" r="7" fill="white"/>' +
+      '<circle cx="36" cy="48" r="4" fill="black"/>' +
+      '<circle cx="60" cy="48" r="4" fill="black"/>' +
+      '<circle cx="37" cy="47" r="1.5" fill="white"/>' +
+      '<circle cx="61" cy="47" r="1.5" fill="white"/>' +
+      // nose
+      '<ellipse cx="48" cy="58" rx="5" ry="4" fill="#1f2937"/>' +
+      // smile cute
+      '<path d="M40 64 Q48 70 56 64" stroke="#6b7280" stroke-width="2" fill="none" stroke-linecap="round"/>' +
+      // rosy cheeks
+      '<circle cx="28" cy="58" r="7" fill="#fca5a5" opacity="0.5"/>' +
+      '<circle cx="68" cy="58" r="7" fill="#fca5a5" opacity="0.5"/>' +
+      '</svg>';
+  }
+};
+
+function adjustColor(hex, amount) {
+  var r = parseInt(hex.slice(1,3),16);
+  var g = parseInt(hex.slice(3,5),16);
+  var b = parseInt(hex.slice(5,7),16);
+  r = Math.max(0,Math.min(255,r+amount));
+  g = Math.max(0,Math.min(255,g+amount));
+  b = Math.max(0,Math.min(255,b+amount));
+  return '#'+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);
+}
+
+function getDefaultCaricature() {
+  return caricatures.default('#f5c5a3','#3b82f6');
+}
+
+function getEquippedCaricatureSVG() {
+  var equippedCar = equippedItems['caricature'];
+  if (!equippedCar) return getDefaultCaricature();
+  if (equippedCar === 'car_dino') return caricatures.dino();
+  if (equippedCar === 'car_robot') return caricatures.robot();
+  if (equippedCar === 'car_alien') return caricatures.alien();
+  if (equippedCar === 'car_clown') return caricatures.clown();
+  if (equippedCar === 'car_wizard') return caricatures.wizard();
+  if (equippedCar === 'car_panda') return caricatures.panda();
+  return getDefaultCaricature();
+}
+
+function updateProfileAvatar() {
+  var box = document.getElementById('profileAvatarBox');
+  if (box) box.innerHTML = getEquippedCaricatureSVG();
+}
+
+function getEquippedTitre() {
+  var equippedTitre = equippedItems['titre'];
+  if (!equippedTitre) return null;
+  var item = shopItems.find(function(i){ return i.id === equippedTitre; });
+  return item ? item.name : null;
+}
+
+function updateProfileTitre() {
+  var badge = document.getElementById('profileTitreBadge');
+  if (!badge) return;
+  var titre = getEquippedTitre();
+  if (titre) {
+    badge.style.display = 'inline-block';
+    badge.textContent = titre;
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+/* ─── STATE ─── */
 function getCoins(){
   return parseFloat(document.getElementById('navXP').textContent.replace(/[\s\u00a0]/g,''))||0;
 }
@@ -971,8 +1264,9 @@ function showPage(id) {
   if (id==='matches') renderMatches();
   if (id==='leaderboard') renderLb('day');
   if (id==='shop') renderShop('all');
-  if (id==='tournaments') renderTourneys();
+  if (id==='tournaments') {}
   if (id==='inventory') renderInventory('all');
+  if (id==='profile') { updateProfileAvatar(); updateProfileTitre(); }
   if (id==='settings') {
     document.getElementById('pseudoCoinBalance').textContent = getCoins().toFixed(2);
     document.getElementById('currentPseudoDisplay').textContent = playerPseudo;
@@ -992,9 +1286,7 @@ function openModal(tab) {
   var btn = document.getElementById(tab==='register' ? 'tabRegister' : 'tabLogin');
   switchAuthTab(tab, btn);
 }
-function closeModal() {
-  document.getElementById('authModal').classList.remove('open');
-}
+function closeModal() { document.getElementById('authModal').classList.remove('open'); }
 function switchAuthTab(tab, btn) {
   currentAuthTab = tab;
   document.querySelectorAll('.modal-tab').forEach(function(t){ t.classList.remove('active'); });
@@ -1010,18 +1302,13 @@ function handleEmailAuth() {
   notify(currentAuthTab==='register' ? 'Compte créé ! Bienvenue' : 'Connexion réussie ! Bienvenue');
 }
 
-/* RESET STATS */
 function resetStats() {
   var coins = getCoins();
-  if (coins < 2.5) {
-    notify('Coins insuffisants ! Il te faut 2.5 coins pour réinitialiser','❌');
-    return;
-  }
+  if (coins < 2.5) { notify('Coins insuffisants ! Il te faut 2.5 coins pour réinitialiser','❌'); return; }
   setCoins(coins - 2.5);
   notify('Statistiques réinitialisées ! (-2.5 coins)','⚠️');
 }
 
-/* PSEUDO CHANGE */
 function validatePseudo(p) {
   if (!p) return 'Le pseudo ne peut pas être vide.';
   if (p.length < 3) return 'Minimum 3 caractères.';
@@ -1046,7 +1333,6 @@ function changePseudo() {
   document.getElementById('currentPseudoDisplay').textContent = playerPseudo;
   document.getElementById('profileDisplayName').textContent = playerPseudo;
   document.getElementById('profileTag').textContent = '@'+playerPseudo.toLowerCase().replace(/[^a-z0-9]/g,'') + ' · Membre depuis Jan 2025';
-  document.getElementById('profileAvatarIcon').textContent = playerPseudo.charAt(0).toUpperCase();
   document.getElementById('newPseudoInput').value = '';
   document.getElementById('pseudoCoinBalance').textContent = getCoins().toFixed(2);
   renderPseudoHistory();
@@ -1210,20 +1496,33 @@ function switchLb(p, btn) {
   renderLb(p);
 }
 
+/* ─── SHOP ITEMS — caricatures 5 coins + titres 2 coins ─── */
 var shopItems = [
-  {id:'fox_avatar',cat:'avatar',icon:'🦊',name:'Fox Elite Avatar',desc:'Avatar renard futuriste exclusif',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
-  {id:'thunder_titre',cat:'titre',icon:'⚡',name:'Thunder God',desc:'Affiche ton titre légendaire en jeu',price:8,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
-  {id:'fn_badge',cat:'badge',icon:'🏅',name:'Badge Fortnite Pro',desc:'Badge exclusif joueurs Fortnite vétérans',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {id:'neon_effet',cat:'effet',icon:'✨',name:'Particules Neon',desc:'Aura de particules violettes sur ton profil',price:8,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
-  {id:'cyber_cadre',cat:'cadre',icon:'🖼️',name:'Cadre Cyber Blue',desc:'Cadre de profil holographique bleu',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {id:'wolf_avatar',cat:'avatar',icon:'🐺',name:'Wolf Alpha Avatar',desc:'Avatar loup alpha dominateur',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
-  {id:'king_titre',cat:'titre',icon:'👑',name:'Clash King',desc:'Titre prestige pour les maîtres CR',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
-  {id:'fair_badge',cat:'badge',icon:'🛡️',name:'Badge Fair Play',desc:'Récompense les joueurs respectueux',price:1,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
-  {id:'cyan_effet',cat:'effet',icon:'🌊',name:'Vague Cyan',desc:'Ondulation cyan autour de ton avatar',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
-  {id:'inferno_cadre',cat:'cadre',icon:'🔥',name:'Cadre Inferno',desc:'Cadre enflammé pour les warriors',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
-  {id:'bot_avatar',cat:'avatar',icon:'🤖',name:'Xeno Bot Avatar',desc:'Avatar robot exclusif XENOVRA',price:1,rarityClass:'rarity-common',rarityLabel:'r-common',rarityText:'COMMUN'},
-  {id:'top100_badge',cat:'badge',icon:'⭐',name:'Badge Top 100',desc:'Pour les joueurs classés Top 100',price:8,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
+  // CARICATURES
+  {id:'car_dino',cat:'caricature',svgKey:'dino',name:'Dino Furieux',desc:'Un dino complètement cinglé avec des yeux rouges exorbités !',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {id:'car_robot',cat:'caricature',svgKey:'robot',name:'Xeno Bot 3000',desc:'Un robot futuriste avec écran de visage et antenne clignotante.',price:5,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
+  {id:'car_alien',cat:'caricature',svgKey:'alien',name:'Alien Psychique',desc:'Une créature extraterrestre avec d\'immenses yeux noirs hypnotiques.',price:5,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
+  {id:'car_clown',cat:'caricature',svgKey:'clown',name:'Clown du Chaos',desc:'Le clown le plus flippant du serveur, sourire XXL inclus !',price:5,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {id:'car_wizard',cat:'caricature',svgKey:'wizard',name:'Mago Fou',desc:'Un vieux mago avec barbe interminable et baguette magique.',price:5,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
+  {id:'car_panda',cat:'caricature',svgKey:'panda',name:'Panda Chubby',desc:'Un panda adorable tout rond avec des joues roses trop mignonnes.',price:5,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
+  // TITRES
+  {id:'titre_zonewars',cat:'titre',svgKey:null,name:'Zone Wars',desc:'Le titre des maîtres du Zone Wars Fortnite.',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
+  {id:'titre_prime',cat:'titre',svgKey:null,name:'Prime',desc:'Tu es au sommet de ton art. Titre prestige.',price:2,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {id:'titre_monstre',cat:'titre',svgKey:null,name:'Monstre',desc:'Inarrêtable. Implacable. Monstre.',price:2,rarityClass:'rarity-epic',rarityLabel:'r-epic',rarityText:'EPIQUE'},
+  {id:'titre_slasher',cat:'titre',svgKey:null,name:'Slasher',desc:'Tu élimines tout le monde sans hésitation.',price:2,rarityClass:'rarity-rare',rarityLabel:'r-rare',rarityText:'RARE'},
+  {id:'titre_only200',cat:'titre',svgKey:null,name:'Only 200',desc:'Réservé à l\'élite — les 200 coins et plus.',price:2,rarityClass:'rarity-legendary',rarityLabel:'r-legendary',rarityText:'LEGENDAIRE'},
 ];
+
+function getCaricatureSVGForItem(item) {
+  if (item.cat !== 'caricature') return null;
+  if (item.svgKey === 'dino') return caricatures.dino();
+  if (item.svgKey === 'robot') return caricatures.robot();
+  if (item.svgKey === 'alien') return caricatures.alien();
+  if (item.svgKey === 'clown') return caricatures.clown();
+  if (item.svgKey === 'wizard') return caricatures.wizard();
+  if (item.svgKey === 'panda') return caricatures.panda();
+  return getDefaultCaricature();
+}
 
 function isOwned(itemId) {
   return inventory.some(function(i){ return i.id === itemId; });
@@ -1234,11 +1533,23 @@ function filterShop(f, btn) {
   btn.classList.add('active');
   renderShop(f);
 }
+
 function renderShop(f) {
   var items = f==='all' ? shopItems : shopItems.filter(function(i){ return i.cat===f; });
   document.getElementById('shopGrid').innerHTML = items.map(function(i){
     var owned = isOwned(i.id);
-    return '<div class="shop-item"><div class="shop-item-img '+i.rarityClass+'"><span class="shop-rarity '+i.rarityLabel+'">'+i.rarityText+'</span><span style="position:relative;z-index:1">'+i.icon+'</span></div><div class="shop-item-body"><div class="shop-item-name">'+i.name+'</div><div class="shop-item-desc">'+i.desc+'</div><div class="shop-item-footer"><div class="shop-price">🪙 '+i.price.toLocaleString('fr-FR')+' coins</div>'+
+    var preview = '';
+    if (i.cat === 'caricature') {
+      var svg = getCaricatureSVGForItem(i);
+      preview = '<div style="position:relative;z-index:1;width:100px;height:100px;display:flex;align-items:center;justify-content:center">'+svg+'</div>';
+    } else {
+      // titre preview
+      preview = '<div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px">' +
+        '<div style="font-size:2rem">🏷️</div>' +
+        '<div style="padding:4px 16px;border-radius:4px;font-family:\'Share Tech Mono\',monospace;font-size:.8rem;font-weight:700;letter-spacing:2px;background:linear-gradient(135deg,rgba(124,58,237,.5),rgba(59,130,246,.4));border:1px solid rgba(124,58,237,.6);color:#e9d5ff">'+i.name+'</div>' +
+        '</div>';
+    }
+    return '<div class="shop-item"><div class="shop-item-img '+i.rarityClass+'" style="height:160px"><span class="shop-rarity '+i.rarityLabel+'">'+i.rarityText+'</span>'+preview+'</div><div class="shop-item-body"><div class="shop-item-name">'+i.name+'</div><div class="shop-item-desc">'+i.desc+'</div><div class="shop-item-footer"><div class="shop-price">🪙 '+i.price.toLocaleString('fr-FR')+' coins</div>'+
       (owned
         ? '<button class="shop-buy-btn" disabled style="background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.3);color:#10b981">✅ Possédé</button>'
         : '<button class="shop-buy-btn" onclick="buyItem(\''+i.id+'\')">Acheter</button>')+
@@ -1252,12 +1563,19 @@ function buyItem(itemId) {
   if (isOwned(itemId)) { notify('Tu possèdes déjà cet item !','⚠️'); return; }
   var coins = getCoins();
   if (coins < item.price) {
-    notify('Coins insuffisants ! Il manque '+(item.price-coins).toLocaleString('fr-FR')+' coins','❌');
+    notify('Coins insuffisants ! Il manque '+(item.price-coins).toFixed(2)+' coins','❌');
     return;
   }
   setCoins(coins - item.price);
-  inventory.push({id:item.id,cat:item.cat,icon:item.icon,name:item.name,rarityClass:item.rarityClass,rarityLabel:item.rarityLabel});
-  renderShop(document.querySelector('.shop-cat.active') ? (document.querySelector('.shop-cat.active').textContent.trim().toLowerCase() === 'tout' ? 'all' : document.querySelector('.shop-cat.active').dataset && document.querySelector('.shop-cat.active').getAttribute('onclick').match(/filterShop\('(\w+)'/)[1]) : 'all');
+  inventory.push({id:item.id,cat:item.cat,svgKey:item.svgKey,name:item.name,rarityClass:item.rarityClass,rarityLabel:item.rarityLabel});
+  var activeShopCat = document.querySelector('.shop-cat.active');
+  var currentFilter = 'all';
+  if (activeShopCat) {
+    var onclick = activeShopCat.getAttribute('onclick');
+    var m = onclick.match(/filterShop\('(\w+)'/);
+    if (m) currentFilter = m[1];
+  }
+  renderShop(currentFilter);
   notify('"'+item.name+'" ajouté à ton inventaire ! 🎒');
 }
 
@@ -1273,14 +1591,22 @@ function renderInventory(f) {
   var items = f==='all' ? inventory : inventory.filter(function(i){ return i.cat===f; });
   var grid = document.getElementById('invGrid');
   if (items.length === 0) {
-    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🎒</div><div class="empty-title">Inventaire vide</div><div class="empty-sub">Achète des items dans la Boutique pour les retrouver ici et les équiper !</div></div>';
+    grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1"><div class="empty-icon">🎒</div><div class="empty-title">Inventaire vide</div><div class="empty-sub">Achète des caricatures et des titres dans la Boutique pour les retrouver ici et les équiper !</div></div>';
     return;
   }
   grid.innerHTML = items.map(function(i){
     var eq = equippedItems[i.cat] === i.id;
-    return '<div class="inv-card '+(eq?'equipped':'')+'" id="icard-'+i.id+'"><div class="inv-img '+i.rarityClass+'">'+(eq?'<span class="inv-equipped-badge">ÉQUIPÉ</span>':'')+'<span style="position:relative;z-index:1">'+i.icon+'</span></div><div class="inv-body"><div class="inv-name">'+i.name+'</div><button class="inv-equip-btn '+(eq?'unequip':'equip')+'" onclick="toggleEquip(\''+i.id+'\',\''+i.cat+'\')">'+(eq?'✅ Déséquiper':'Équiper')+'</button></div></div>';
+    var preview = '';
+    if (i.cat === 'caricature') {
+      var svg = getCaricatureSVGForItem(i);
+      preview = '<div style="width:80px;height:80px;display:flex;align-items:center;justify-content:center;transform:scale(0.8)">'+svg+'</div>';
+    } else {
+      preview = '<div style="display:flex;flex-direction:column;align-items:center;gap:6px"><div style="font-size:1.8rem">🏷️</div><div style="padding:3px 10px;border-radius:3px;font-family:\'Share Tech Mono\',monospace;font-size:.65rem;font-weight:700;letter-spacing:1.5px;background:linear-gradient(135deg,rgba(124,58,237,.3),rgba(59,130,246,.2));border:1px solid rgba(124,58,237,.4);color:var(--violet3)">'+i.name+'</div></div>';
+    }
+    return '<div class="inv-card '+(eq?'equipped':'')+'" id="icard-'+i.id+'"><div class="inv-img '+i.rarityClass+'">'+(eq?'<span class="inv-equipped-badge">ÉQUIPÉ</span>':'')+preview+'</div><div class="inv-body"><div class="inv-name">'+i.name+'</div><button class="inv-equip-btn '+(eq?'unequip':'equip')+'" onclick="toggleEquip(\''+i.id+'\',\''+i.cat+'\')">'+(eq?'✅ Déséquiper':'Équiper')+'</button></div></div>';
   }).join('');
 }
+
 function toggleEquip(itemId, cat) {
   if (equippedItems[cat] === itemId) {
     delete equippedItems[cat];
@@ -1291,22 +1617,11 @@ function toggleEquip(itemId, cat) {
     notify('"'+(item?item.name:itemId)+'" équipé sur ton profil !','✅');
   }
   renderInventory(invFilter);
+  updateProfileAvatar();
+  updateProfileTitre();
 }
 
-var tourneyData = [
-  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTOT',name:'XENOVRA Fortnite Cup #1',mode:'Boxfight',prize:'10 000 coins',players:'0/64',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
-  {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTOT',name:'Clash Royale Grand Prix #1',mode:'Draft',prize:'8 000 coins',players:'0/32',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
-  {game:'fn',banner:'tc-banner-fn',emoji:'⚡',statusClass:'tc-soon',statusText:'BIENTOT',name:'Fortnite Zero Build Cup',mode:'ZB Realistic',prize:'15 000 coins',players:'0/128',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
-  {game:'cr',banner:'tc-banner-cr',emoji:'👑',statusClass:'tc-soon',statusText:'BIENTOT',name:'CR Mega Draft Masters #1',mode:'Mega Draft',prize:'12 000 coins',players:'0/32',date:'A definir',btnClass:'tc-join-soon',btnText:'Rappel →'},
-];
-function renderTourneys() {
-  var grid = document.getElementById('tourneyGrid');
-  if (!grid) return;
-}
-function joinTourney(name) {
-  notify('Rappel activé pour "'+name+'"');
-}
-
+/* CURSOR */
 var cur = null, ring = null, mx = 0, my = 0, rx = 0, ry = 0;
 function initCursor() {
   cur = document.getElementById('cursor');
@@ -1365,6 +1680,7 @@ document.addEventListener('DOMContentLoaded', function(){
   initCursor();
   initCanvas();
   initLoader();
+  updateProfileAvatar();
   renderMatches();
   renderShop('all');
   renderInventory('all');
